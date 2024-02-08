@@ -1,0 +1,9 @@
+﻿text_name,text
+LO1,"Define key measures of surface freshwater quality (DO, turbidity, TSS, metals, chlorophyll-a)."
+LO2,"Explain what HABs are (rapid growth of phytoplankton), how HABs arise (high nutrients, warm temperatures, thermal stratification), and the water quality effects of HABs (toxins, turbidity, TSS, low DO which can affect metals release)."
+LO3,Interpret water quality using high-frequency sensor data from a drinking water reservoir.
+LO4,Develop recommendations for water withdrawal and treatment for a drinking water reservoir using high-frequency sensor data.
+act_A,Explore several lake and reservoir ecosystem variables and learn how they can affect the suitability of water for human use.
+water_quality,"Water quality is the suitability of water for human use, such as drinking water or irrigation, as well as the degree to which a water body can support important ecosystem processes, such as sustaining a fish population."
+high_freq_data,"High-frequency water quality data are measurements of various attributes of a water body (such as temperature, dissolved oxygen, pH, etc.) that are taken many times a day (for example, every 10 minutes). High-frequency data allow water managers and scientists to observe and analyze patterns and trends in water quality that were not previously measurable using low-frequency (once a day or even less frequently) measurements."
+collection,"High-frequency water quality data are often collected using automated sensors. These sensors are deployed in a water body attached to buoys, catwalks, or other structures and collect data continuously. Many of these sensors are automated, which means they can wirelessly stream data to a server so that it is accessible to managers in near-real time."
