@@ -25,7 +25,103 @@ shinyServer(function(input, output, session) {
     }
   )
   
-    #### Navigating Tabs ----
+  #### Activity A
+  
+  #### Objective 1 ----
+  
+  # LTREB Sites datatable ----
+  output$table01 <- DT::renderDT(
+    sites_df[, c(1:2)], selection = "single", options = list(stateSave = TRUE, dom = 't'), server = FALSE
+  )
+  
+  observe({
+    if(input$row_num != "") {
+      dt_proxy <- dataTableProxy("table01")
+      selectRows(dt_proxy, input$row_num)
+    }
+  })
+  
+  # to keep track of previously selected row
+  prev_row <- reactiveVal()
+  siteID <- reactiveValues(lab = NULL)
+  
+  # new icon style
+  my_icon = makeAwesomeIcon(icon = 'flag', markerColor = 'red', iconColor = 'white')
+  
+  
+  # Select NEON DT rows ----
+  lake_data <- reactiveValues(df = NULL)
+  site_photo_file <- reactiveValues(img = NULL)
+
+  observeEvent(input$table01_rows_selected, {
+    row_selected = sites_df[input$table01_rows_selected, ]
+    proxy <- leafletProxy('ltrebmap')
+    proxy %>%
+      addAwesomeMarkers(layerId = as.character(row_selected$SiteID),
+                        lng=row_selected$Longitude,
+                        lat=row_selected$Latitude,
+                        icon = my_icon)
+    
+    # Reset previously selected marker
+    if(!is.null(prev_row()))
+    {
+      proxy %>%
+        removeMarker(layerId = as.character(prev_row()$SiteID))
+    }
+    # set new value to reactiveVal
+    prev_row(row_selected)
+    
+    progress <- shiny::Progress$new()
+    # Make sure it closes when we exit this reactive, even if there's an error
+    on.exit(progress$close())
+    progress$set(message = "Loading LTREB data",
+                 detail = "This may take a while. This window will disappear
+                     when it is loaded.", value = 0.33)
+    
+    #load LTREB data
+    url <- "https://renc.osn.xsede.org/bio230121-bucket01/vera4cast/targets/project_id=vera4cast/duration=P1D/daily-insitu-targets.csv.gz"
+    library(tidyverse)
+    lake_data$df <- read_csv(url, show_col_types = FALSE) %>%
+      filter(site_id == sites_df[input$table01_rows_selected, "SiteID"])
+    
+    #retrieve site photooutput$display.image <- renderImage({
+    site_photo_file$img <- paste("www/",row_selected$SiteID,".jpg",sep="")
+
+    #show site info
+    output$site_info <- renderText({
+      module_text[row_selected$SiteID, ]
+    })
+    progress$set(value = 1)
+    
+  })
+  
+  # LTREB map ----
+  output$ltrebmap <- renderLeaflet({
+    leaflet() %>%
+      addProviderTiles(providers$Esri.NatGeoWorldMap,
+                       options = providerTileOptions(noWrap = TRUE)
+      ) %>%
+      addMarkers(data = sites_df,
+                 layerId = ~SiteID, clusterOptions = markerClusterOptions(),
+                 label = ~ReservoirName, icon = ~ltrebIcons[1])
+    
+  })
+  
+  # Show reservoir image ----
+  output$site_photo <- renderImage({
+    
+    validate(
+      need(input$table01_rows_selected != "",
+           message = "Please select a site in the table.")
+    )
+    list(src = site_photo_file$img,
+         alt = "Image failed to render.",
+         height = 320,
+         width = 400)
+  }, deleteFile = FALSE)
+  
+  
+  #### Navigating Tabs ----
     
     # Navigating Tabs ----
     #* Main Tab ====

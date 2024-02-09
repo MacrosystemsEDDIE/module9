@@ -38,6 +38,7 @@ obj_bg <- "#DDE4E1"
 nav_butt <- "#2E4F84"
 nav_txt <- "#fff" # white = #fff; black = #000000
 slider_col <- "#DDE4E1"
+ques_bg <- "#C1E4E2"
 
 # Functions required
 invisible(sapply(list.files("R", full.names = TRUE), source))
@@ -53,7 +54,7 @@ qid <- row.names(quest)
 help_text <- read.csv("data/help_text.csv", row.names = 1)
 
 # Slides
-recap_slides <- list.files("www/Mod7_key_slides", full.names = TRUE)
+recap_slides <- list.files("www/key_slides", full.names = TRUE)
 
 # Add last update time
 app_time <- format(file.info("ui.R")$mtime, "%Y-%m-%d")
@@ -62,5 +63,16 @@ app_update_txt <- paste0("This app was last updated on: ", app_time)
 # Tab names for updating buttons
 tab_names <- read.csv("data/tab_names.csv", fileEncoding = "UTF-8-BOM")
 rownames(tab_names) <- tab_names[, 1]
+
+# Create site dataframe
+sites_df <- tibble(SiteID = c("fcre","bvre"),
+                   ReservoirName = c("Falling Creek Reservoir","Beaverdam Reservoir"),
+                   Latitude = c(37.30325, 37.31288),
+                   Longitude = c(-79.8373, -79.8159))
+
+# Icons
+ltrebIcons <- iconList(
+  Aquatic = makeIcon("icons/water-icon.png", iconWidth = 28, iconHeight = 28)
+)
 
 # end
