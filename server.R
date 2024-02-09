@@ -50,10 +50,14 @@ shinyServer(function(input, output, session) {
   
   
   # Select NEON DT rows ----
-  lake_data <- reactiveValues(df = NULL)
+  lake_data <- reactiveValues(df = NULL,
+                              chla = NULL)
   site_photo_file <- reactiveValues(img = NULL)
 
   observeEvent(input$table01_rows_selected, {
+    
+    siteID$lab <- input$table01_rows_selected
+    
     row_selected = sites_df[input$table01_rows_selected, ]
     proxy <- leafletProxy('ltrebmap')
     proxy %>%
@@ -82,7 +86,7 @@ shinyServer(function(input, output, session) {
     url <- "https://renc.osn.xsede.org/bio230121-bucket01/vera4cast/targets/project_id=vera4cast/duration=P1D/daily-insitu-targets.csv.gz"
     library(tidyverse)
     lake_data$df <- read_csv(url, show_col_types = FALSE) %>%
-      filter(site_id == sites_df[input$table01_rows_selected, "SiteID"])
+      filter(site_id == pull(sites_df[input$table01_rows_selected, "SiteID"]))
     
     #retrieve site photooutput$display.image <- renderImage({
     site_photo_file$img <- paste("www/",row_selected$SiteID,".jpg",sep="")
@@ -91,6 +95,14 @@ shinyServer(function(input, output, session) {
     output$site_info <- renderText({
       module_text[row_selected$SiteID, ]
     })
+    
+    #pull recent data
+    recent_dates <- seq.Date(from = Sys.Date() - 30, to = Sys.Date(), by = 'days')
+    
+    lake_data$chla <- lake_data$df %>%
+      select(datetime, variable, observation) %>%
+      filter(datetime %in% recent_dates & variable == "Chla_ugL_mean")
+    
     progress$set(value = 1)
     
   })
@@ -119,6 +131,64 @@ shinyServer(function(input, output, session) {
          height = 320,
          width = 400)
   }, deleteFile = FALSE)
+  
+  #### Objective 2 ----
+  
+  #** chlorophyll-a Presentation slides ----
+  output$chla_slides <- renderSlickR({
+    slickR(chla_slides) + settings(dots = TRUE)
+  })
+  
+  # Plot chlorophyll-a
+  plot.chla <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$chla_plot <- renderPlotly({ 
+      
+      validate(
+        need(input$table01_rows_selected != "",
+             message = "Please select a site in Objective 1.")
+      )
+      validate(
+        need(!is.null(lake_data$df),
+             message = "Please select a site in Objective 1.")
+      )
+      validate(
+        need(input$plot_chla > 0,
+             message = "Click 'Plot chlorophyll-a'")
+      )
+      
+      df <- lake_data$chla
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation))+
+        geom_point(aes(color = "Chl-a"))+
+        xlab("")+
+        ylab("Chlorophyll-a (ug/L)")+
+        scale_color_manual(values = c("Chl-a" = "chartreuse4"), name = "")+
+        theme_bw()
+      
+      plot.chla$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of air and water temperature
+  output$save_chla_plot <- downloadHandler(
+    filename = function() {
+      paste("Q5a-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.chla$main, device = device)
+    }
+  )
   
   
   #### Navigating Tabs ----

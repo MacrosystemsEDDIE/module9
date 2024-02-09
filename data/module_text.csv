@@ -17,3 +17,6 @@ acknowledgement,"This module was initially developed by: Lofton, M.E., Cooke, R.
 site_photo,"When you select a site in the table, you will see a photo of your chosen Virginia Reservoirs LTREB drinking water reservoir."
 fcre,A paragraph of text about FCR.
 bvre,A paragraph of text about BVR.
+chla,Chlorophyll-a data are a useful proxy for phytoplankton biomass in lakes. Chlorophyll-a is a molecule that phytoplankton use for photosynthesis. Measuring chlorophyll-a concentrations in water can give a bulk estimate of phytoplankton concentrations. Chlorophyll-a data can be collected at a high frequency by automated sensors.
+phyto_wq,"Phytoplankton are microscopic primary producers that live in the water. They are the dominant primary producers in many lakes and reservoirs. Excess phytoplankton biomass can lead to harmful algal blooms (HABs), which compromise water quality through production of toxins, production of taste and odor compounds, and creation of anoxic (low-oxygen zones), which can lead to release of metals and other undesirable compounds from reservoir sediments."
+chla_wq,A reservoir may be at risk of experiencing water quality degradation due to HABs when chlorophyll-a is elevated.

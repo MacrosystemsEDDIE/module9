@@ -55,6 +55,8 @@ help_text <- read.csv("data/help_text.csv", row.names = 1)
 
 # Slides
 recap_slides <- list.files("www/key_slides", full.names = TRUE)
+chla_slides <- list.files("www/chlorophyll", full.names = TRUE)
+
 
 # Add last update time
 app_time <- format(file.info("ui.R")$mtime, "%Y-%m-%d")

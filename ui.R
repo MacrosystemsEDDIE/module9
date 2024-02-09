@@ -386,6 +386,70 @@ ui <- function(req) {
                           )
                         ),
                         hr(),
+                        fluidRow(
+                          column(12,
+                                 h4("Now we will visualize high-frequency data from your chosen reservoir and explore how these data can be related to water quality."))
+                        ),
+                        fluidRow(
+                          column(4,
+                                 h3("Chlorophyll-a"),
+                                 p(tags$b("What is chlorophyll-a?")),
+                                 tags$ul(
+                                   tags$li(module_text["chla", ])
+                                 ),
+                                 p(tags$b("How can phytoplankton affect water quality?")),
+                                 tags$ul(
+                                   tags$li(module_text["phyto_wq", ])
+                                 ),
+                                 p(tags$b("How can we relate chlorophyll-a data to water quality?")),
+                                 tags$ul(
+                                   tags$li(module_text["chla_wq", ])
+                                 ),
+                                 p(tags$i("Click through the slides to understand how chlorophyll-a data can be related to water quality.")),
+                                 br(),
+                                 box(id = "box12", width = 12, status = "primary",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h4("Questions"),
+                                              p(tags$b(quest["q4", 1]))
+                                       )
+                                     )
+                                 ),
+                          ),
+                          column(8, offset = 0, align = "center",
+                                 h3("Using chlorophyll-a to assess water quality",
+                                    align = "center"),
+                                 h5("Click the arrows to navigate through the slides", align = "center"),
+                                 wellPanel(
+                                   slickROutput("chla_slides", width = "700px", height = "525px")
+                                 )
+                          )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(6,
+                                 h3("Plot chlorophyll-a data"),
+                                 p("Click the button below to plot chlorophyll-a data at your chosen reservoir site."),
+                                 actionButton("plot_chla", "Plot high-frequency chlorophyll-a data"),
+                                 br(),br(),
+                                 box(id = "box12", width = 12, status = "primary",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h4("Questions"),
+                                              p(tags$b(quest["q5", 1]))
+                                       )
+                                     )
+                                 )
+                          ),
+                          column(6,
+                                 wellPanel(
+                                   plotlyOutput("chla_plot")
+                                 ),
+                                 downloadButton("save_chla_plot", "Download plot", icon = icon("download"))
+                                 )
+                        )
                         
                ),
                # 6. Activity B ----
