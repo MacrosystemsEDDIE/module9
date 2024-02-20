@@ -607,7 +607,7 @@ ui <- function(req) {
                                        column(10, offset = 1,
                                               introBox(
                                                 h3("Next step:"),
-                                                h4("Use high-frequency water quality data to explore how water quality changes over the course of a year in your chosen drinking water reservoir."))
+                                                h4("Use high-frequency water quality data to explore how water quality changes over the course of a year in two drinking water reservoirs."))
                                        )
                                      )
                                  )
@@ -624,7 +624,40 @@ ui <- function(req) {
                                            h2("Activity B - Assess how water quality changes over time"),
                                            p(module_text["act_B", ])
                                  )
+                          ),
+                          column(12,
+                                 box(id = "box1", width = 10, status = "success",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              introBox(
+                                                h3("Objective 3: Compare water temperature over a year at two reservoirs"))
+                                       )
+                                     )
+                                 )
                           )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(12,
+                                 h4("Water temperature"),
+                                 p("Click the 'Plot water temperature' button below to view high-frequency water temperature data from the most recent complete calendar year at Falling Creek and Beaverdam Reservoirs. Then, answer the questions below."),
+                                 p(tags$em("Note these plots are interactive! You can scroll over them to see data values, zoom in and out, and change your view window. Plot options will appear in the top right corner of the plot when you scroll over it."))
+                                 )
+                        ),
+                        fluidRow(
+                          column(6,
+                                 wellPanel(
+                                   plotlyOutput("fcr_wtemp_plot")
+                                 ),
+                                 downloadButton("save_fcr_wtemp_plot", "Download plot", icon = icon("download"))
+                                 ),
+                          column(6,
+                                 wellPanel(
+                                   plotlyOutput("bvr_wtemp_plot")
+                                 ),
+                                 downloadButton("save_bvr_wtemp_plot", "Download plot", icon = icon("download"))
+                                 )
                         )
                ),
                # 7. Activity C ----

@@ -59,8 +59,6 @@ chla_slides <- list.files("www/chlorophyll", full.names = TRUE)
 wtemp_slides <- list.files("www/waterTemperature", full.names = TRUE)
 do_slides <- list.files("www/dissolvedOxygen", full.names = TRUE)
 
-
-
 # Add last update time
 app_time <- format(file.info("ui.R")$mtime, "%Y-%m-%d")
 app_update_txt <- paste0("This app was last updated on: ", app_time)
@@ -79,5 +77,9 @@ sites_df <- tibble(SiteID = c("fcre","bvre"),
 ltrebIcons <- iconList(
   Aquatic = makeIcon("icons/water-icon.png", iconWidth = 28, iconHeight = 28)
 )
+
+# Annual data
+fcr <- read.csv("data/FCR_catwalk_data.csv")
+bvr <- read.csv("data/BVR_platform_data.csv")
 
 # end
