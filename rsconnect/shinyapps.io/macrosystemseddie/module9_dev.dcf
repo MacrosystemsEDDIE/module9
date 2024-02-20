@@ -1,0 +1,12 @@
+name: module9_dev
+title: module9_dev
+username: macrosystemseddie
+account: macrosystemseddie
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11187482
+bundleId: 8239762
+url: https://macrosystemseddie.shinyapps.io/module9_dev/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

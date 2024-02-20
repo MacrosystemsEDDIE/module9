@@ -56,6 +56,9 @@ help_text <- read.csv("data/help_text.csv", row.names = 1)
 # Slides
 recap_slides <- list.files("www/key_slides", full.names = TRUE)
 chla_slides <- list.files("www/chlorophyll", full.names = TRUE)
+wtemp_slides <- list.files("www/waterTemperature", full.names = TRUE)
+do_slides <- list.files("www/dissolvedOxygen", full.names = TRUE)
+
 
 
 # Add last update time

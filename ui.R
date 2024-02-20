@@ -392,6 +392,154 @@ ui <- function(req) {
                         ),
                         fluidRow(
                           column(4,
+                                 h3("Water temperature"),
+                                 p(tags$i("Click through the slides to understand how water temperature data can be related to water quality. The information presented on the slides is also summarized in text below the slides to help you answer the questions.")),
+                                 br(),
+                                 box(id = "box12", width = 12, status = "primary",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1, align = "left",
+                                              h4("Questions"),
+                                              p(tags$b(quest["q4", 1]))
+                                       )
+                                     )
+                                 )
+                          ),
+                          column(8, offset = 0, align = "center",
+                                 h3("Using water temperature to assess water quality",
+                                    align = "center"),
+                                 h5("Click the arrows to navigate through the slides", align = "center"),
+                                 wellPanel(
+                                   slickROutput("wtemp_slides", width = "700px", height = "525px")
+                                 )
+                          )
+                        ),
+                        fluidRow(
+                          column(6,
+                                 p(tags$b("Why is water temperature important?")),
+                                 tags$ul(
+                                   tags$li(module_text["wtemp", ])
+                                 ),
+                                 p(tags$b("What is thermal stratification?")),
+                                 tags$ul(
+                                   tags$li(module_text["stratification", ])
+                                 ),
+                                 img(src = "water_density.png", height = "60%", id = "bla_border",
+                                     width = "60%", tags$style("border: solid 2px black;")),
+                                 p("Water density vs. water temperature"),
+                                 p(tags$em("Source: Mike Arthur and Demian Saffer, accessed at: https://www.e-education.psu.edu/earth111/node/842"))
+                                 ),
+                          column(6,
+                                 p(tags$b("How does thermal stratification change over the course of a year?")),
+                                 tags$ul(
+                                   tags$li(module_text["seasonal_strat", ])
+                                 ),
+                                 p(tags$b("How does thermal stratification affect water quality?")),
+                                 tags$ul(
+                                   tags$li(module_text["strat_wq", ])
+                                 ),
+                                 p(tags$b("What is turnover?")),
+                                 tags$ul(
+                                   tags$li(module_text["turnover", ])
+                                 ),
+                                 p(tags$b("How does turnover affect water quality?")),
+                                 tags$ul(
+                                   tags$li(module_text["turnover_wq", ])
+                                 )
+                                 )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(4,
+                                 h3("Plot water temperature data"),
+                                 p("Click the button below to plot water temperature data at your chosen reservoir site."),
+                                 actionButton("plot_wtemp", "Plot high-frequency water temperature data"),
+                                 br(),br(),
+                                 box(id = "box12", width = 12, status = "primary", 
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h4("Questions"),
+                                              p(tags$b(quest["q5", 1]))
+                                       )
+                                     )
+                                 )
+                          ),
+                          column(8,
+                                 wellPanel(
+                                   plotlyOutput("wtemp_plot")
+                                 ),
+                                 downloadButton("save_wtemp_plot", "Download plot", icon = icon("download"))
+                                 )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(4,
+                                 h3("Dissolved oxygen"),
+                                 p(tags$b("What is dissolved oxygen?")),
+                                 tags$ul(
+                                   tags$li(module_text["do", ])
+                                 ),
+                                 p(tags$b("How is dissolved oxygen related to water temperature?")),
+                                 tags$ul(
+                                   tags$li(module_text["do_wtemp", ])
+                                 ),
+                                 img(src = "oxygen_solubility.png", height = "90%", id = "bla_border",
+                                     width = "90%", tags$style("border: solid 2px black;")),
+                                 p("Oxygen solubility vs. water temperature"),
+                                 p(tags$em("Source: Kenneth C. Waterman, accessed at: https://www.researchgate.net/figure/Effect-of-temperature-on-oxygen-solubility-in-water-generated-by-extrapolation-of-data_fig5_7957124")),
+                                 p(tags$b("How can dissolved oxygen affect water quality?")),
+                                 tags$ul(
+                                   tags$li(module_text["do_wq", ])
+                                 ),
+                                 p(tags$i("Click through the slides to understand how dissolved oxygen data can be related to water quality.")),
+                                 br(),
+                                 box(id = "box12", width = 12, status = "primary",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h4("Questions"),
+                                              p(tags$b(quest["q6", 1]))
+                                       )
+                                     )
+                                 )
+                          ),
+                          column(8, offset = 0, align = "center",
+                                 h3("Using dissolved oxygen to assess water quality",
+                                    align = "center"),
+                                 h5("Click the arrows to navigate through the slides", align = "center"),
+                                 wellPanel(
+                                   slickROutput("do_slides", width = "700px", height = "525px")
+                                 )
+                          )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(4,
+                                 h3("Plot dissolved oxygen data"),
+                                 p("Click the button below to plot dissolved oxygen data at your chosen reservoir site."),
+                                 actionButton("plot_do", "Plot high-frequency dissolved oxygen data"),
+                                 br(),br(),
+                                 box(id = "box12", width = 12, status = "primary",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h4("Questions"),
+                                              p(tags$b(quest["q7", 1]))
+                                       )
+                                     )
+                                 )
+                          ),
+                          column(8,
+                                 wellPanel(
+                                   plotlyOutput("do_plot")
+                                 ),
+                                 downloadButton("save_do_plot", "Download plot", icon = icon("download"))
+                          )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(4,
                                  h3("Chlorophyll-a"),
                                  p(tags$b("What is chlorophyll-a?")),
                                  tags$ul(
@@ -412,10 +560,10 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q4", 1]))
+                                              p(tags$b(quest["q8", 1]))
                                        )
                                      )
-                                 ),
+                                 )
                           ),
                           column(8, offset = 0, align = "center",
                                  h3("Using chlorophyll-a to assess water quality",
@@ -428,7 +576,7 @@ ui <- function(req) {
                         ),
                         hr(),
                         fluidRow(
-                          column(6,
+                          column(4,
                                  h3("Plot chlorophyll-a data"),
                                  p("Click the button below to plot chlorophyll-a data at your chosen reservoir site."),
                                  actionButton("plot_chla", "Plot high-frequency chlorophyll-a data"),
@@ -438,19 +586,33 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q5", 1]))
+                                              p(tags$b(quest["q9", 1]))
                                        )
                                      )
                                  )
                           ),
-                          column(6,
+                          column(8,
                                  wellPanel(
                                    plotlyOutput("chla_plot")
                                  ),
                                  downloadButton("save_chla_plot", "Download plot", icon = icon("download"))
+                          )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(12,
+                                 box(id = "box1", width = 10, status = "success",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              introBox(
+                                                h3("Next step:"),
+                                                h4("Use high-frequency water quality data to explore how water quality changes over the course of a year in your chosen drinking water reservoir."))
+                                       )
+                                     )
                                  )
+                          )
                         )
-                        
                ),
                # 6. Activity B ----
                tabPanel(title = tab_names["mtab3", 2], value = "mtab3",

@@ -84,7 +84,7 @@ shinyServer(function(input, output, session) {
     
     #load LTREB data
     url <- "https://renc.osn.xsede.org/bio230121-bucket01/vera4cast/targets/project_id=vera4cast/duration=P1D/daily-insitu-targets.csv.gz"
-    library(tidyverse)
+    
     lake_data$df <- read_csv(url, show_col_types = FALSE) %>%
       filter(site_id == pull(sites_df[input$table01_rows_selected, "SiteID"]))
     
@@ -98,6 +98,14 @@ shinyServer(function(input, output, session) {
     
     #pull recent data
     recent_dates <- seq.Date(from = Sys.Date() - 30, to = Sys.Date(), by = 'days')
+    
+    lake_data$wtemp <- lake_data$df %>%
+      select(datetime, variable, depth_m, observation) %>%
+      filter(datetime %in% recent_dates & variable == "Temp_C_mean")
+    
+    lake_data$do <- lake_data$df %>%
+      select(datetime, variable, depth_m, observation) %>%
+      filter(datetime %in% recent_dates & variable == "DO_mgL_mean")
     
     lake_data$chla <- lake_data$df %>%
       select(datetime, variable, observation) %>%
@@ -133,6 +141,128 @@ shinyServer(function(input, output, session) {
   }, deleteFile = FALSE)
   
   #### Objective 2 ----
+  
+  #** water temperature Presentation slides ----
+  output$wtemp_slides <- renderSlickR({
+    slickR(wtemp_slides) + settings(dots = TRUE)
+  })
+  
+  # Plot water temperature
+  plot.wtemp <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$wtemp_plot <- renderPlotly({ 
+      
+      validate(
+        need(input$table01_rows_selected != "",
+             message = "Please select a site in Objective 1.")
+      )
+      validate(
+        need(!is.null(lake_data$df),
+             message = "Please select a site in Objective 1.")
+      )
+      validate(
+        need(input$plot_wtemp > 0,
+             message = "Click 'Plot water temperature'")
+      )
+      
+      df <- lake_data$wtemp
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+        geom_line()+
+        xlab("")+
+        ylab("Water temperature (degrees Celsius)")+
+        scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
+        theme_bw()
+      
+      plot.wtemp$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of water temperature
+  output$save_wtemp_plot <- downloadHandler(
+    filename = function() {
+      paste("Q5a-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.wtemp$main, device = device)
+    }
+  )
+  
+  #** dissolved oxygen Presentation slides ----
+  output$do_slides <- renderSlickR({
+    slickR(do_slides) + settings(dots = TRUE)
+  })
+  
+  # Plot dissolved oxygen
+  plot.do <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$do_plot <- renderPlotly({ 
+      
+      validate(
+        need(input$table01_rows_selected != "",
+             message = "Please select a site in Objective 1.")
+      )
+      validate(
+        need(!is.null(lake_data$df),
+             message = "Please select a site in Objective 1.")
+      )
+      validate(
+        need(input$plot_do > 0,
+             message = "Click 'Plot dissolved oxygen'")
+      )
+      
+      df <- lake_data$do
+      
+      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "fcre"){
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+        geom_line()+
+        xlab("")+
+        ylab("Dissolved oxygen (mg/L)")+
+        scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
+        theme_bw()
+      }
+      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "bvre"){
+        p <- ggplot(data = df, aes(x = datetime, y = observation, color = as.factor(depth_m)))+
+          geom_line()+
+          xlab("")+
+          ylab("Dissolved oxygen (mg/L")+
+          scale_color_manual(values = c("lightsteelblue"), name = "Depth (m)")+
+          theme_bw()
+      }
+      
+      plot.do$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of DO
+  output$save_do_plot <- downloadHandler(
+    filename = function() {
+      paste("Q7a-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.do$main, device = device)
+    }
+  )
   
   #** chlorophyll-a Presentation slides ----
   output$chla_slides <- renderSlickR({
@@ -176,10 +306,10 @@ shinyServer(function(input, output, session) {
     
   })
   
-  # Download plot of air and water temperature
+  # Download plot of chl-a
   output$save_chla_plot <- downloadHandler(
     filename = function() {
-      paste("Q5a-plot-", Sys.Date(), ".png", sep="")
+      paste("Q9a-plot-", Sys.Date(), ".png", sep="")
     },
     content = function(file) {
       device <- function(..., width, height) {
