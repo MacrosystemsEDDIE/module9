@@ -226,22 +226,12 @@ shinyServer(function(input, output, session) {
       
       df <- lake_data$do
       
-      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "fcre"){
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
         geom_line()+
         xlab("")+
         ylab("Dissolved oxygen (mg/L)")+
         scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
         theme_bw()
-      }
-      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "bvre"){
-        p <- ggplot(data = df, aes(x = datetime, y = observation, color = as.factor(depth_m)))+
-          geom_line()+
-          xlab("")+
-          ylab("Dissolved oxygen (mg/L")+
-          scale_color_manual(values = c("lightsteelblue"), name = "Depth (m)")+
-          theme_bw()
-      }
       
       plot.do$main <- p
       
