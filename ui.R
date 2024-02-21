@@ -1081,8 +1081,8 @@ ui <- function(req) {
                         hr(),
                         fluidRow(
                           column(6, align = "center",
-                                 br(),br(),
-                                 h4("First turnover forecast image here; probability of turnover is LOW")
+                                 img(src = "forecast1.png", height = "90%", id = "bla_border",
+                                     width = "90%", tags$style("border: solid 2px black;"))
                                  ),
                           column(6,
                                  box(id = "box1", width = 10, status = "primary",
@@ -1106,9 +1106,9 @@ ui <- function(req) {
                         ),
                         hr(),
                         fluidRow(
-                          column(6, align = "center",
-                                 br(),br(),
-                                 h4("Second turnover forecast image here; probability of turnover is HIGH")
+                          column(6, 
+                                 img(src = "forecast2.png", height = "90%", id = "bla_border",
+                                     width = "90%", tags$style("border: solid 2px black;"))
                           ),
                           column(6,
                                  box(id = "box1", width = 10, status = "primary",
