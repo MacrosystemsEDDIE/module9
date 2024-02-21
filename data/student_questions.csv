@@ -14,3 +14,13 @@ q6,Q6. Some question text related to dissolved oxygen presentation content.
 q7,Q7. Some question text asking students to describe plotted dissolved oxygen data.
 q8,Q8. Some question text related to chlorophyll-a presentation content.
 q9,Q9. Some question text asking students to describe plotted chlorophyll-a data.
+q10,Q10. When was turnover in the fall? Explain how you know.
+q11,Q11. Do you think there was ice at any point in the year? Justify your reasoning.
+q12,Q12. Compare dissolved oxygen over time between the two reservoirs. Ask students to focus on particular depths?
+q13,"Q13. Do you observe hypoxia (will need to introduce hypoxia first!)? If so, when and at what depths in which reservoir?"
+q14,"Q14. Based on these figures, when and at what depth do you observe the greatest risk of impaired water quality? Explain your reasoning."
+q15,Q15. What happens to DO during fall turnover? How might this affect water quality?
+q16,Q16. Compare chlorophyll-a over time between the two reservoirs.
+q17,Q17. The horizontal red line represents a threshold that is twice the historical mean of chlorophyll-a at these reservoirs. Is it exceeded at any point during the year?
+q18,Q18. Do the chlorophyll-a data indicate that there may be water quality impairment at any point during the year? Explain your reasoning.
+q19,Q19. What happens to chlorophyll-a levels during fall turnover?

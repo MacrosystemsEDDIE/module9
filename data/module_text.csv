@@ -11,8 +11,8 @@ workflow1,Watch the introductory presentation provided at the link in your Canva
 workflow2,"Complete Activities A, B, and C in this web app."
 workflow3,"When you are prompted to answer questions in the app, enter your answers in the Canvas quiz provided as part of the Canvas module."
 workflow4,"As you work, you can save your progress in the web app using the 'Bookmark my progress' button described below, and you can save your progress in the quiz using the 'Save' button on Canvas."
-act_B,Use high-frequency water quality data to explore how water quality changes over the course of a year in a drinking water reservoir 
-act_C,Make management recommendations for reservoir water withdrawal and treatment using high-frequency water quality data
+act_B,Use high-frequency water quality data to explore how water quality changes over the course of a year in two drinking water reservoirs 
+act_C,Make management recommendations for reservoir water withdrawal and treatment using high-frequency water quality data and water quality forecasts
 acknowledgement,"This module was initially developed by: Lofton, M.E., Cooke, R.L., and C.C. Carey. XX February 2024. Macrosystems EDDIE: Using High-Frequency Data to Manage Water Quality. Macrosystems EDDIE Module 9, Version 1. https://serc.carleton.edu/eddie/teaching_materials/modules/module9.html. Module development was supported by NSF grants XXX."
 site_photo,"When you select a site in the table, you will see a photo of your chosen Virginia Reservoirs LTREB drinking water reservoir."
 fcre,A paragraph of text about FCR.

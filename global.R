@@ -78,8 +78,4 @@ ltrebIcons <- iconList(
   Aquatic = makeIcon("icons/water-icon.png", iconWidth = 28, iconHeight = 28)
 )
 
-# Annual data
-fcr <- read.csv("data/FCR_catwalk_data.csv")
-bvr <- read.csv("data/BVR_platform_data.csv")
-
 # end

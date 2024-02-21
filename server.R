@@ -174,6 +174,7 @@ shinyServer(function(input, output, session) {
         xlab("")+
         ylab("Water temperature (degrees Celsius)")+
         scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
+        ylim(c(0,35))+
         theme_bw()
       
       plot.wtemp$main <- p
@@ -322,7 +323,534 @@ shinyServer(function(input, output, session) {
   
   #### Activity B ----
   
+  res_data <- reactiveValues(df = NULL,
+                             wtemp = NULL,
+                             do = NULL,
+                             chla = NULL,
+                             tds = NULL,
+                             turb = NULL)
   
+  observeEvent(input$load_res_data, {
+    
+    progress <- shiny::Progress$new()
+    # Make sure it closes when we exit this reactive, even if there's an error
+    on.exit(progress$close())
+    progress$set(message = "Loading LTREB data",
+                 detail = "This may take a while. This window will disappear
+                     when it is loaded.", value = 0.33)
+    
+    # load in reservoir data
+    res_data$df <- read_csv("./data/reservoir_data.csv")
+    res_data$wtemp <- res_data$df %>%
+      filter(variable == "Temp_C_mean")
+    res_data$do <- res_data$df %>%
+      filter(variable == "DO_mgL_mean")
+    res_data$chla <- res_data$df %>%
+      filter(variable == "Chla_ugL_mean")
+    res_data$tds <- res_data$df %>%
+      filter(variable == "TDS_mgL_mean")
+    res_data$turb <- res_data$df %>%
+      filter(variable == "Turbidity_FNU_mean")
+    
+    progress$set(value = 1)
+    
+  })
+  
+  # Plot 1 year of FCR water temperature
+  plot.fcr.wtemp <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$fcr_wtemp_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data'")
+      )
+      validate(
+        need(input$plot_res_wtemp > 0,
+             message = "Click 'Plot water temperature'")
+      )
+      
+      df <- res_data$wtemp %>%
+        filter(site_id == "fcre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+        geom_line()+
+        xlab("")+
+        ylab("Water temperature (degrees Celsius)")+
+        scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
+        ggtitle("Falling Creek Reservoir")+
+        ylim(c(0,35))+
+        theme_bw()
+      
+      plot.fcr.wtemp$main <- p
+      
+      return(ggplotly(p, dynamicTicks = FALSE))
+      
+    })
+    
+  })
+  
+  # Download plot of FCR water temperature
+  output$save_fcr_wtemp_plot <- downloadHandler(
+    filename = function() {
+      paste("Q10a-plot1-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.fcr.wtemp$main, device = device)
+    }
+  )
+  
+  # Plot 1 year of BVR water temperature
+  plot.bvr.wtemp <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$bvr_wtemp_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data'")
+      )
+      validate(
+        need(input$plot_res_wtemp > 0,
+             message = "Click 'Plot water temperature'")
+      )
+      
+      df <- res_data$wtemp %>%
+        filter(site_id == "bvre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+        geom_line()+
+        xlab("")+
+        ylab("Water temperature (degrees Celsius)")+
+        scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
+        ylim(c(0,35))+
+        ggtitle("Beaverdam Reservoir")+
+        theme_bw()
+      
+      plot.bvr.wtemp$main <- p
+      
+      return(ggplotly(p, dynamicTicks = FALSE))
+      
+    })
+    
+  })
+  
+  # Download plot of BVR water temperature
+  output$save_bvr_wtemp_plot <- downloadHandler(
+    filename = function() {
+      paste("Q10a-plot2-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.bvr.wtemp$main, device = device)
+    }
+  )
+  
+  # Plot 1 year of FCR dissolved oxygen
+  plot.fcr.do <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$fcr_do_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data' above")
+      )
+      validate(
+        need(input$plot_res_do > 0,
+             message = "Click 'Plot dissolved oxygen'")
+      )
+      
+      df <- res_data$do %>%
+        filter(site_id == "fcre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+        geom_line()+
+        xlab("")+
+        ylab("Dissolved oxygen (mg/L)")+
+        scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
+        ylim(c(0,20))+
+        ggtitle("Falling Creek Reservoir")+
+        theme_bw()
+      
+      plot.fcr.do$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of FCR dissolved oxygen
+  output$save_fcr_do_plot <- downloadHandler(
+    filename = function() {
+      paste("Q12a-plot1-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.fcr.do$main, device = device)
+    }
+  )
+  
+  # Plot 1 year of BVR dissolved oxygen
+  plot.bvr.do <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$bvr_do_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data' above")
+      )
+      validate(
+        need(input$plot_res_do > 0,
+             message = "Click 'Plot dissolved oxygen'")
+      )
+      
+      df <- res_data$do %>%
+        filter(site_id == "bvre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+        geom_line()+
+        xlab("")+
+        ylab("Dissolved oxygen (mg/L)")+
+        scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
+        ylim(c(0,20))+
+        ggtitle("Beaverdam Reservoir")+
+        theme_bw()
+      
+      plot.bvr.do$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of BVR dissolved oxygen
+  output$save_bvr_do_plot <- downloadHandler(
+    filename = function() {
+      paste("Q12a-plot2-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.bvr.do$main, device = device)
+    }
+  )
+  
+  # Plot 1 year of FCR chla
+  plot.fcr.chla <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$fcr_chla_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data' above")
+      )
+      validate(
+        need(input$plot_res_chla > 0,
+             message = "Click 'Plot chlorophyll-a'")
+      )
+      
+      df <- res_data$chla %>%
+        filter(site_id == "fcre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation))+
+        geom_point(aes(color = "Chl-a"))+
+        xlab("")+
+        ylab("Chlorophyll-a (ug/L)")+
+        scale_color_manual(values = c("Chl-a" = "chartreuse4"), name = "")+
+        ggtitle("Falling Creek Reservoir")+
+        geom_hline(yintercept = 20)+
+        theme_bw()
+      
+      plot.fcr.chla$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of FCR chla
+  output$save_fcr_chla_plot <- downloadHandler(
+    filename = function() {
+      paste("Q16a-plot1-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.fcr.chla$main, device = device)
+    }
+  )
+  
+  # Plot 1 year of BVR chla
+  plot.bvr.chla <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$bvr_chla_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data' above")
+      )
+      validate(
+        need(input$plot_res_chla > 0,
+             message = "Click 'Plot chlorophyll-a'")
+      )
+      
+      df <- res_data$chla %>%
+        filter(site_id == "bvre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation))+
+        geom_point(aes(color = "Chl-a"))+
+        xlab("")+
+        ylab("Chlorophyll-a (ug/L)")+
+        scale_color_manual(values = c("Chl-a" = "chartreuse4"), name = "")+
+        ggtitle("Beaverdam Reservoir")+
+        geom_hline(yintercept = 20)+
+        theme_bw()
+      
+      plot.bvr.chla$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of BVR chla
+  output$save_bvr_chla_plot <- downloadHandler(
+    filename = function() {
+      paste("Q16a-plot2-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.bvr.chla$main, device = device)
+    }
+  )
+  
+  # Plot 1 year of FCR tds
+  plot.fcr.tds <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$fcr_tds_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data' above")
+      )
+      validate(
+        need(input$plot_res_tds > 0,
+             message = "Click 'Plot TDS/turbidity'")
+      )
+      
+      df <- res_data$tds %>%
+        filter(site_id == "fcre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation))+
+        geom_point(aes(color = "TDS"))+
+        xlab("")+
+        ylab("Total dissolved solids (mg/L)")+
+        scale_color_manual(values = c("TDS" = "darkorange"), name = "")+
+        ggtitle("Falling Creek Reservoir")+
+        theme_bw()
+      
+      plot.fcr.tds$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of FCR tds
+  output$save_fcr_tds_plot <- downloadHandler(
+    filename = function() {
+      paste("Q20a-plot1-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.fcr.tds$main, device = device)
+    }
+  )
+  
+  # Plot 1 year of BVR tds
+  plot.bvr.tds <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$bvr_tds_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data' above")
+      )
+      validate(
+        need(input$plot_res_tds > 0,
+             message = "Click 'Plot TDS/turbidity'")
+      )
+      
+      df <- res_data$tds %>%
+        filter(site_id == "bvre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation))+
+        geom_point(aes(color = "TDS"))+
+        xlab("")+
+        ylab("Total dissolved solids (mg/L)")+
+        scale_color_manual(values = c("TDS" = "darkorange"), name = "")+
+        ggtitle("Beaverdam Reservoir")+
+        theme_bw()
+      
+      plot.bvr.tds$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of BVR tds
+  output$save_bvr_tds_plot <- downloadHandler(
+    filename = function() {
+      paste("Q20a-plot2-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.bvr.tds$main, device = device)
+    }
+  )
+  
+  # Plot 1 year of FCR turbidity
+  plot.fcr.turb <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$fcr_turb_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data' above")
+      )
+      validate(
+        need(input$plot_res_tds > 0,
+             message = "Click 'Plot TDS/turbidity'")
+      )
+      
+      df <- res_data$turb %>%
+        filter(site_id == "fcre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation))+
+        geom_point(aes(color = "Turbidity"))+
+        xlab("")+
+        ylab("Turbidity (FNU)")+
+        scale_color_manual(values = c("Turbidity" = "brown4"), name = "")+
+        ggtitle("Falling Creek Reservoir")+
+        theme_bw()
+      
+      plot.fcr.turb$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of FCR turbidity
+  output$save_fcr_turb_plot <- downloadHandler(
+    filename = function() {
+      paste("Q21a-plot1-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.fcr.turb$main, device = device)
+    }
+  )
+  
+  # Plot 1 year of BVR turbidity
+  plot.bvr.turb <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$bvr_turb_plot <- renderPlotly({ 
+      
+      validate(
+        need(!is.null(res_data$df),
+             message = "Click 'Load reservoir data' above")
+      )
+      validate(
+        need(input$plot_res_tds > 0,
+             message = "Click 'Plot TDS/turbidity'")
+      )
+      
+      df <- res_data$turb %>%
+        filter(site_id == "bvre")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = observation))+
+        geom_point(aes(color = "Turbidity"))+
+        xlab("")+
+        ylab("Turbidity (FNU)")+
+        scale_color_manual(values = c("Turbidity" = "brown4"), name = "")+
+        ggtitle("Beaverdam Reservoir")+
+        theme_bw()
+      
+      plot.bvr.turb$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE))
+      
+    })
+    
+  })
+  
+  # Download plot of BVR turbidity
+  output$save_bvr_turb_plot <- downloadHandler(
+    filename = function() {
+      paste("Q21a-plot2-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.bvr.turb$main, device = device)
+    }
+  )
   
   
   #### Navigating Tabs ----

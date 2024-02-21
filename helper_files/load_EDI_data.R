@@ -135,9 +135,10 @@ mycols <- c("Reservoir",
             "ThermistorTemp_C_13", 
             "RDO_mgL_6",     
             "RDO_mgL_13", 
-            "EXODO_mgL_1.5",     
-            "EXOChla_RFU_1.5",     
-            "EXOChla_ugL_1.5"     
+            "EXODO_mgL_1.5",  
+            "EXOTDS_mgL_1.5",
+            "EXOChla_ugL_1.5",  
+            "EXOTurbidity_FNU_1.5"
             )
 
 bvr <- dt1 %>%
@@ -147,9 +148,18 @@ bvr <- dt1 %>%
   select(-DateTime) %>%
   group_by(Reservoir, Site, Date) %>%
   summarise_all(list(mean), na.rm = TRUE) %>%
-  add_column(site_id = "bvre")
-
-write.csv(bvr, "./data/BVR_platform_data.csv", row.names = FALSE)
+  ungroup() %>%
+  add_column(site_id = "bvre") %>%
+  pivot_longer(ThermistorTemp_C_1:EXOTurbidity_FNU_1.5, names_to = "var", values_to = "observation") %>%
+  separate(var, into = c("variable","unit","depth_m"), sep = "_") %>%
+  rename(datetime = Date) %>%
+  mutate(variable = ifelse(grepl("Temp", variable),"Temp_C_mean",
+                           ifelse(grepl("DO",variable),"DO_mgL_mean",
+                                  ifelse(grepl("Chla",variable),"Chla_ugL_mean",
+                                         ifelse(grepl("TDS",variable),"TDS_mgL_mean","Turbidity_FNU_mean")))),
+         depth_m = as.numeric(depth_m)) %>%
+  select(site_id, datetime, depth_m, variable, observation)
+  
 
 # FCR catwalk ----
 
@@ -274,8 +284,10 @@ mycols <- c("Reservoir",
             "ThermistorTemp_C_9",     
             "RDO_mgL_5_adjusted",     
             "RDO_mgL_9_adjusted",   
-            "EXODO_mgL_1",     
-            "EXOChla_ugL_1"
+            "EXODO_mgL_1",   
+            "EXOTDS_mgL_1", 
+            "EXOChla_ugL_1",
+            "EXOTurbidity_FNU_1"
 )
 
 fcr <- dt1 %>%
@@ -284,7 +296,21 @@ fcr <- dt1 %>%
   mutate(Date = date(DateTime)) %>%
   select(-DateTime) %>%
   group_by(Reservoir, Site, Date) %>%
-  summarise_all(list(mean), na.rm = TRUE)
+  summarise_all(list(mean), na.rm = TRUE) %>%
+  ungroup() %>%
+  add_column(site_id = "fcre") %>%
+  pivot_longer(ThermistorTemp_C_surface:EXOTurbidity_FNU_1, names_to = "var", values_to = "observation") %>%
+  separate(var, into = c("variable","unit","depth_m","method"), sep = "_") %>%
+  rename(datetime = Date) %>%
+  mutate(variable = ifelse(grepl("Temp", variable),"Temp_C_mean",
+                           ifelse(grepl("DO",variable),"DO_mgL_mean",
+                                  ifelse(grepl("Chla",variable),"Chla_ugL_mean",
+                                         ifelse(grepl("TDS",variable),"TDS_mgL_mean","Turbidity_FNU_mean")))),
+         depth_m = ifelse(depth_m == "surface", 0.1, as.numeric(depth_m))) %>%
+  select(site_id, datetime, depth_m, variable, observation)
 
-write.csv(fcr, "./data/FCR_catwalk_data.csv", row.names = FALSE)
+reservoir_data <- bind_rows(bvr, fcr)
+
+write.csv(reservoir_data, "./data/reservoir_data.csv", row.names = FALSE)
+
 
