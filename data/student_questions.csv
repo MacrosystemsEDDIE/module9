@@ -12,15 +12,24 @@ q4,Q4. Some question text related to water temperature presentation content.
 q5,Q5. Some question text asking students to describe plotted water temperature data.
 q6,Q6. Some question text related to dissolved oxygen presentation content.
 q7,Q7. Some question text asking students to describe plotted dissolved oxygen data.
-q8,Q8. Some question text related to chlorophyll-a presentation content.
-q9,Q9. Some question text asking students to describe plotted chlorophyll-a data.
-q10,Q10. When was turnover in the fall? Explain how you know.
-q11,Q11. Do you think there was ice at any point in the year? Justify your reasoning.
-q12,Q12. Compare dissolved oxygen over time between the two reservoirs. Ask students to focus on particular depths?
-q13,"Q13. Do you observe hypoxia (will need to introduce hypoxia first!)? If so, when and at what depths in which reservoir?"
-q14,"Q14. Based on these figures, when and at what depth do you observe the greatest risk of impaired water quality? Explain your reasoning."
-q15,Q15. What happens to DO during fall turnover? How might this affect water quality?
-q16,Q16. Compare chlorophyll-a over time between the two reservoirs.
-q17,Q17. The horizontal red line represents a threshold that is twice the historical mean of chlorophyll-a at these reservoirs. Is it exceeded at any point during the year?
-q18,Q18. Do the chlorophyll-a data indicate that there may be water quality impairment at any point during the year? Explain your reasoning.
-q19,Q19. What happens to chlorophyll-a levels during fall turnover?
+q8,Q8. Some question text related to turbidity presentation content.
+q9,Q9. Some question text asking students to describe plotted turbidity data.
+q10,Q10. Is the reservoir currently thermally stratified or mixed? Explain how you know.
+q11,"Q11. Do you observe hypoxia at any depth in the reservoir? If so, which depth?"
+q12,"Q12. At what depth is the turbidity sensor deployed, and is turbidity currently high or low (need to define what ""high"" and ""low"" mean)? "
+q13,Q13. Which depth do you choose for water extraction?
+q14,Q14. Explain your reasoning behind your decision.
+q15,Q15. Fall turnover occurs when water temperatures are within 1 degree C of each other across all the depths of the reservoir. On what date did fall turnover occur this past fall?
+q16,Q16. What happens to DO during fall turnover? How might this affect water quality?
+q17,Q17. What happens to turbidity during fall turnover? How might this affect water quality?
+q18,Q18. Which depth would you choose for water extraction TWO DAYS BEFORE the day of fall turnover? Explain your reasoning.
+q19,Q19. Which depth would you choose for water extraction TWO DAYS AFTER the day of fall turnover? Explain your reasoning.
+q20,"Q20. Compare your answers to Q18 and Q19. Were your choices different before and after turnover? If so, explain why."
+q21,Q21. Is the reservoir currently thermally stratified or mixed? Explain how you know.
+q22,"Q22. Compare dissolved oxyen concentrations at the deepest depth in your reservoir (9 m for Falling Creek and 13 m for Beaverdam) between the summer and winter data. Do they differ? If so, how?"
+q23,"Q23. Compare turbidity concentrations in your reservoir between the sumemr and winder data. Do they differ? If so, how?"
+q24,Q24. Which depth do you choose for water extraction?
+q25,Q25. Explain your reasoning behind your decision.
+q26,Q26. What is the forecasted probability of turnover occurring on Oct. 15? Do you think it is likely turnover will occur on this date?
+q27,Q27. What is the forecast probability of turnover occurring on Oct. 27? Do you think it is likely turnover will occur on this date?
+q28,Q28. What water quality changes (positive or negative!) might you observe when the reservoir turns over? Name at least two.

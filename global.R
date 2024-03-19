@@ -58,6 +58,8 @@ recap_slides <- list.files("www/key_slides", full.names = TRUE)
 turb_slides <- list.files("www/turbidity", full.names = TRUE)
 wtemp_slides <- list.files("www/waterTemperature", full.names = TRUE)
 do_slides <- list.files("www/dissolvedOxygen", full.names = TRUE)
+forecast_slides <- list.files("www/forecasting", full.names = TRUE)
+
 
 # Add last update time
 app_time <- format(file.info("ui.R")$mtime, "%Y-%m-%d")

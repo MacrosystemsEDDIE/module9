@@ -649,7 +649,7 @@ ui <- function(req) {
                         fluidRow(
                           column(12,
                                  wellPanel(style = paste0("background: ", obj_bg),
-                                           h2("Activity B - Assess how water quality changes over time"),
+                                           h2("Activity B - Use high-frequency water quality data to make operation decisions"),
                                            p(module_text["act_B", ])
                                  )
                           ),
@@ -659,7 +659,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               introBox(
-                                                h3("Objective 3: Compare water temperature over a year at two reservoirs"))
+                                                h3("Objective 5: Make water withdrawal depth decisions at different times of year"))
                                        )
                                      )
                                  )
@@ -668,56 +668,49 @@ ui <- function(req) {
                         hr(),
                         fluidRow(
                           column(6,
-                                 h3("Water temperature"),
-                                 p("Click the 'Load reservoir data' and 'Plot water temperature' button below to view high-frequency water temperature data from the most recent complete calendar year at Falling Creek and Beaverdam Reservoirs. Then, answer the questions below."),
+                                 box(id = "box12", width = 12, status = "warning",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h3("Operation scenario"),
+                                              h4("Decide: from which depth should water be extracted for treatment?"),
+                                              p("You are operating a reservoir with intake valves at multiple depths. During the course of a year, you must decide which intake valve to use for water extraction for treatment."),
+                                              p("Remember, water quality can differ greatly at different depths in the reservoir! Your objective is to withdraw water at the depth that has the highest water quality, to minimize treatment difficulty and cost."),
+                                              p("Click the plotting buttons below to view reservoir data from different times of year. Then, use what you have learned in previous objectives to choose an intake valve depth."),
+                                              h4("The depths of water intake valves in your reservoir are given below."),
+                                              wellPanel(
+                                                htmlOutput("extraction_depths"),
+                                                p("You will use water quality data to decide which of these depths is best for water extraction.")
+                                              )
+                                       )
+                                     )
+                                 )
+                                 ),
+                          column(6,
+                                 img(src = "Carvins2023.png", height = "90%", id = "bla_border",
+                                     width = "90%", tags$style("border: solid 2px black;")),
+                                 p(tags$em("Carvin's Cove Reservoir, Roanoke, VA")),
+                                 p(tags$em("Photo credit: Ryan Keverline"))
+                                 )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(6,
+                                 h3("Summer"),
+                                 p("Click the 'Plot summer data' button below to view high-frequency data from the most recent complete calendar year at Falling Creek and Beaverdam Reservoirs. Then, answer the questions below."),
                                  p(tags$em("These plots are interactive! You can scroll over them to see data values, zoom in and out, and change your view window. Plot options will appear in the top right corner of the plot when you scroll over it.")),
                                  fluidRow(
                                    column(4,
-                                          actionButton("load_res_data", "Load reservoir data")
-                                          ),
-                                   column(4,
-                                          actionButton("plot_res_wtemp", "Plot water temperature")
+                                          actionButton("plot_summer_data", "Plot summer data")
                                    )
                                  )
                                  ),
                           column(6,
-                                 box(id = "box12", width = 12, status = "info",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(4, offset = 1,
-                                              br(),br(),
-                                              p(tags$b("A water temperature sensor. These sensors are deployed at every meter in Falling Creek Reservoir and Beaverdam Reservoir.")),
-                                              p(tags$em("Photo credit: Adrienne Breef-Pilz"))
-                                       ),
-                                       column(6, align = "center",
-                                              br(),
-                                              img(src = "thermistor.jpeg", height = "90%", id = "bla_border",
-                                                  width = "90%", tags$style("border: solid 2px black;")),
-                                              br(),br(),br()
-                                       )
-                                     )
-                                 )
                                  )
                         ),
                         fluidRow(br()),
                         fluidRow(
-                          column(6,
-                                 wellPanel(
-                                   plotlyOutput("fcr_wtemp_plot")
-                                 ),
-                                 downloadButton("save_fcr_wtemp_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
-                                 ),
-                          column(6,
-                                 wellPanel(
-                                   plotlyOutput("bvr_wtemp_plot")
-                                 ),
-                                 downloadButton("save_bvr_wtemp_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
-                                 )
-                        ),
-                        fluidRow(
-                          column(12,
+                          column(4,
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
                                      fluidRow(
@@ -725,184 +718,137 @@ ui <- function(req) {
                                               h4("Questions"),
                                               p("Some question text asking students to interpret and compare figures. A couple of ideas for possible questions are provided below. These will need wordsmithing."),
                                               p(tags$b(quest["q10", 1])),
-                                              p(tags$b(quest["q11", 1]))
+                                              p(tags$b(quest["q11", 1])),
+                                              p(tags$b(quest["q12", 1]))
                                        )
                                      )
                                  )
+                          ),
+                          column(8,
+                                 wellPanel(
+                                   plotlyOutput("summer_data_plot", width = "800px", height = "700px")
+                                 ),
+                                 downloadButton("save_summer_data_plot", "Download plot", icon = icon("download")),
+                                 br(),br()
                                  )
                         ),
-                        hr(),
                         fluidRow(
                           column(12,
-                                 box(id = "box1", width = 10, status = "success",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(10, offset = 1,
-                                              introBox(
-                                                h3("Objective 4: Compare dissolved oxygen over a year at two reservoirs"))
-                                       )
-                                     )
-                                 )
-                          )
-                        ),
-                        hr(),
-                        fluidRow(
-                          column(6,
-                                 h3("Dissolved oxygen"),
-                                 p("Click the 'Plot dissolved oxygen' button below to view high-frequency dissolved oxygen data from the most recent complete calendar year at Falling Creek and Beaverdam Reservoirs. Then, answer the questions below."),
-                                 p(tags$em("These plots are interactive! You can scroll over them to see data values, zoom in and out, and change your view window. Plot options will appear in the top right corner of the plot when you scroll over it.")),
                                  box(id = "box12", width = 12, status = "warning",
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1,
-                                              h4("Note that the y axis limits differ between the two plots!")
-                                       )
-                                     )
-                                 ),
-                                 fluidRow(
-                                   br(),br(),br(),
-                                   column(4,
-                                          actionButton("plot_res_do", "Plot dissolved oxygen")
-                                   )
-                                 )
-                          ),
-                          column(6,
-                                 box(id = "box12", width = 12, status = "info",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(3, offset = 1,
-                                              br(),br(),
-                                              p(tags$b("A dissolved oxygen sensor. These sensors are deployed at multiple depths in Falling Creek Reservoir and Beaverdam Reservoir.")),
-                                              p(tags$em("Photo credit: Adrienne Breef-Pilz"))
-                                       ),
-                                       column(7, align = "center",
-                                              br(),
-                                              img(src = "exo.jpg", height = "90%", id = "bla_border",
-                                                  width = "90%", tags$style("border: solid 2px black;")),
-                                              br(),br(),br()
-                                       )
-                                     )
-                                 )
-                          )
-                        ),
-                        fluidRow(br()),
-                        fluidRow(
-                          column(6,
-                                 wellPanel(
-                                   plotlyOutput("fcr_do_plot")
-                                 ),
-                                 downloadButton("save_fcr_do_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
-                          ),
-                          column(6,
-                                 wellPanel(
-                                   plotlyOutput("bvr_do_plot")
-                                 ),
-                                 downloadButton("save_bvr_do_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
-                          )
-                        ),
-                        fluidRow(
-                          column(12,
-                                 box(id = "box12", width = 12, status = "primary",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(10, offset = 1,
-                                              h4("Questions"),
-                                              p("Some question text asking students to interpret and compare figures. A couple of ideas for possible questions are provided below. These will need wordsmithing."),
-                                              p(tags$b(quest["q12", 1])),
+                                              h3("Make a decision for water extraction on July 31."),
+                                              h4(tags$em("Hint: you can scroll over the plot to see the exact values of the water quality variables at different depths on July 31.")),
                                               p(tags$b(quest["q13", 1])),
-                                              p(tags$b(quest["q14", 1])),
-                                              p(tags$b(quest["q15", 1]))
+                                              p(tags$b(quest["q14", 1]))
                                        )
                                      )
                                  )
-                          )
-                        ),
-                        hr(),
-                        fluidRow(
-                          column(12,
-                                 box(id = "box1", width = 10, status = "success",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(10, offset = 1,
-                                              introBox(
-                                                h3("Objective 5: Compare chlorophyll-a over a year at two reservoirs"))
-                                       )
-                                     )
                                  )
-                          )
                         ),
                         hr(),
                         fluidRow(
                           column(6,
-                                 h3("Chlorophyll-a"),
-                                 p("Click the 'Plot chlorophyll-a' button below to view high-frequency chlorophyll-a data from the most recent complete calendar year at Falling Creek and Beaverdam Reservoirs. Then, answer the questions below."),
+                                 h3("Fall"),
+                                 p("Click the 'Plot fall data' button below to view high-frequency data from the most recent complete calendar year at Falling Creek and Beaverdam Reservoirs. Then, answer the questions below."),
                                  p(tags$em("These plots are interactive! You can scroll over them to see data values, zoom in and out, and change your view window. Plot options will appear in the top right corner of the plot when you scroll over it.")),
-                                 box(id = "box12", width = 12, status = "warning",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(10, offset = 1,
-                                              h4("Note that y axis limits differ between the two plots and chlorophyll-a is only measured at a single depth in each reservoir!"),
-                                              p("Chlorophyll-a is measured at a depth of 1.5 meters in Beaverdam and 1.6 meters in Falling Creek. At Falling Creek, there is an outtake to the treatment plant at 1.6 m, which is why chlorophyll-a is measured at this depth.")
-                                       )
-                                     )
-                                 ),
                                  fluidRow(
-                                   br(),br(),br(),br(),br(),br(),br(),
                                    column(4,
-                                          actionButton("plot_res_chla", "Plot chlorophyll-a")
+                                          actionButton("plot_fall_data", "Plot fall data")
                                    )
-                                 ),
+                                 )
                           ),
                           column(6,
-                                 box(id = "box12", width = 12, status = "info",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(3, offset = 1,
-                                              br(),br(),
-                                              p(tags$b("A chlorophyll-a sensor. These sensors are deployed at a single depth near the surface in Falling Creek Reservoir and Beaverdam Reservoir.")),
-                                              p(tags$em("Photo credit: Adrienne Breef-Pilz"))
-                                       ),
-                                       column(7, align = "center",
-                                              br(),
-                                              img(src = "exo.jpg", height = "90%", id = "bla_border",
-                                                  width = "90%", tags$style("border: solid 2px black;")),
-                                              br(),br(),br()
-                                       )
-                                     )
-                                 )
                           )
                         ),
                         fluidRow(br()),
                         fluidRow(
-                          column(6,
-                                 wellPanel(
-                                   plotlyOutput("fcr_chla_plot")
-                                 ),
-                                 downloadButton("save_fcr_chla_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
-                          ),
-                          column(6,
-                                 wellPanel(
-                                   plotlyOutput("bvr_chla_plot")
-                                 ),
-                                 downloadButton("save_bvr_chla_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
-                          )
-                        ),
-                        fluidRow(
-                          column(12,
+                          column(4,
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
                                               p("Some question text asking students to interpret and compare figures. A couple of ideas for possible questions are provided below. These will need wordsmithing."),
+                                              p(tags$b(quest["q15", 1])),
                                               p(tags$b(quest["q16", 1])),
-                                              p(tags$b(quest["q17", 1])),
+                                              p(tags$b(quest["q17", 1]))
+                                       )
+                                     )
+                                 )
+                          ),
+                          column(8,
+                                 wellPanel(
+                                   plotlyOutput("fall_data_plot", width = "800px", height = "700px")
+                                 ),
+                                 downloadButton("save_fall_data_plot", "Download plot", icon = icon("download")),
+                                 br(),br()
+                          )
+                        ),
+                        fluidRow(
+                          column(12,
+                                 box(id = "box12", width = 12, status = "warning",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h3("Make a decision for water extraction before and after fall turnover."),
                                               p(tags$b(quest["q18", 1])),
-                                              p(tags$b(quest["q19", 1]))
+                                              p(tags$b(quest["q19", 1])),
+                                              p(tags$b(quest["q20", 1]))
+                                       )
+                                     )
+                                 )
+                          )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(6,
+                                 h3("Winter"),
+                                 p("Click the 'Plot winter data' button below to view high-frequency data from the most recent complete calendar year at Falling Creek and Beaverdam Reservoirs. Then, answer the questions below."),
+                                 p(tags$em("These plots are interactive! You can scroll over them to see data values, zoom in and out, and change your view window. Plot options will appear in the top right corner of the plot when you scroll over it.")),
+                                 fluidRow(
+                                   column(4,
+                                          actionButton("plot_winter_data", "Plot winter data")
+                                   )
+                                 )
+                          ),
+                          column(6,
+                          )
+                        ),
+                        fluidRow(br()),
+                        fluidRow(
+                          column(4,
+                                 box(id = "box12", width = 12, status = "primary",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h4("Questions"),
+                                              p("Some question text asking students to interpret and compare figures. A couple of ideas for possible questions are provided below. These will need wordsmithing."),
+                                              p(tags$b(quest["q21", 1])),
+                                              p(tags$b(quest["q22", 1])),
+                                              p(tags$b(quest["q23", 1]))
+                                       )
+                                     )
+                                 )
+                          ),
+                          column(8,
+                                 wellPanel(
+                                   plotlyOutput("winter_data_plot", width = "800px", height = "700px")
+                                 ),
+                                 downloadButton("save_winter_data_plot", "Download plot", icon = icon("download")),
+                                 br(),br()
+                          )
+                        ),
+                        fluidRow(
+                          column(12,
+                                 box(id = "box12", width = 12, status = "warning",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h3("Make a decision for water extraction on Jan. 31."),
+                                              p(tags$b(quest["q24", 1])),
+                                              p(tags$b(quest["q25", 1]))
                                        )
                                      )
                                  )
@@ -916,7 +862,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               introBox(
-                                                h3("Objective 6/7?: Compare TDS and/or turbidity? over a year at two reservoirs"))
+                                                h3("Objective 6: Interpret a fall turnover forecast"))
                                        )
                                      )
                                  )
@@ -925,99 +871,70 @@ ui <- function(req) {
                         hr(),
                         fluidRow(
                           column(6,
-                                 h3("TDS and/or turbidity"),
-                                 p("Click the 'Plot TDS/turbidity' button below to view high-frequency TDS/turbidity data from the most recent complete calendar year at Falling Creek and Beaverdam Reservoirs. Then, answer the questions below."),
-                                 p(tags$em("These plots are interactive! You can scroll over them to see data values, zoom in and out, and change your view window. Plot options will appear in the top right corner of the plot when you scroll over it.")),
+                                 h3("Forecasting fall turnover"),
+                                 p("You have seen that fall turnover can have substantial impacts on water quality."),
+                                 p("Because of this, researchers have been working to develop water temperature forecasts to predict fall turnover in advance."),
+                                 p("With advance notice of turnover, water managers may be able to take preemptive management action to avoid water quality degradation or increased treatment costs during turnover."),
+                                 p("Below, you will learn about water temperature forecasting and how to interpret a turnover forecast."),
                                  box(id = "box12", width = 12, status = "warning",
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1,
-                                              h4("Some important info text if needed")
-                                       )
-                                     )
-                                 ),
-                                 fluidRow(
-                                   br(),br(),br(),
-                                   column(4,
-                                          actionButton("plot_res_tds", "Plot TDS/turbidity")
-                                   )
-                                 ),
-                          ),
-                          column(6,
-                                 box(id = "box12", width = 12, status = "info",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(3, offset = 1,
-                                              br(),br(),
-                                              p(tags$b("A sensor. These sensors are deployed in Falling Creek Reservoir and Beaverdam Reservoir.")),
-                                              p(tags$em("Photo credit: Adrienne Breef-Pilz"))
-                                       ),
-                                       column(7, align = "center",
-                                              br(),
-                                              img(src = "exo.jpg", height = "90%", id = "bla_border",
-                                                  width = "90%", tags$style("border: solid 2px black;")),
-                                              br(),br(),br()
+                                              h3("Fall turnover effects on water quality"),
+                                              p(tags$em("The picture to the right illustrates the potential effects of fall turnover on water quality.")),
+                                              p(tags$em("When temperatures homogenize across the water column, dissolved substances and particulate matter can be brought to the surface, increasing turbidity.")),
+                                              p(tags$em("The bottle on the left was a sample taken from Falling Creek Reservoir just before turnover, while the bottle on the right was collected right after turnover - just a few days later!")),
+                                              p(tags$em("Photo credit: Bethany Bookout"))
                                        )
                                      )
                                  )
-                          )
+                                 ),
+                          column(6,
+                                 img(src = "turnover_water_samples.png", height = "90%", id = "bla_border",
+                                     width = "90%", tags$style("border: solid 2px black;")),
+                                 )
                         ),
-                        fluidRow(br(),
-                                 column(12,
-                                        h4("TDS")
-                                        )
-                                 ),
+                        hr(),
                         fluidRow(
-                          column(6,
-                                 wellPanel(
-                                   plotlyOutput("fcr_tds_plot")
+                          column(4,
+                                 h3("Water quality forecasting"),
+                                 p(tags$b("What is a forecast?")),
+                                 tags$ul(
+                                   tags$li(module_text["forecast", ])
                                  ),
-                                 downloadButton("save_fcr_tds_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
+                                 p(tags$b("What is forecast uncertainty?")),
+                                 tags$ul(
+                                   tags$li(module_text["uncertainty", ])
+                                 )
                           ),
-                          column(6,
+                          column(8, offset = 0, align = "center",
+                                 h3("What is water quality forecasting?",
+                                    align = "center"),
+                                 h5("Click the arrows to navigate through the slides", align = "center"),
                                  wellPanel(
-                                   plotlyOutput("bvr_tds_plot")
-                                 ),
-                                 downloadButton("save_bvr_tds_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
+                                   slickROutput("forecast_slides", width = "700px", height = "525px")
+                                 )
                           )
                         ),
                         hr(),
                         fluidRow(
-                          column(12,
-                                 h4("Turbidity")
-                                 )
-                        ),
-                        fluidRow(
-                          column(6,
-                                 wellPanel(
-                                   plotlyOutput("fcr_turb_plot")
+                          column(8,
+                                 img(src = "forecast2.png", height = "90%", id = "bla_border",
+                                     width = "90%", tags$style("border: solid 2px black;"))
                                  ),
-                                 downloadButton("save_fcr_turb_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
-                          ),
-                          column(6,
-                                 wellPanel(
-                                   plotlyOutput("bvr_turb_plot")
-                                 ),
-                                 downloadButton("save_bvr_turb_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
-                          )
-                        ),
-                        hr(),
-                        fluidRow(
-                          column(12,
+                          column(4,
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1,
-                                              h4("Questions"),
-                                              p("Some question text asking students to interpret and compare figures.")
+                                              h3("Interpret the forecast plot."),
+                                              p(tags$b(quest["q26", 1])),
+                                              p(tags$b(quest["q27", 1])),
+                                              p(tags$b(quest["q28", 1]))
                                        )
                                      )
                                  )
-                          )
+                                 )
                         ),
                         hr(),
                         fluidRow(
@@ -1028,7 +945,7 @@ ui <- function(req) {
                                        column(10, offset = 1,
                                               introBox(
                                                 h3("Next step:"),
-                                                h4("Make management recommendations for reservoir water withdrawal and treatment using high-frequency water quality data and water quality forecasts."))
+                                                h4("Make management recommendations for reservoir water treatment using high-frequency water quality data and water quality forecasts."))
                                        )
                                      )
                                  )

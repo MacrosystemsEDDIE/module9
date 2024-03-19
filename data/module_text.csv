@@ -11,7 +11,7 @@ workflow1,Watch the introductory presentation provided at the link in your Canva
 workflow2,"Complete Activities A, B, and C in this web app."
 workflow3,"When you are prompted to answer questions in the app, enter your answers in the Canvas quiz provided as part of the Canvas module."
 workflow4,"As you work, you can save your progress in the web app using the 'Bookmark my progress' button described below, and you can save your progress in the quiz using the 'Save' button on Canvas."
-act_B,Use high-frequency water quality data to explore how water quality changes over the course of a year in two drinking water reservoirs 
+act_B,Use high-frequency water quality data to explore how water quality changes and make decisions about water withdrawal depth over the course of a year 
 act_C,Make management recommendations for reservoir water withdrawal and treatment using high-frequency water quality data and water quality forecasts
 acknowledgement,"This module was initially developed by: Lofton, M.E., Cooke, R.L., and C.C. Carey. XX February 2024. Macrosystems EDDIE: Using High-Frequency Data to Manage Water Quality. Macrosystems EDDIE Module 9, Version 1. https://serc.carleton.edu/eddie/teaching_materials/modules/module9.html. Module development was supported by NSF grants XXX."
 site_photo,"When you select a site in the table, you will see a photo of your chosen Virginia Reservoirs LTREB drinking water reservoir."
@@ -33,3 +33,5 @@ do_wq,"Often, higher levels of dissolved oxygen are indicative of better water q
 chla,Chlorophyll-a data are a useful proxy for phytoplankton biomass in lakes. Chlorophyll-a is a molecule that phytoplankton use for photosynthesis. Measuring chlorophyll-a concentrations in water can give a bulk estimate of phytoplankton concentrations. Chlorophyll-a data can be collected at a high frequency by automated sensors.
 phyto_wq,"Phytoplankton are microscopic primary producers that live in the water. They are the dominant primary producers in many lakes and reservoirs. Excess phytoplankton biomass can lead to harmful algal blooms (HABs), which compromise water quality through production of toxins, production of taste and odor compounds, and creation of anoxic (low-oxygen zones), which can lead to release of metals and other undesirable compounds from reservoir sediments."
 chla_wq,A reservoir may be at risk of experiencing water quality degradation due to HABs when chlorophyll-a is elevated.
+forecast,A forecast is a prediction of a future event with uncertainty. A water quality forecast is a future prediction of a water quality variable (such as water temperature) with uncertainty
+uncertainty,Forecast uncertainty is the set of possible alternate future conditions predicted by a model and the chance of observing each outcome. We generate multiple different predictions of the future because the future is inherently unknown. Uncertainty generally increases as the time into the future increases.
