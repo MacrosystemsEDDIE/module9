@@ -163,13 +163,14 @@ shinyServer(function(input, output, session) {
              message = "Click 'Plot water temperature'")
       )
       
-      df <- lake_data$wtemp
+      df <- lake_data$wtemp %>%
+        mutate(depth_m = as.factor(depth_m))
       
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
         geom_line()+
         xlab("")+
         ylab("Water temperature (degrees Celsius)")+
-        scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
+        scale_color_discrete(name = "Depth (m)")+
         ylim(c(0,35))+
         theme_bw()
       
@@ -220,13 +221,14 @@ shinyServer(function(input, output, session) {
              message = "Click 'Plot dissolved oxygen'")
       )
       
-      df <- lake_data$do
+      df <- lake_data$do %>%
+        mutate(depth_m = as.factor(depth_m))
       
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
         geom_line()+
         xlab("")+
         ylab("Dissolved oxygen (mg/L)")+
-        scale_color_continuous(trans = 'reverse', name = "Depth (m)")+
+        scale_color_discrete(name = "Depth (m)")+
         theme_bw()
       
       plot.do$main <- p
@@ -276,7 +278,7 @@ shinyServer(function(input, output, session) {
              message = "Click 'Plot turbidity'")
       )
       
-      df <- lake_data$turb
+      df <- lake_data$turb 
       
       p <- ggplot(data = df, aes(x = datetime, y = observation))+
         geom_point(aes(color = "Turbidity"))+
@@ -312,8 +314,6 @@ shinyServer(function(input, output, session) {
   res_data <- reactiveValues(df = NULL,
                              wtemp = NULL,
                              do = NULL,
-                             chla = NULL,
-                             tds = NULL,
                              turb = NULL)
   
   observeEvent(input$load_res_data, {
@@ -331,10 +331,6 @@ shinyServer(function(input, output, session) {
       filter(variable == "Temp_C_mean")
     res_data$do <- res_data$df %>%
       filter(variable == "DO_mgL_mean")
-    res_data$chla <- res_data$df %>%
-      filter(variable == "Chla_ugL_mean")
-    res_data$tds <- res_data$df %>%
-      filter(variable == "TDS_mgL_mean")
     res_data$turb <- res_data$df %>%
       filter(variable == "Turbidity_FNU_mean")
     
