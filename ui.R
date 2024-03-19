@@ -24,28 +24,34 @@ ui <- function(req) {
     tags$style(type = "text/css", "text-align: justify"),
     tags$head(tags$link(rel = "shortcut icon", href = "macroeddi_ico_green.ico")), # Add icon for web bookmarks
     tags$head(includeHTML(("google-analytics.html"))),
+    tags$header(
+      introBox(
+        img(src = "eddie_banner_2020_test.png", height = 100,
+            width = 1544, top = 5),
+        data.step = 1,
+        data.intro = help_text["welcome", 1]
+      )
+    ),
     fluidPage(
-      column(10,
+      column(11,
              br(),
              p(tags$b("Teaching materials associated with this module can be found at ",
                       tags$a(href="http://module9.macrosystemseddie.org", 
-                             "http://module9.macrosystemseddie.org.", target="_blank")))
+                             "http://module9.macrosystemseddie.org.", target="_blank"))),
+             h2(tags$b("Module 9: Using High-Frequency Data to Manage Water Quality")),
+             bookmarkButton(id = "bookmarkBtn", label = "Bookmark my progress"),
+             p(tags$em("At any time, use this button to obtain a link that saves your progress."))
+      ),
+      column(1, align = "right",
+             br(),
+             introBox(
+               actionButton("help", label = "Help", icon = icon("question-circle")), data.step = 7, data.intro = help_text["help", 1]
+             )
       )
     ),
-    navbarPage(title = "Module 9: Using High-Frequency Data to Manage Water Quality",
-               position = "static-top", id = "maintab",
+    navbarPage(position = "static-top", id = "maintab",
                tags$header(
                  fluidRow(
-                   column(11,
-                          bookmarkButton(id = "bookmarkBtn", label = "Bookmark my progress"),
-                          br(), 
-                          p(tags$em("At any time, use this button to obtain a link that saves your progress."))
-                   ),
-                   column(1, align = "right",
-                          introBox(
-                            actionButton("help", label = "Help", icon = icon("question-circle")), data.step = 7, data.intro = help_text["help", 1]
-                          )
-                   )
                  )
                ),
                # 1. Introduction ----
@@ -55,12 +61,6 @@ ui <- function(req) {
                                  ),
                value = "mtab1",
                introjsUI(), # must include in UI
-               introBox(
-                 img(src = "eddie_banner_2020_test.png", height = 100,
-                     width = 1544, top = 5),
-                 data.step = 1,
-                 data.intro = help_text["welcome", 1]
-               ),
                withMathJax(), # NEEDS to be here for rendering eqn's in data.table
                
                tags$style(".btn-file {
@@ -379,7 +379,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               introBox(
-                                                h3("Objective 2: Explore real-time high-frequency water quality data from your chosen reservoir"))
+                                                h3("Objective 2: Explore high-frequency water temperature data from your chosen reservoir"))
                                        )
                                      )
                                  )
@@ -474,6 +474,20 @@ ui <- function(req) {
                         ),
                         hr(),
                         fluidRow(
+                          column(12,
+                                 box(id = "box1", width = 10, status = "success",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              introBox(
+                                                h3("Objective 3: Explore high-frequency dissolved oxygen data from your chosen reservoir"))
+                                       )
+                                     )
+                                 )
+                          )
+                        ),
+                        hr(),
+                        fluidRow(
                           column(4,
                                  h3("Dissolved oxygen"),
                                  p(tags$b("What is dissolved oxygen?")),
@@ -539,21 +553,35 @@ ui <- function(req) {
                         ),
                         hr(),
                         fluidRow(
+                          column(12,
+                                 box(id = "box1", width = 10, status = "success",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              introBox(
+                                                h3("Objective 4: Explore high-frequency turbidity data from your chosen reservoir"))
+                                       )
+                                     )
+                                 )
+                          )
+                        ),
+                        hr(), 
+                        fluidRow(
                           column(4,
-                                 h3("Chlorophyll-a"),
-                                 p(tags$b("What is chlorophyll-a?")),
+                                 h3("Turbidity"),
+                                 p(tags$b("What is turbidity?")),
                                  tags$ul(
-                                   tags$li(module_text["chla", ])
+                                   tags$li(module_text["turb", ])
                                  ),
-                                 p(tags$b("How can phytoplankton affect water quality?")),
+                                 p(tags$b("How do we measure turbidity?")),
                                  tags$ul(
-                                   tags$li(module_text["phyto_wq", ])
+                                   tags$li(module_text["turb_measure", ])
                                  ),
-                                 p(tags$b("How can we relate chlorophyll-a data to water quality?")),
+                                 p(tags$b("How can we relate turbidity data to water quality?")),
                                  tags$ul(
-                                   tags$li(module_text["chla_wq", ])
+                                   tags$li(module_text["turb_wq", ])
                                  ),
-                                 p(tags$i("Click through the slides to understand how chlorophyll-a data can be related to water quality.")),
+                                 p(tags$i("Click through the slides to understand how turbidity data can be related to water quality.")),
                                  br(),
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
@@ -566,20 +594,20 @@ ui <- function(req) {
                                  )
                           ),
                           column(8, offset = 0, align = "center",
-                                 h3("Using chlorophyll-a to assess water quality",
+                                 h3("Using turbidity to assess water quality",
                                     align = "center"),
                                  h5("Click the arrows to navigate through the slides", align = "center"),
                                  wellPanel(
-                                   slickROutput("chla_slides", width = "700px", height = "525px")
+                                   slickROutput("turb_slides", width = "700px", height = "525px")
                                  )
                           )
                         ),
                         hr(),
                         fluidRow(
                           column(4,
-                                 h3("Plot chlorophyll-a data"),
-                                 p("Click the button below to plot chlorophyll-a data at your chosen reservoir site."),
-                                 actionButton("plot_chla", "Plot high-frequency chlorophyll-a data"),
+                                 h3("Plot turbidity data"),
+                                 p("Click the button below to plot turbidity data at your chosen reservoir site."),
+                                 actionButton("plot_turb", "Plot high-frequency turbidity data"),
                                  br(),br(),
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
@@ -593,9 +621,9 @@ ui <- function(req) {
                           ),
                           column(8,
                                  wellPanel(
-                                   plotlyOutput("chla_plot")
+                                   plotlyOutput("turb_plot")
                                  ),
-                                 downloadButton("save_chla_plot", "Download plot", icon = icon("download"))
+                                 downloadButton("save_turb_plot", "Download plot", icon = icon("download"))
                           )
                         ),
                         hr(),
@@ -607,7 +635,7 @@ ui <- function(req) {
                                        column(10, offset = 1,
                                               introBox(
                                                 h3("Next step:"),
-                                                h4("Use high-frequency water quality data to explore how water quality changes over the course of a year in two drinking water reservoirs."))
+                                                h4("Use high-frequency water quality data to make decisions about withdrawal depth in your focal reservoir."))
                                        )
                                      )
                                  )

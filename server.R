@@ -83,9 +83,7 @@ shinyServer(function(input, output, session) {
                      when it is loaded.", value = 0.33)
     
     #load LTREB data
-    url <- "https://renc.osn.xsede.org/bio230121-bucket01/vera4cast/targets/project_id=vera4cast/duration=P1D/daily-insitu-targets.csv.gz"
-    
-    lake_data$df <- read_csv(url, show_col_types = FALSE) %>%
+    lake_data$df <- reservoir_data %>%
       filter(site_id == pull(sites_df[input$table01_rows_selected, "SiteID"]))
     
     #retrieve site photooutput$display.image <- renderImage({
@@ -97,19 +95,17 @@ shinyServer(function(input, output, session) {
     })
     
     #pull recent data
-    recent_dates <- seq.Date(from = Sys.Date() - 30, to = Sys.Date(), by = 'days')
-    
     lake_data$wtemp <- lake_data$df %>%
       select(datetime, variable, depth_m, observation) %>%
-      filter(datetime %in% recent_dates & variable == "Temp_C_mean")
+      filter(variable == "Temp_C_mean")
     
     lake_data$do <- lake_data$df %>%
       select(datetime, variable, depth_m, observation) %>%
-      filter(datetime %in% recent_dates & variable == "DO_mgL_mean")
+      filter(variable == "DO_mgL_mean")
     
-    lake_data$chla <- lake_data$df %>%
+    lake_data$turb <- lake_data$df %>%
       select(datetime, variable, observation) %>%
-      filter(datetime %in% recent_dates & variable == "Chla_ugL_mean")
+      filter(variable == "Turbidity_FNU_mean")
     
     progress$set(value = 1)
     
@@ -255,17 +251,17 @@ shinyServer(function(input, output, session) {
     }
   )
   
-  #** chlorophyll-a Presentation slides ----
-  output$chla_slides <- renderSlickR({
-    slickR(chla_slides) + settings(dots = TRUE)
+  #** turbidity Presentation slides ----
+  output$turb_slides <- renderSlickR({
+    slickR(turb_slides) + settings(dots = TRUE)
   })
   
-  # Plot chlorophyll-a
-  plot.chla <- reactiveValues(main=NULL)
+  # Plot turbidity
+  plot.turb <- reactiveValues(main=NULL)
   
   observe({
     
-    output$chla_plot <- renderPlotly({ 
+    output$turb_plot <- renderPlotly({ 
       
       validate(
         need(input$table01_rows_selected != "",
@@ -276,20 +272,20 @@ shinyServer(function(input, output, session) {
              message = "Please select a site in Objective 1.")
       )
       validate(
-        need(input$plot_chla > 0,
-             message = "Click 'Plot chlorophyll-a'")
+        need(input$plot_turb > 0,
+             message = "Click 'Plot turbidity'")
       )
       
-      df <- lake_data$chla
+      df <- lake_data$turb
       
       p <- ggplot(data = df, aes(x = datetime, y = observation))+
-        geom_point(aes(color = "Chl-a"))+
+        geom_point(aes(color = "Turbidity"))+
         xlab("")+
-        ylab("Chlorophyll-a (ug/L)")+
-        scale_color_manual(values = c("Chl-a" = "chartreuse4"), name = "")+
+        ylab("Turbidity (FNU)")+
+        scale_color_manual(values = c("Turbidity" = "brown"), name = "")+
         theme_bw()
       
-      plot.chla$main <- p
+      plot.turb$main <- p
       
       return(ggplotly(p, dynamicTicks = TRUE))
       
@@ -297,8 +293,8 @@ shinyServer(function(input, output, session) {
     
   })
   
-  # Download plot of chl-a
-  output$save_chla_plot <- downloadHandler(
+  # Download plot of turbidity
+  output$save_turb_plot <- downloadHandler(
     filename = function() {
       paste("Q9a-plot-", Sys.Date(), ".png", sep="")
     },
@@ -307,7 +303,7 @@ shinyServer(function(input, output, session) {
         grDevices::png(..., width = 8, height = 4,
                        res = 200, units = "in")
       }
-      ggsave(file, plot = plot.chla$main, device = device)
+      ggsave(file, plot = plot.turb$main, device = device)
     }
   )
   
