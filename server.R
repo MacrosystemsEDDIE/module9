@@ -167,19 +167,20 @@ shinyServer(function(input, output, session) {
       )
       
       df <- lake_data$wtemp %>%
-        mutate(depth_m = as.factor(depth_m))
+        mutate(depth_ft = as.factor(round(depth_m*3.28,1)),
+               observation = round(observation, 1))
       
-      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
         xlab("")+
         ylab("Water temperature (degrees Celsius)")+
-        scale_color_discrete(name = "Depth (m)")+
+        scale_color_discrete(name = "Depth (ft)")+
         ylim(c(0,35))+
         theme_bw()
       
       plot.wtemp$main <- p
       
-      return(ggplotly(p, dynamicTicks = TRUE))
+      return(ggplotly(p, dynamicTicks = TRUE, tooltip=c("x", "y", "color")))
       
     })
     
@@ -188,7 +189,7 @@ shinyServer(function(input, output, session) {
   # Download plot of water temperature
   output$save_wtemp_plot <- downloadHandler(
     filename = function() {
-      paste("Q5a-plot-", Sys.Date(), ".png", sep="")
+      paste("Q8-10-plot-", Sys.Date(), ".png", sep="")
     },
     content = function(file) {
       device <- function(..., width, height) {
@@ -225,18 +226,22 @@ shinyServer(function(input, output, session) {
       )
       
       df <- lake_data$do %>%
-        mutate(depth_m = as.factor(depth_m))
+        filter(depth_m <= 2 | depth_m >= 8) %>% #remove epilimnion
+        mutate(depth_ft = as.factor(round(depth_m*3.28,1)),
+               observation = round(observation, 1),
+               layer = ifelse(depth_m <= 2, "surface waters","bottom waters")) %>%
+        mutate(layer = factor(layer, levels = c("surface waters","bottom waters")))
       
-      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = layer, color = layer))+
         geom_line()+
         xlab("")+
-        ylab("Dissolved oxygen (mg/L)")+
-        scale_color_discrete(name = "Depth (m)")+
+        ylab("Dissolved oxygen (ppm)")+
+        scale_color_discrete(name = "Water depth")+
         theme_bw()
       
       plot.do$main <- p
       
-      return(ggplotly(p, dynamicTicks = TRUE))
+      return(ggplotly(p, dynamicTicks = TRUE, tooltip=c("x", "y", "color")))
       
     })
     
@@ -245,7 +250,7 @@ shinyServer(function(input, output, session) {
   # Download plot of DO
   output$save_do_plot <- downloadHandler(
     filename = function() {
-      paste("Q7a-plot-", Sys.Date(), ".png", sep="")
+      paste("Q12-14-plot-", Sys.Date(), ".png", sep="")
     },
     content = function(file) {
       device <- function(..., width, height) {

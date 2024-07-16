@@ -367,6 +367,13 @@ ui <- function(req) {
                                               p(tags$em(quest["q3e", 1], width = "90%")),
                                               p(tags$em(quest["q3f", 1], width = "90%"))
                                        )
+                                     ),
+                                     fluidRow(
+                                       column(7, offset = 1,
+                                              p(tags$b("Virginia's Water Quality Assessment Guidance Manual gives the following guidance on water quality evaluation using a trophic state index (TSI), which may be calculated from Secchi depth (SD), chlorophyll-a (CA), or total phosphorus (TP):")),
+                                              p(tags$em("A trophic state index value of 60 or greater for any one of the 3 indices will indicate that nutrient enrichment from anthropogenic sources are adversely interfering, directly or indirectly, with the designated uses. A TSI value of 60 corresponds to a CA concentration of 20 ug/l, a SD of 1 meter, and a TP concentration of 48 ug/l.")),
+                                              p(tags$b(quest["q4", 1]))
+                                       )
                                      )
                                  )
                           )
@@ -400,7 +407,8 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1, align = "left",
                                               h4("Questions"),
-                                              p(tags$b(quest["q4", 1]))
+                                              p(tags$b(quest["q5", 1])),
+                                              p(tags$b(quest["q6", 1]))
                                        )
                                      )
                                  )
@@ -460,7 +468,9 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q5", 1]))
+                                              p(tags$b(quest["q7", 1])),
+                                              p(tags$b(quest["q8", 1])),
+                                              p(tags$b(quest["q9", 1]))
                                        )
                                      )
                                  )
@@ -490,30 +500,15 @@ ui <- function(req) {
                         fluidRow(
                           column(4,
                                  h3("Dissolved oxygen"),
-                                 p(tags$b("What is dissolved oxygen?")),
-                                 tags$ul(
-                                   tags$li(module_text["do", ])
-                                 ),
-                                 p(tags$b("How is dissolved oxygen related to water temperature?")),
-                                 tags$ul(
-                                   tags$li(module_text["do_wtemp", ])
-                                 ),
-                                 img(src = "oxygen_solubility.png", height = "90%", id = "bla_border",
-                                     width = "90%", tags$style("border: solid 2px black;")),
-                                 p("Oxygen solubility vs. water temperature"),
-                                 p(tags$em("Source: Kenneth C. Waterman, accessed at: https://www.researchgate.net/figure/Effect-of-temperature-on-oxygen-solubility-in-water-generated-by-extrapolation-of-data_fig5_7957124")),
-                                 p(tags$b("How can dissolved oxygen affect water quality?")),
-                                 tags$ul(
-                                   tags$li(module_text["do_wq", ])
-                                 ),
-                                 p(tags$i("Click through the slides to understand how dissolved oxygen data can be related to water quality.")),
+                                 p(tags$i("Click through the slides to understand how dissolved oxygen data can be related to water quality. The information presented on the slides is also summarized in text below the slides to help you answer the questions.")),
                                  br(),
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q6", 1]))
+                                              p(tags$b(quest["q10", 1])),
+                                              p(tags$b(quest["q11", 1]))
                                        )
                                      )
                                  )
@@ -529,6 +524,29 @@ ui <- function(req) {
                         ),
                         hr(),
                         fluidRow(
+                          column(6,
+                                 p(tags$b("What is dissolved oxygen?")),
+                                 tags$ul(
+                                   tags$li(module_text["do", ])
+                                 ),
+                                 p(tags$b("How is dissolved oxygen related to water temperature?")),
+                                 tags$ul(
+                                   tags$li(module_text["do_wtemp", ])
+                                 ),
+                                 img(src = "oxygen_solubility.png", height = "60%", id = "bla_border",
+                                     width = "60%", tags$style("border: solid 2px black;")),
+                                 p("Oxygen solubility vs. water temperature"),
+                                 p(tags$em("Source: Kenneth C. Waterman, accessed at: https://www.researchgate.net/figure/Effect-of-temperature-on-oxygen-solubility-in-water-generated-by-extrapolation-of-data_fig5_7957124"))
+                                 ),
+                          column(6,
+                                 p(tags$b("How can dissolved oxygen affect water quality?")),
+                                 tags$ul(
+                                   tags$li(module_text["do_wq", ])
+                                 )
+                                 )
+                        ),
+                        hr(),
+                        fluidRow(
                           column(4,
                                  h3("Plot dissolved oxygen data"),
                                  p("Click the button below to plot dissolved oxygen data at your chosen reservoir site."),
@@ -539,7 +557,9 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q7", 1]))
+                                              p(tags$b(quest["q12", 1])),
+                                              p(tags$b(quest["q13", 1])),
+                                              p(tags$b(quest["q14", 1]))
                                        )
                                      )
                                  )
