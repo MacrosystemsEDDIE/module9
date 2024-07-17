@@ -77,6 +77,7 @@ sites_df <- tibble(SiteID = c("fcre","bvre"),
 
 # Read in data
 reservoir_data <- read_csv("./data/reservoir_data.csv")
+forecast_data <- read_csv("./data/forecast_scenario_data.csv")
 
 # Icons
 ltrebIcons <- iconList(

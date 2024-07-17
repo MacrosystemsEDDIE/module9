@@ -87,7 +87,10 @@ shinyServer(function(input, output, session) {
     #load LTREB data
     lake_data$df <- reservoir_data %>%
       filter(site_id == pull(sites_df[input$table01_rows_selected, "SiteID"]),
-             variable %in% c("Temp_C_mean","DO_mgL_mean","Turbidity_FNU_mean"))
+             variable %in% c("Temp_C_mean","DO_mgL_mean","Turbidity_FNU_mean"),
+             !(variable == "DO_mgL_mean" & depth_m >= 2 & depth_m <= 8)) %>% # remove metalimnetic DO
+      mutate(observation = round(observation, 1),
+             depth_ft = round(depth_m*3.28,1))
     
     #retrieve site photooutput$display.image <- renderImage({
     site_photo_file$img <- paste("www/",row_selected$SiteID,".jpg",sep="")
@@ -99,15 +102,15 @@ shinyServer(function(input, output, session) {
     
     #pull recent data
     lake_data$wtemp <- lake_data$df %>%
-      select(datetime, variable, depth_m, observation) %>%
+      select(datetime, variable, depth_m, depth_ft, observation) %>%
       filter(variable == "Temp_C_mean")
     
     lake_data$do <- lake_data$df %>%
-      select(datetime, variable, depth_m, observation) %>%
-      filter(variable == "DO_mgL_mean")
+      select(datetime, variable, depth_m, depth_ft, observation) %>%
+      filter(variable == "DO_mgL_mean" & (depth_m <= 2 | depth_m >= 8)) # remove metalimnion
     
     lake_data$turb <- lake_data$df %>%
-      select(datetime, variable, observation) %>%
+      select(datetime, variable, depth_ft, observation) %>%
       filter(variable == "Turbidity_FNU_mean")
     
     progress$set(value = 1)
@@ -167,8 +170,7 @@ shinyServer(function(input, output, session) {
       )
       
       df <- lake_data$wtemp %>%
-        mutate(depth_ft = as.factor(round(depth_m*3.28,1)),
-               observation = round(observation, 1))
+        mutate(depth_ft = as.factor(depth_ft))
       
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
@@ -226,9 +228,7 @@ shinyServer(function(input, output, session) {
       )
       
       df <- lake_data$do %>%
-        filter(depth_m <= 2 | depth_m >= 8) %>% #remove epilimnion
-        mutate(depth_ft = as.factor(round(depth_m*3.28,1)),
-               observation = round(observation, 1),
+        mutate(depth_ft = as.factor(depth_ft),
                layer = ifelse(depth_m <= 2, "surface waters","bottom waters")) %>%
         mutate(layer = factor(layer, levels = c("surface waters","bottom waters")))
       
@@ -289,15 +289,15 @@ shinyServer(function(input, output, session) {
       df <- lake_data$turb 
       
       p <- ggplot(data = df, aes(x = datetime, y = observation))+
-        geom_point(aes(color = "Turbidity"))+
+        geom_point(aes(color = "surface water turbidity"))+
         xlab("")+
         ylab("Turbidity (FNU)")+
-        scale_color_manual(values = c("Turbidity" = "brown"), name = "")+
+        scale_color_manual(values = c("surface water turbidity" = "brown"), name = "")+
         theme_bw()
       
       plot.turb$main <- p
       
-      return(ggplotly(p, dynamicTicks = TRUE))
+      return(ggplotly(p, dynamicTicks = TRUE, tooltip=c("x", "y", "color")))
       
     })
     
@@ -306,7 +306,7 @@ shinyServer(function(input, output, session) {
   # Download plot of turbidity
   output$save_turb_plot <- downloadHandler(
     filename = function() {
-      paste("Q9a-plot-", Sys.Date(), ".png", sep="")
+      paste("Q17-plot-", Sys.Date(), ".png", sep="")
     },
     content = function(file) {
       device <- function(..., width, height) {
@@ -332,10 +332,10 @@ shinyServer(function(input, output, session) {
       site = pull(sites_df[input$table01_rows_selected, "SiteID"])
       
       if(site == "fcre"){
-        extraction_depths <- paste("<b>","Possible extraction depths: 1.6 m, 5 m, and 9 m.","</b>", sep = "")
+        extraction_depths <- paste("<b>","Possible extraction depths: 5.2 ft and 29.5 ft.","</b>", sep = "")
       }
       if(site == "bvre"){
-        extraction_depths <- paste("<b>","Possible extraction depths: 1.5 m, 6 m, and 13 m.","</b>", sep = "")
+        extraction_depths <- paste("<b>","Possible extraction depths: 4.9 ft and 42.7 ft.","</b>", sep = "")
       }
       
 
@@ -362,30 +362,31 @@ shinyServer(function(input, output, session) {
       
       df <- lake_data$df %>%
         filter(month(datetime) == 7) %>%
-        mutate(depth_m = as.factor(depth_m))
+        mutate(depth_ft = as.factor(depth_ft),
+               observation = ifelse(variable == "Temp_C_mean",round(observation*(9/5) + 32,1),observation))
       
       # end_july <- df %>%
       #   mutate(day = format(as.Date(datetime), "%m-%d")) %>%
       #   filter(day == "07-31" & depth_m == 0.1) 
       
       # New facet label names for variables
-      var.labs <- c("Water temperature (degrees Celsius)","Dissolved oxygen (mg/L)","Turbidity (FNU)")
+      var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
-      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
         xlab("")+
         ylab("")+
         facet_wrap(vars(variable), nrow = 3, scales = "free_y", 
                    labeller = labeller(variable = var.labs), strip.position = "top")+
         #geom_vline(data = end_july, aes(xintercept = as.numeric(end_july)))+
-        scale_color_discrete(name = "Depth (m)")+
+        scale_color_discrete(name = "Depth (ft)")+
         ggtitle("Summer water quality data")+
         theme_bw()
       
       plot.summer.data$main <- p
       
-      return(ggplotly(p, dynamicTicks = FALSE) %>% 
+      return(ggplotly(p, dynamicTicks = TRUE, tooltip=c("x", "y", "color")) %>% 
                layout(height = 700, width = 800))
       
     })
@@ -395,7 +396,7 @@ shinyServer(function(input, output, session) {
   # Download plot of summer data
   output$save_summer_data_plot <- downloadHandler(
     filename = function() {
-      paste("Q10-plot-", Sys.Date(), ".png", sep="")
+      paste("Q19-plot-", Sys.Date(), ".png", sep="")
     },
     content = function(file) {
       device <- function(..., width, height) {
@@ -438,25 +439,26 @@ shinyServer(function(input, output, session) {
       
       plot_data <- df %>%
         filter(datetime %in% fall_dates) %>%
-        mutate(depth_m = as.factor(depth_m))
+        mutate(depth_ft = as.factor(depth_ft),
+               observation = ifelse(variable == "Temp_C_mean",round(observation*(9/5) + 32,1),observation))
       
       # New facet label names for variables
-      var.labs <- c("Water temperature (degrees Celsius)","Dissolved oxygen (mg/L)","Turbidity (FNU)")
+      var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
-      p <- ggplot(data = plot_data, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+      p <- ggplot(data = plot_data, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
         xlab("")+
         ylab("")+
         facet_wrap(vars(variable), nrow = 3, scales = "free_y", 
                    labeller = labeller(variable = var.labs), strip.position = "top")+
-        scale_color_discrete(name = "Depth (m)")+
+        scale_color_discrete(name = "Depth (ft)")+
         ggtitle("Fall water quality data")+
         theme_bw()
       
       plot.fall.data$main <- p
       
-      return(ggplotly(p, dynamicTicks = FALSE) %>% layout(height = 700, width = 800))
+      return(ggplotly(p, dynamicTicks = FALSE, tooltip=c("x", "y", "color")) %>% layout(height = 700, width = 800))
       
     })
     
@@ -465,7 +467,7 @@ shinyServer(function(input, output, session) {
   # Download plot of fall data
   output$save_fall_data_plot <- downloadHandler(
     filename = function() {
-      paste("Q10a-plot-", Sys.Date(), ".png", sep="")
+      paste("Q24-plot-", Sys.Date(), ".png", sep="")
     },
     content = function(file) {
       device <- function(..., width, height) {
@@ -494,25 +496,26 @@ shinyServer(function(input, output, session) {
       
       df <- lake_data$df %>%
         filter(month(datetime) == 1) %>%
-        mutate(depth_m = as.factor(depth_m))
+        mutate(depth_ft = as.factor(depth_ft),
+               observation = ifelse(variable == "Temp_C_mean",round(observation*(9/5) + 32,1),observation))
       
       # New facet label names for variables
-      var.labs <- c("Water temperature (degrees Celsius)","Dissolved oxygen (mg/L)","Turbidity (FNU)")
+      var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
-      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_m, color = depth_m))+
+      p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
         xlab("")+
         ylab("")+
         facet_wrap(vars(variable), nrow = 3, scales = "free_y", 
                    labeller = labeller(variable = var.labs), strip.position = "top")+
-        scale_color_discrete(name = "Depth (m)")+
+        scale_color_discrete(name = "Depth (ft)")+
         ggtitle("Winter water quality data")+
         theme_bw()
       
       plot.winter.data$main <- p
       
-      return(ggplotly(p, dynamicTicks = FALSE) %>% layout(height = 700, width = 800))
+      return(ggplotly(p, dynamicTicks = FALSE, tooltip=c("x", "y", "color")) %>% layout(height = 700, width = 800))
       
     })
     
@@ -521,7 +524,7 @@ shinyServer(function(input, output, session) {
   # Download plot of winter data
   output$save_winter_data_plot <- downloadHandler(
     filename = function() {
-      paste("Q10a-plot-", Sys.Date(), ".png", sep="")
+      paste("Q30-plot-", Sys.Date(), ".png", sep="")
     },
     content = function(file) {
       device <- function(..., width, height) {
