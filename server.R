@@ -172,11 +172,14 @@ shinyServer(function(input, output, session) {
       df <- lake_data$wtemp %>%
         mutate(depth_ft = as.factor(depth_ft))
       
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      
+      
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
         xlab("")+
         ylab("Water temperature (degrees Celsius)")+
-        scale_color_discrete(name = "Depth (ft)")+
+        scale_color_manual(name = "Depth (ft)",values = palette_yb)+
         ylim(c(0,35))+
         theme_bw()
       
@@ -236,7 +239,7 @@ shinyServer(function(input, output, session) {
         geom_line()+
         xlab("")+
         ylab("Dissolved oxygen (ppm)")+
-        scale_color_discrete(name = "Water depth")+
+        scale_color_manual(name = "Depth", values = c("#A9A448", "#023858"))+
         theme_bw()
       
       plot.do$main <- p
@@ -292,7 +295,7 @@ shinyServer(function(input, output, session) {
         geom_point(aes(color = "surface water turbidity"))+
         xlab("")+
         ylab("Turbidity (FNU)")+
-        scale_color_manual(values = c("surface water turbidity" = "brown"), name = "")+
+        scale_color_manual(values = c("surface water turbidity" = "#A9A448"), name = "")+
         theme_bw()
       
       plot.turb$main <- p
@@ -373,6 +376,8 @@ shinyServer(function(input, output, session) {
       var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
         xlab("")+
@@ -380,7 +385,7 @@ shinyServer(function(input, output, session) {
         facet_wrap(vars(variable), nrow = 3, scales = "free_y", 
                    labeller = labeller(variable = var.labs), strip.position = "top")+
         #geom_vline(data = end_july, aes(xintercept = as.numeric(end_july)))+
-        scale_color_discrete(name = "Depth (ft)")+
+        scale_color_manual(name = "Depth (ft)", values = palette_yb)+
         ggtitle("Summer water quality data")+
         theme_bw()
       
@@ -446,13 +451,15 @@ shinyServer(function(input, output, session) {
       var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      
       p <- ggplot(data = plot_data, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
         xlab("")+
         ylab("")+
         facet_wrap(vars(variable), nrow = 3, scales = "free_y", 
                    labeller = labeller(variable = var.labs), strip.position = "top")+
-        scale_color_discrete(name = "Depth (ft)")+
+        scale_color_manual(name = "Depth (ft)", values = palette_yb)+
         ggtitle("Fall water quality data")+
         theme_bw()
       
@@ -503,13 +510,15 @@ shinyServer(function(input, output, session) {
       var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
         xlab("")+
         ylab("")+
         facet_wrap(vars(variable), nrow = 3, scales = "free_y", 
                    labeller = labeller(variable = var.labs), strip.position = "top")+
-        scale_color_discrete(name = "Depth (ft)")+
+        scale_color_manual(name = "Depth (ft)", values = palette_yb)+
         ggtitle("Winter water quality data")+
         theme_bw()
       
@@ -539,6 +548,506 @@ shinyServer(function(input, output, session) {
   output$forecast_slides <- renderSlickR({
     slickR(forecast_slides) + settings(dots = TRUE)
   })
+  
+  # Plot forecast for practicing interpretation
+  plot.fc <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$fc_plot <- renderPlotly({ 
+      
+      validate(
+        need(input$plot_fc > 0,
+             message = "Click 'View turnover forecast'")
+      )
+      
+      df <- forecast_data %>%
+        filter(fc_id == "second_forecast") %>%
+        mutate(perc_turnover = prob_turnover*100)
+      
+      # Text 
+      ann_text <- data.frame(datetime = as.Date(c("2023-10-12")),
+                             perc_turnover = c(80),
+                             lab = "today")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = perc_turnover))+
+        geom_line(aes(color = "percent chance of turnover"), linewidth = 1)+
+        geom_vline(xintercept = as.numeric(as.Date("2023-10-13")), linetype = 2)+
+        ggtitle("Turnover forecast")+
+        xlab("")+
+        ylab("Percent chance of turnover (%)")+
+        ylim(c(0,100))+
+        scale_color_manual(values = c("percent chance of turnover" = "#8EB1AF"), name = "")+
+        geom_text(data = ann_text, aes(x = datetime, y = perc_turnover, label = lab))+
+        theme_bw()
+      
+      plot.fc$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE, tooltip=c("x", "y", "color")))
+      
+    })
+    
+  })
+  
+  # Download plot of second forecast
+  output$save_fc_plot <- downloadHandler(
+    filename = function() {
+      paste("Q17-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.fc$main, device = device)
+    }
+  )
+  
+  
+  #### Activity C ----
+  
+  # Plot real-time water temperature data for the first time period
+  plot.realtime.wtemp.1 <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$realtime_wtemp_plot_1 <- renderPlotly({ 
+    
+      validate(
+        need(input$plot_realtime_data_1 > 0,
+             message = "Click 'Plot real-time data'")
+      )
+      
+      realtime.dates <- seq.Date(from = as.Date("2023-10-06") - 30, to = as.Date("2023-10-06"), by = 'days')
+      
+      df <- realtime_fcr_data %>%
+        filter(variable == "Temp_C_mean") %>%
+        mutate(depth_ft = as.factor(depth_ft)) %>%
+        rename(wq.variable = variable) %>%
+        filter(datetime %in% realtime.dates) %>%
+        mutate(observation = round(observation*(9/5) + 32,1))
+      
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      
+      # Text 
+      ann_text <- data.frame(datetime = as.Date(c("2023-10-05")),
+                             observation = c(80),
+                             lab = "today",
+                             wq.variable = factor(unique(df$wq.variable)))
+      
+      p <- ggplot()+
+        geom_line(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
+        xlab("")+
+        ylab("Water temperature (degrees Fahrenheit)")+
+        scale_color_manual(name = "Depth (ft)",values = palette_yb)+
+        geom_vline(xintercept = as.numeric(as.Date("2023-10-06")), linetype = 2, linewidth = 1)+
+        geom_text(data = ann_text, aes(x = datetime, y = observation, label = lab))+
+        theme_bw()
+      
+      plot.realtime.wtemp.1$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE, tooltip=c("x", "y", "color")))
+      
+    })
+    
+  })
+  
+  # Download plot of water temperature
+  output$save_realtime_wtemp_plot_1 <- downloadHandler(
+    filename = function() {
+      paste("Q8-10-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.realtime.wtemp.1$main, device = device)
+    }
+  )
+  
+  # Message re: turbidity threshold
+  output$turb_message1 <- renderText({"The horizontal line indicates the raw water turbidity threshold of 20 NTU."})
+  
+  # Plot realtime wq data for first time period
+  plot.realtime.data.1 <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$realtime_data_1_plot <- renderPlotly({ 
+      
+      validate(
+        need(input$plot_realtime_data_1 > 0,
+             message = "Click 'Plot real-time data'")
+      )
+      
+      realtime.dates <- seq.Date(from = as.Date("2023-10-06") - 30, to = as.Date("2023-10-06"), by = 'days')
+      
+      df <- realtime_fcr_data %>%
+        filter(variable %in% c("DO_mgL_mean","Turbidity_FNU_mean")) %>%
+        mutate(depth_ft = as.factor(depth_ft),
+               layer = ifelse(depth_m <= 2, "surface waters","bottom waters")) %>%
+        mutate(layer = factor(layer, levels = c("surface waters","bottom waters"))) %>%
+        filter(datetime %in% realtime.dates) %>%
+        rename(wq.variable = variable)
+      
+      # New facet label names for variables
+      var.labs <- c("Dissolved oxygen (ppm)","Turbidity (NTU)")
+      names(var.labs) <- unique(df$wq.variable)
+      
+      # Text for facets
+      ann_text <- data.frame(datetime = as.Date(c("2023-10-04","2023-10-04")),
+                             observation = c(10,7),
+                             lab = rep("today", times = 2),
+                             wq.variable = factor(unique(df$wq.variable)))
+      
+      p <- ggplot()+
+        geom_line(data = df, aes(x = datetime, y = observation, group = layer, color = layer))+
+        xlab("")+
+        ylab("")+
+        geom_hline(data = df %>% filter(wq.variable == "Turbidity_FNU_mean"),
+                   aes(yintercept = 20), col = "#8A5F50")+
+        facet_wrap(vars(wq.variable), nrow = 1, scales = "free_y", 
+                   labeller = labeller(wq.variable = var.labs), strip.position = "top")+
+        scale_color_manual(name = "Depth", values = c("#A9A448", "#023858"))+
+        ggtitle("Real-time water quality data")+
+        geom_vline(xintercept = as.numeric(as.Date("2023-10-06")), linetype = 2)+
+        geom_text(data = ann_text, aes(x = datetime, y = observation, label = lab))+
+        theme_bw()
+      
+      plot.realtime.data.1$main <- p
+      
+      return(ggplotly(p, dynamicTicks = FALSE, tooltip=c("x", "y", "color")) %>% layout(height = 400, width = 1200))
+      
+    })
+    
+  })
+  
+  # Download plot of real-time data
+  output$save_realtime_data_plot_1 <- downloadHandler(
+    filename = function() {
+      paste("Q38-39-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 3,
+                       res = 300, units = "in")
+      }
+      ggsave(file, plot = plot.realtime.data.1$main, device = device)
+    }
+  )
+  
+  # Plot forecast for first time period
+  plot.fc1 <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$fc1_plot <- renderPlotly({ 
+      
+      validate(
+        need(input$plot_fc1 > 0,
+             message = "Click 'View turnover forecast'")
+      )
+      
+      df <- forecast_data %>%
+        filter(fc_id == "first_forecast") %>%
+        mutate(perc_turnover = prob_turnover*100)
+      
+      # Text 
+      ann_text <- data.frame(datetime = as.Date(c("2023-10-05")),
+                             perc_turnover = c(80),
+                             lab = "today")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = perc_turnover))+
+        geom_line(aes(color = "percent chance of turnover"), linewidth = 1)+
+        geom_vline(xintercept = as.numeric(as.Date("2023-10-06")), linetype = 2)+
+        xlab("")+
+        ylab("Percent chance of turnover (%)")+
+        ggtitle("Turnover forecast")+
+        ylim(c(0,100))+
+        scale_color_manual(values = c("percent chance of turnover" = "#8EB1AF"), name = "")+
+        geom_text(data = ann_text, aes(x = datetime, y = perc_turnover, label = lab))+
+        theme_bw()
+      
+      plot.fc1$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE, tooltip=c("x", "y", "color")))
+      
+    })
+    
+  })
+  
+  # Download plot of first forecast
+  output$save_fc1_plot <- downloadHandler(
+    filename = function() {
+      paste("Q17-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.fc1$main, device = device)
+    }
+  )
+  
+  # Plot real-time water temperature data for the second time period
+  plot.realtime.wtemp.2 <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$realtime_wtemp_plot_2 <- renderPlotly({ 
+      
+      validate(
+        need(input$plot_realtime_data_2 > 0,
+             message = "Click 'Plot real-time data'")
+      )
+      
+      realtime.dates <- seq.Date(from = as.Date("2023-10-13") - 30, to = as.Date("2023-10-13"), by = 'days')
+      
+      df <- realtime_fcr_data %>%
+        filter(variable == "Temp_C_mean") %>%
+        mutate(depth_ft = as.factor(depth_ft)) %>%
+        rename(wq.variable = variable) %>%
+        filter(datetime %in% realtime.dates) %>%
+        mutate(observation = round(observation*(9/5) + 32,1))
+      
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      
+      # Text 
+      ann_text <- data.frame(datetime = as.Date(c("2023-10-12")),
+                             observation = c(80),
+                             lab = "today",
+                             wq.variable = factor(unique(df$wq.variable)))
+      
+      p <- ggplot()+
+        geom_line(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
+        xlab("")+
+        ylab("Water temperature (degrees Fahrenheit)")+
+        scale_color_manual(name = "Depth (ft)",values = palette_yb)+
+        geom_vline(xintercept = as.numeric(as.Date("2023-10-13")), linetype = 2, linewidth = 1)+
+        geom_text(data = ann_text, aes(x = datetime, y = observation, label = lab))+
+        theme_bw()
+      
+      plot.realtime.wtemp.2$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE, tooltip=c("x", "y", "color")))
+      
+    })
+    
+  })
+  
+  # Download plot of water temperature
+  output$save_realtime_wtemp_plot_2 <- downloadHandler(
+    filename = function() {
+      paste("Q8-10-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.realtime.wtemp.2$main, device = device)
+    }
+  )
+  
+  # Message re: turbidity threshold
+  output$turb_message2 <- renderText({"The horizontal line indicates the raw water turbidity threshold of 20 NTU."})
+  
+  # Plot realtime data for second time period
+  plot.realtime.data.2 <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$realtime_data_2_plot <- renderPlotly({ 
+      
+      validate(
+        need(input$plot_realtime_data_2 > 0,
+             message = "Click 'Plot real-time data'")
+      )
+      
+      realtime.dates <- seq.Date(from = as.Date("2023-10-13") - 30, to = as.Date("2023-10-13"), by = 'days')
+      
+      df <- realtime_fcr_data %>%
+        filter(variable %in% c("DO_mgL_mean","Turbidity_FNU_mean")) %>%
+        mutate(depth_ft = as.factor(depth_ft),
+               layer = ifelse(depth_m <= 2, "surface waters","bottom waters")) %>%
+        mutate(layer = factor(layer, levels = c("surface waters","bottom waters"))) %>%
+        filter(datetime %in% realtime.dates) %>%
+        rename(wq.variable = variable)
+      
+      # New facet label names for variables
+      var.labs <- c("Dissolved oxygen (ppm)","Turbidity (NTU)")
+      names(var.labs) <- unique(df$wq.variable)
+      
+      # Text for facets
+      ann_text <- data.frame(datetime = as.Date(c("2023-10-11","2023-10-11")),
+                             observation = c(9.5,6),
+                             lab = rep("today", times = 2),
+                             wq.variable = factor(unique(df$wq.variable)))
+      
+      p <- ggplot()+
+        geom_line(data = df, aes(x = datetime, y = observation, group = layer, color = layer))+
+        xlab("")+
+        ylab("")+
+        geom_hline(data = df %>% filter(wq.variable == "Turbidity_FNU_mean"),
+                   aes(yintercept = 20), col = "#8A5F50")+
+        facet_wrap(vars(wq.variable), nrow = 1, scales = "free_y", 
+                   labeller = labeller(wq.variable = var.labs), strip.position = "top")+
+        scale_color_manual(name = "Depth", values = c("#A9A448", "#023858"))+
+        ggtitle("Real-time water quality data")+
+        geom_vline(xintercept = as.numeric(as.Date("2023-10-13")), linetype = 2)+
+        geom_text(data = ann_text, aes(x = datetime, y = observation, label = lab))+
+        theme_bw()
+      
+      plot.realtime.data.2$main <- p
+      
+      #return(p)
+      return(ggplotly(p, dynamicTicks = FALSE, tooltip=c("x", "y", "color")) %>% layout(height = 400, width = 1200))
+      
+    })
+    
+  })
+  
+  # Download plot of real-time data
+  output$save_realtime_data_plot_2 <- downloadHandler(
+    filename = function() {
+      paste("Q42-43-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 3,
+                       res = 300, units = "in")
+      }
+      ggsave(file, plot = plot.realtime.data.2$main, device = device)
+    }
+  )
+  
+  # Plot forecast for second time period
+  plot.fc2 <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$fc2_plot <- renderPlotly({ 
+      
+      validate(
+        need(input$plot_fc2 > 0,
+             message = "Click 'View turnover forecast'")
+      )
+      
+      df <- forecast_data %>%
+        filter(fc_id == "second_forecast") %>%
+        mutate(perc_turnover = prob_turnover*100)
+      
+      # Text 
+      ann_text <- data.frame(datetime = as.Date(c("2023-10-12")),
+                             perc_turnover = c(80),
+                             lab = "today")
+      
+      p <- ggplot(data = df, aes(x = datetime, y = perc_turnover))+
+        geom_line(aes(color = "percent chance of turnover"), linewidth = 1)+
+        geom_vline(xintercept = as.numeric(as.Date("2023-10-13")), linetype = 2)+
+        ggtitle("Turnover forecast")+
+        xlab("")+
+        ylab("Percent chance of turnover (%)")+
+        ylim(c(0,100))+
+        scale_color_manual(values = c("percent chance of turnover" = "#8EB1AF"), name = "")+
+        geom_text(data = ann_text, aes(x = datetime, y = perc_turnover, label = lab))+
+        theme_bw()
+      
+      plot.fc2$main <- p
+      
+      return(ggplotly(p, dynamicTicks = TRUE, tooltip=c("x", "y", "color")))
+      
+    })
+    
+  })
+  
+  # Download plot of second forecast
+  output$save_fc2_plot <- downloadHandler(
+    filename = function() {
+      paste("Q17-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 4,
+                       res = 200, units = "in")
+      }
+      ggsave(file, plot = plot.fc2$main, device = device)
+    }
+  )
+  
+  # Message re: turbidity threshold
+  output$turb_message3 <- renderText({"The horizontal line indicates the raw water turbidity threshold of 20 NTU."})
+  
+  # Plot outcome
+  plot.outcome <- reactiveValues(main=NULL)
+  
+  observe({
+    
+    output$outcome_plot <- renderPlotly({ 
+      
+      validate(
+        need(input$plot_outcome > 0,
+             message = "Click 'Plot resevoir data'")
+      )
+      
+      realtime.dates <- seq.Date(from = as.Date("2023-11-10") - 30, to = as.Date("2023-11-10"), by = 'days')
+      
+      df <- realtime_fcr_data %>%
+        filter(variable %in% c("DO_mgL_mean","Turbidity_FNU_mean")) %>%
+        mutate(depth_ft = as.factor(depth_ft),
+               layer = ifelse(depth_m <= 2, "surface waters","bottom waters")) %>%
+        mutate(layer = factor(layer, levels = c("surface waters","bottom waters"))) %>%
+        filter(datetime %in% realtime.dates) %>%
+        rename(wq.variable = variable)
+      
+      # New facet label names for variables
+      var.labs <- c("Dissolved oxygen (ppm)","Turbidity (NTU)")
+      names(var.labs) <- unique(df$wq.variable)
+      
+      # Text for facets
+      ann_text <- data.frame(datetime = as.Date(c("2023-10-19","2023-10-19")),
+                             observation = c(12,90),
+                             lab = rep("turnover", times = 2),
+                             wq.variable = factor(unique(df$wq.variable)))
+      
+      p <- ggplot()+
+        geom_line(data = df, aes(x = datetime, y = observation, group = layer, color = layer))+
+        xlab("")+
+        ylab("")+
+        geom_hline(data = df %>% filter(wq.variable == "Turbidity_FNU_mean"),
+                   aes(yintercept = 20), col = "#8A5F50")+
+        facet_wrap(vars(wq.variable), nrow = 1, scales = "free_y", 
+                   labeller = labeller(wq.variable = var.labs), strip.position = "top")+
+        scale_color_manual(name = "Depth", values = c("#A9A448", "#023858"))+
+        ggtitle("Real-time water quality data")+
+        geom_vline(xintercept = as.numeric(as.Date("2023-10-22")), linetype = 2)+
+        geom_text(data = ann_text, aes(x = datetime, y = observation, label = lab))+
+        theme_bw()
+      
+      plot.outcome$main <- p
+      
+      #return(p)
+      return(ggplotly(p, dynamicTicks = FALSE, tooltip=c("x", "y", "color")) %>% layout(height = 400, width = 1200))
+      
+    })
+    
+  })
+  
+  # Download plot of outcome data
+  output$save_outcome <- downloadHandler(
+    filename = function() {
+      paste("Q42-43-plot-", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = 8, height = 3,
+                       res = 300, units = "in")
+      }
+      ggsave(file, plot = plot.outcome$main, device = device)
+    }
+  )
   
   
   

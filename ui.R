@@ -386,7 +386,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               introBox(
-                                                h3("Objective 2: Explore high-frequency water temperature data from your chosen reservoir"))
+                                                h3("Objective 2: Explore high-frequency water quality data from your chosen reservoir"))
                                        )
                                      )
                                  )
@@ -484,20 +484,6 @@ ui <- function(req) {
                         ),
                         hr(),
                         fluidRow(
-                          column(12,
-                                 box(id = "box1", width = 10, status = "success",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(10, offset = 1,
-                                              introBox(
-                                                h3("Objective 3: Explore high-frequency dissolved oxygen data from your chosen reservoir"))
-                                       )
-                                     )
-                                 )
-                          )
-                        ),
-                        hr(),
-                        fluidRow(
                           column(4,
                                  h3("Dissolved oxygen"),
                                  p(tags$i("Click through the slides to understand how dissolved oxygen data can be related to water quality. The information presented on the slides is also summarized in text below the slides to help you answer the questions.")),
@@ -572,20 +558,6 @@ ui <- function(req) {
                           )
                         ),
                         hr(),
-                        fluidRow(
-                          column(12,
-                                 box(id = "box1", width = 10, status = "success",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(10, offset = 1,
-                                              introBox(
-                                                h3("Objective 4: Explore high-frequency turbidity data from your chosen reservoir"))
-                                       )
-                                     )
-                                 )
-                          )
-                        ),
-                        hr(), 
                         fluidRow(
                           column(4,
                                  h3("Turbidity"),
@@ -681,7 +653,7 @@ ui <- function(req) {
                         fluidRow(
                           column(12,
                                  wellPanel(style = paste0("background: ", obj_bg),
-                                           h2("Activity B - Use high-frequency water quality data to make operation decisions"),
+                                           h2("Activity B - Use high-frequency water quality data to make water treatment plant operation decisions"),
                                            p(module_text["act_B", ])
                                  )
                           ),
@@ -691,7 +663,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               introBox(
-                                                h3("Objective 5: Make water withdrawal depth decisions at different times of year"))
+                                                h3("Objective 3: Use high-frequency water quality data to make water withdrawal depth decisions at different times of year"))
                                        )
                                      )
                                  )
@@ -892,7 +864,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               introBox(
-                                                h3("Objective 6: Interpret a fall turnover forecast"))
+                                                h3("Objective 4: Define water quality forecasting and interpret a fall turnover forecast"))
                                        )
                                      )
                                  )
@@ -949,18 +921,25 @@ ui <- function(req) {
                         hr(),
                         fluidRow(
                           column(8,
-                                 img(src = "forecast2.png", height = "90%", id = "bla_border",
-                                     width = "90%", tags$style("border: solid 2px black;"))
+                                 wellPanel(
+                                   h4("View turnover forecast"),
+                                   p("Click the button below to view a 1 to 16-day-ahead turnover forecast."),
+                                   actionButton("plot_fc", "View turnover forecast"),
+                                   br(),br(),
+                                   plotlyOutput("fc_plot"),
+                                   br(),br(),
+                                   downloadButton("save_fc_plot", "Download plot", icon = icon("download"))
                                  ),
+                          ),
                           column(4,
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1,
                                               h3("Interpret the forecast plot."),
-                                              p(tags$b(quest["q26", 1])),
-                                              p(tags$b(quest["q27", 1])),
-                                              p(tags$b(quest["q28", 1]))
+                                              p(tags$b(quest["q35", 1])),
+                                              p(tags$b(quest["q36", 1])),
+                                              p(tags$b(quest["q37", 1]))
                                        )
                                      )
                                  )
@@ -1000,7 +979,7 @@ ui <- function(req) {
                                    fluidRow(
                                      column(10, offset = 1,
                                             introBox(
-                                              h3("Objective 7: Make water treatment decisions using high-frequency water quality data and forecasts"))
+                                              h3("Objective 5: Make water treatment decisions using high-frequency water quality data and forecasts"))
                                      )
                                    )
                                )
@@ -1015,8 +994,9 @@ ui <- function(req) {
                               column(10, offset = 1,
                                      h3("Operation scenario"),
                                      h4("Decide: should I begin additional treatment measures to prevent water quality concerns during fall turnover, and if so, when?"),
-                                     p("You are operating a small reservoir water treatment plant with a very short detention time - only 30 minutes from the raw water intake to the bottom filter. In addition, the reservoir feeding your plant is small, with a short residence time. This means that water can travel from the inflow to the dam, where it is withdrawn for treatment, in a matter of hours to a few days, especially during high rainfall events. As a result, your plant is very sensitive to high turbidity in the raw water, and you must be able to act quickly to avoid exceeding the regulatory limit of 0.3 NTU turbidity on the bottom filter."),
-                                     p("Your supervisor has alerted you that this reservoir has experienced increased turbidity around the time of fall turnover in the past. In addition, it has been a rainy fall so far this year. Cumulative rainfall last month was three inches above what your region typically experiences."),
+                                     p("You are operating a small reservoir water treatment plant with a very short detention time - only 30 minutes from the raw water intake to the bottom filter. In addition, the reservoir feeding your plant is small, with a short residence time. This means that water can travel from the inflow to the dam, where it is withdrawn for treatment, in a matter of hours to a few days, especially during high rainfall events. There is only one extraction depth in the surface waters of the reservoir. As a result, your plant is very sensitive to high turbidity in the raw water, and you must be able to act quickly to avoid exceeding the regulatory limit of 0.3 NTU turbidity on the bottom filter."),
+                                     p(tags$b("Specifically, previous operators have had difficulty meeting regulatory limits for bottom filter turbidity when raw water turbidity exceeds 20 NTU.")),
+                                     p("Your supervisor has alerted you that this reservoir has experienced increased turbidity around the time of fall turnover in the past. Usually, the highest turbidity is experienced from about a week before until about a week after turnover. In addition, it has been a rainy fall so far this year. Cumulative rainfall last month was three inches above what your region typically experiences."),
                                      h4("Your objective is to determine if and when to enact additional treatment measures to ensure you meet the regulatory limit for turbidity immediately before and after fall turnover."),
                                      p(tags$b("You will make a series of four treatment decisions using reservoir data and turnover forecasts.")),
                                      p("Click the plotting buttons below to view reservoir data and turnover forecasts. Then, use what you have learned in previous objectives to choose whether to enact additional treatment measures to counteract potentially high turbidity during fall turnover.")
@@ -1034,43 +1014,34 @@ ui <- function(req) {
                hr(),
                         fluidRow(
                           column(12,
-                                 box(id = "box1", width = 10, status = "success",
-                                     solidHeader = TRUE,
-                                     fluidRow(
-                                       column(10, offset = 1,
-                                              introBox(
-                                                h3("Mock-up of possible activities"),
-                                                h4("Proposed scenario:"),
-                                                p("1. Students will view real-time data and make a management decision about the depth from which to withdraw water from the reservoir. The data show that there is hypoxia at depth and low turbidity in the surface waters."),
-                                                p("2. Students will view a turnover forecast with a LOW probability of turnover forecasted and decide whether to change their management decision about withdrawal depth."),
-                                                p("3. Imagine a week has passed. Now, students will view a turnover forecast with a HIGH probability of turnover and decide whether to change their management decision about withdrawal depth."),
-                                                p("4. Finally, the future arrives. Students discover that turnover has led to an increase in dissolved oxyen at depth and a spike in turbidity in the surface waters. Students are asked to evaluate their decision-making and the utility of the turnover forecast.")
-                                                )
-                                              
-                                       )
-                                     )
-                                 )
-                          )
-                        ),
-                        hr(),
-                        fluidRow(
-                          column(12,
                                  h3("1. Make a decision using real-time reservoir data"),
                                  h4("Today is October 6."),
-                                 p("Below are two plots of real-time reservoir data over the past month showing dissolved oxygen and turbidity in your reservoir."),
+                                 p("Below are plots of real-time reservoir data over the past month showing water temperature, dissolved oxygen, and turbidity in your reservoir."),
                                  p(tags$b("You know from talking with other operators who work at this plant that turnover in the reservoir typically happens in mid to late October.")),
                                  p("Use the information in the plots to make a treatment decision.")
                                  )
                         ),
-                        fluidRow(
-                          column(6,
-                                 img(src = "current_conditions_do.png", height = "90%", id = "bla_border",
-                                     width = "90%", tags$style("border: solid 2px black;"))
-                                 ),
-                          column(6,
-                                 img(src = "current_conditions_turbidity.png", height = "90%", id = "bla_border",
-                                     width = "90%", tags$style("border: solid 2px black;"))                                 )
-                        ),
+               br(),
+               fluidRow(
+                 column(12,
+                        wellPanel(
+                          h4("Plot real-time reservoir data"),
+                          p("Click the button below to plot real-time data at the reservoir you are operating."),
+                          actionButton("plot_realtime_data_1", "Plot real-time data"),
+                          br(),br(),
+                          plotlyOutput("realtime_wtemp_plot_1", width = "1200px", height = "400px"),
+                          br(),br(),
+                          downloadButton("save_realtime_wtemp_plot_1", "Download plot", icon = icon("download")),
+                          br(),br(),
+                          span(textOutput("turb_message1"), style="color:#8A5F50; font-size:16px"),
+                          br(),
+                          plotlyOutput("realtime_data_1_plot", width = "1200px", height = "400px"),
+                          br(),br(),
+                          downloadButton("save_realtime_data_plot_1", "Download plot", icon = icon("download")),
+                          br(),br()
+                        )
+                 )
+               ),
                br(),
                fluidRow(
                  column(12,
@@ -1079,7 +1050,6 @@ ui <- function(req) {
                             fluidRow(
                               column(10, offset = 1,
                                      h3("Make a decision for water treatment on October 6 using real-time data."),
-                                     h4(tags$em("Hint: you can scroll over the plot to see the exact values of the water quality variables at different depths on July 31.")),
                                      p(tags$b(quest["q38", 1])),
                                      p(tags$b(quest["q39", 1]))
                               )
@@ -1097,11 +1067,16 @@ ui <- function(req) {
                  )
                ),
                fluidRow(
-                 column(6,
-                        img(src = "forecast1.png", height = "90%", id = "bla_border",
-                            width = "90%", tags$style("border: solid 2px black;"))
-                 ),
-                 column(6,
+                 column(8,
+                        wellPanel(
+                          h4("View turnover forecast"),
+                          p("Click the button below to view a 1 to 16-day-ahead turnover forecast at the reservoir you are operating."),
+                          actionButton("plot_fc1", "View turnover forecast"),
+                          br(),br(),
+                          plotlyOutput("fc1_plot"),
+                          br(),br(),
+                          downloadButton("save_fc1_plot", "Download plot", icon = icon("download"))
+                        ),
                  )
                ),
                br(),
@@ -1113,7 +1088,8 @@ ui <- function(req) {
                               column(10, offset = 1,
                                      h3("Make a decision for water treatment on October 6 using a turnover forecast."),
                                      p(tags$b(quest["q40", 1])),
-                                     p(tags$b(quest["q41", 1]))
+                                     p(tags$b(quest["q41", 1])),
+                                     p(tags$b(quest["q42", 1]))
                               )
                             )
                         )
@@ -1125,19 +1101,31 @@ ui <- function(req) {
                        h3("3. Make a decision using real-time reservoir data"),
                        h4("Today is October 13."),
                        p("A week has passed since you made your last decision."),
-                       p("Below are two plots of real-time reservoir data over the past month showing dissolved oxygen and turbidity in your reservoir."),
+                       p("Below are plots of real-time reservoir data over the past month showing water temperature, dissolved oxygen, and turbidity in your reservoir."),
                        p(tags$b("Remember, turnover in the reservoir typically happens in mid to late October.")),
                        p("Use the information in the plots to make a treatment decision.")
                 )
               ),
+              br(),
               fluidRow(
-                column(6,
-                       img(src = "current_conditions_do.png", height = "90%", id = "bla_border",
-                           width = "90%", tags$style("border: solid 2px black;"))
-                ),
-                column(6,
-                       img(src = "current_conditions_turbidity.png", height = "90%", id = "bla_border",
-                           width = "90%", tags$style("border: solid 2px black;"))                                 )
+                column(12,
+                       wellPanel(
+                         h4("Plot real-time reservoir data"),
+                         p("Click the button below to plot real-time data at the reservoir you are operating."),
+                         actionButton("plot_realtime_data_2", "Plot real-time data"),
+                         br(),br(),
+                         plotlyOutput("realtime_wtemp_plot_2", width = "1200px", height = "400px"),
+                         br(),br(),
+                         downloadButton("save_realtime_wtemp_plot_2", "Download plot", icon = icon("download")),
+                         br(),br(),
+                       span(textOutput("turb_message2"), style="color:#8A5F50; font-size:16px"),
+                       br(),
+                       plotlyOutput("realtime_data_2_plot", width = "1200px", height = "400px"),
+                       br(),br(),
+                       downloadButton("save_realtime_data_plot_2", "Download plot", icon = icon("download")),
+                       br(),br()
+                       )
+                )
               ),
               br(),
               fluidRow(
@@ -1147,8 +1135,8 @@ ui <- function(req) {
                            fluidRow(
                              column(10, offset = 1,
                                     h3("Make a decision for water treatment on October 13 using real-time data."),
-                                    p(tags$b(quest["q42", 1])),
-                                    p(tags$b(quest["q43", 1]))
+                                    p(tags$b(quest["q43", 1])),
+                                    p(tags$b(quest["q44", 1]))
                              )
                            )
                        )
@@ -1164,14 +1152,19 @@ ui <- function(req) {
                        p("Use the information in the forecast to make a treatment decision.")
                 )
               ),
-                        fluidRow(
-                          column(6, 
-                                 img(src = "forecast2.png", height = "90%", id = "bla_border",
-                                     width = "90%", tags$style("border: solid 2px black;"))
-                          ),
-                          column(6,
-                          )
-                        ),
+              fluidRow(
+                column(8,
+                       wellPanel(
+                         h4("View turnover forecast"),
+                         p("Click the button below to view a 1 to 16-day-ahead turnover forecast at the reservoir you are operating."),
+                         actionButton("plot_fc2", "View turnover forecast"),
+                         br(),br(),
+                         plotlyOutput("fc2_plot"),
+                         br(),br(),
+                         downloadButton("save_fc2_plot", "Download plot", icon = icon("download"))
+                       ),
+                )
+              ),
               br(),
               fluidRow(
                 column(12,
@@ -1180,8 +1173,8 @@ ui <- function(req) {
                            fluidRow(
                              column(10, offset = 1,
                                     h3("Make a decision for water treatment on October 13 using a turnover forecast."),
-                                    p(tags$b(quest["q44", 1])),
-                                    p(tags$b(quest["q45", 1]))
+                                    p(tags$b(quest["q45", 1])),
+                                    p(tags$b(quest["q46", 1]))
                              )
                            )
                        )
@@ -1198,13 +1191,20 @@ ui <- function(req) {
                           )
                         ),
                         fluidRow(
-                          column(6,
-                                 img(src = "outcome_do.png", height = "90%", id = "bla_border",
-                                     width = "90%", tags$style("border: solid 2px black;"))
-                          ),
-                          column(6,
-                                 img(src = "outcome_turbidity.png", height = "90%", id = "bla_border",
-                                     width = "90%", tags$style("border: solid 2px black;"))                                 )
+                          column(12,
+                                 wellPanel(
+                                   h4("View reservoir data before and after turnover"),
+                                   p("Click the button below to plot data at the reservoir you are operating from before and after turnover."),
+                                   actionButton("plot_outcome", "Plot reservoir data"),
+                                   br(),br(),
+                                   span(textOutput("turb_message2"), style="color:#8A5F50; font-size:16px"),
+                                   br(),
+                                   plotlyOutput("outcome_plot", width = "1200px", height = "400px"),
+                                   br(),br(),
+                                   downloadButton("save_outcome", "Download plot", icon = icon("download")),
+                                   br(),br()
+                                 )
+                          )
                         ),
                         hr(),
                         fluidRow(
