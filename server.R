@@ -113,6 +113,8 @@ shinyServer(function(input, output, session) {
       select(datetime, variable, depth_ft, observation) %>%
       filter(variable == "Turbidity_FNU_mean")
     
+    focal_year <- ifelse(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "fcre",2023,2022)
+    
     progress$set(value = 1)
     
   })
@@ -170,9 +172,15 @@ shinyServer(function(input, output, session) {
       )
       
       df <- lake_data$wtemp %>%
-        mutate(depth_ft = as.factor(depth_ft))
+        mutate(depth_ft = as.factor(depth_ft)) 
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "bvre"){
+        df <- df %>% filter(year(datetime) == 2022)
+      } else {
+        df <- df %>% filter(year(datetime) == 2023)
+      }
+      
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
       
       
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
@@ -233,7 +241,13 @@ shinyServer(function(input, output, session) {
       df <- lake_data$do %>%
         mutate(depth_ft = as.factor(depth_ft),
                layer = ifelse(depth_m <= 2, "surface waters","bottom waters")) %>%
-        mutate(layer = factor(layer, levels = c("surface waters","bottom waters")))
+        mutate(layer = factor(layer, levels = c("surface waters","bottom waters"))) 
+      
+      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "bvre"){
+        df <- df %>% filter(year(datetime) == 2022)
+      } else {
+        df <- df %>% filter(year(datetime) == 2023)
+      }
       
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = layer, color = layer))+
         geom_line()+
@@ -291,6 +305,12 @@ shinyServer(function(input, output, session) {
       
       df <- lake_data$turb 
       
+      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "bvre"){
+        df <- df %>% filter(year(datetime) == 2022)
+      } else {
+        df <- df %>% filter(year(datetime) == 2023)
+      }
+      
       p <- ggplot(data = df, aes(x = datetime, y = observation))+
         geom_point(aes(color = "surface water turbidity"))+
         xlab("")+
@@ -335,10 +355,10 @@ shinyServer(function(input, output, session) {
       site = pull(sites_df[input$table01_rows_selected, "SiteID"])
       
       if(site == "fcre"){
-        extraction_depths <- paste("<b>","Possible extraction depths: 5.2 ft and 29.5 ft.","</b>", sep = "")
+        extraction_depths <- paste("<b>","Possible extraction depths: 3.3 ft and 29.5 ft.","</b>", sep = "")
       }
       if(site == "bvre"){
-        extraction_depths <- paste("<b>","Possible extraction depths: 4.9 ft and 42.7 ft.","</b>", sep = "")
+        extraction_depths <- paste("<b>","Possible extraction depths: 4.9 ft and 42.6 ft.","</b>", sep = "")
       }
       
 
@@ -376,7 +396,7 @@ shinyServer(function(input, output, session) {
       var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
       
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
@@ -451,7 +471,7 @@ shinyServer(function(input, output, session) {
       var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
       
       p <- ggplot(data = plot_data, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
@@ -502,7 +522,7 @@ shinyServer(function(input, output, session) {
       )
       
       df <- lake_data$df %>%
-        filter(month(datetime) == 1) %>%
+        filter(year(datetime) == 2024 & month(datetime) == 1) %>%
         mutate(depth_ft = as.factor(depth_ft),
                observation = ifelse(variable == "Temp_C_mean",round(observation*(9/5) + 32,1),observation))
       
@@ -510,7 +530,7 @@ shinyServer(function(input, output, session) {
       var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
       
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
@@ -627,7 +647,7 @@ shinyServer(function(input, output, session) {
         filter(datetime %in% realtime.dates) %>%
         mutate(observation = round(observation*(9/5) + 32,1))
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
       
       # Text 
       ann_text <- data.frame(datetime = as.Date(c("2023-10-05")),
@@ -812,7 +832,7 @@ shinyServer(function(input, output, session) {
         filter(datetime %in% realtime.dates) %>%
         mutate(observation = round(observation*(9/5) + 32,1))
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(13)
+      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
       
       # Text 
       ann_text <- data.frame(datetime = as.Date(c("2023-10-12")),

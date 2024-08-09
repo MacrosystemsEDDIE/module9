@@ -117,6 +117,10 @@ dt1 <-read.csv(infile1,header=F
 
 unlink(infile1)
 
+dt2 <- read.csv("https://raw.githubusercontent.com/FLARE-forecast/BVRE-data/bvre-platform-data-qaqc/bvre-waterquality_L1.csv")
+
+dt1 <- bind_rows(dt1, dt2)
+
 mycols <- c("Reservoir",     
             "Site",     
             "DateTime",     
@@ -142,7 +146,7 @@ mycols <- c("Reservoir",
             )
 
 bvr <- dt1 %>%
-  filter(year(DateTime) == 2022) %>%
+  filter(year(DateTime) %in% c(2022,2024)) %>%
   select(any_of(mycols)) %>%
   mutate(Date = date(DateTime)) %>%
   select(-DateTime) %>%
@@ -269,6 +273,10 @@ dt1 <-read.csv(infile1,header=F
 
 unlink(infile1)
 
+dt2 <- read.csv("https://raw.githubusercontent.com/FLARE-forecast/FCRE-data/fcre-catwalk-data-qaqc/fcre-waterquality_L1.csv")
+
+dt1 <- bind_rows(dt1, dt2)
+
 mycols <- c("Reservoir",     
             "Site",     
             "DateTime",     
@@ -291,7 +299,7 @@ mycols <- c("Reservoir",
 )
 
 fcr <- dt1 %>%
-  filter(year(DateTime) == 2023) %>%
+  filter(year(DateTime) %in% c(2023,2024)) %>%
   select(any_of(mycols)) %>%
   mutate(Date = date(DateTime)) %>%
   select(-DateTime) %>%
@@ -309,8 +317,14 @@ fcr <- dt1 %>%
          depth_m = ifelse(depth_m == "surface", 0.1, as.numeric(depth_m))) %>%
   select(site_id, datetime, depth_m, variable, observation)
 
-reservoir_data <- bind_rows(bvr, fcr)
+reservoir_data <- bind_rows(bvr, fcr) %>%
+  filter(datetime <= "2024-01-31")
 
 write.csv(reservoir_data, "./data/reservoir_data.csv", row.names = FALSE)
 
-
+# check <- reservoir_data %>%
+#   filter(year(datetime) == 2024 & month(datetime) == 1) %>%
+#   ggplot()+
+#   geom_line(aes(x = datetime, y = observation, group = site_id, color = site_id))+
+#   facet_wrap(facets = vars(variable))
+# check

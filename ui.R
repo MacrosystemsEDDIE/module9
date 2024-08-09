@@ -254,7 +254,19 @@ ui <- function(req) {
                                      introBox(
                                        h3(tags$b("Think about it!")),
                                        p(tags$b(quest["q1", 1])),
+                                       tags$ul(
+                                         tags$li(id = "txt_j", quest["q1a", ]),
+                                         tags$li(id = "txt_j", quest["q1b", ]),
+                                         tags$li(id = "txt_j", quest["q1c", ]),
+                                         tags$li(id = "txt_j", quest["q1d", ]),
+                                         tags$li(id = "txt_j", quest["q1e", ])
+                                       ),
                                        p(tags$b(quest["q2", 1])),
+                                       tags$ul(
+                                         tags$li(id = "txt_j", quest["q2a", ]),
+                                         tags$li(id = "txt_j", quest["q2b", ]),
+                                         tags$li(id = "txt_j", quest["q2c", ])
+                                       ),
                                        data.step = 5, data.intro = help_text["questions", 1]
                                      )
                               )
@@ -347,34 +359,31 @@ ui <- function(req) {
                           )
                         ),
                         fluidRow(
-                          column(10, align = "left",
+                          column(12, align = "left",
                                  box(id = "box3", width = 10, status = "primary",
                                      solidHeader = TRUE,
                                      fluidRow(
-                                       column(7, offset = 1,
+                                       column(5, offset = 1,
                                               h3("Questions"),
-                                              p(tags$b(quest["q3", 1]))
-                                       )
-                                     ),
-                                     fluidRow(
-                                       column(4, offset = 1, align = "left", style = paste0("background: ", ques_bg),
-                                              p(tags$em(quest["q3a", 1] , width = "90%")),
-                                              p(tags$em(quest["q3b", 1], width = "90%")),
-                                              p(tags$em(quest["q3c", 1], width = "90%"))
+                                              p(tags$b(quest["q3", 1])),
+                                              p(tags$b(quest["q4", 1])),
+                                              p(tags$b(quest["q5", 1])),
+                                              tags$ul(
+                                                tags$li(id = "txt_j", quest["q5a", ]),
+                                                tags$li(id = "txt_j", quest["q5b", ]),
+                                                tags$li(id = "txt_j", quest["q5c", ]),
+                                                tags$li(id = "txt_j", quest["q5d", ])
+                                              ),
+                                              p(tags$b(quest["q6", 1])),
+                                              p(tags$b(quest["q7", 1]))
                                        ),
-                                       column(4, offset = 1, align = "left", style = paste0("background: ", ques_bg),
-                                              p(tags$em(quest["q3d", 1] , width = "90%")),
-                                              p(tags$em(quest["q3e", 1], width = "90%")),
-                                              p(tags$em(quest["q3f", 1], width = "90%"))
-                                       )
-                                     ),
-                                     fluidRow(
-                                       column(7, offset = 1,
-                                              p(tags$b("Virginia's Water Quality Assessment Guidance Manual gives the following guidance on water quality evaluation using a trophic state index (TSI), which may be calculated from Secchi depth (SD), chlorophyll-a (CA), or total phosphorus (TP):")),
+                                       column(5, 
+                                              h3(""),
+                                              p("Virginia's Water Quality Assessment Guidance Manual gives the following guidance on water quality evaluation using a trophic state index (TSI), which may be calculated from Secchi depth (SD), chlorophyll-a (CA), or total phosphorus (TP):"),
                                               p(tags$em("A trophic state index value of 60 or greater for any one of the 3 indices will indicate that nutrient enrichment from anthropogenic sources are adversely interfering, directly or indirectly, with the designated uses. A TSI value of 60 corresponds to a CA concentration of 20 ug/l, a SD of 1 meter, and a TP concentration of 48 ug/l.")),
-                                              p(tags$b(quest["q4", 1]))
+                                              p(tags$b(quest["q8", 1]))
                                        )
-                                     )
+                                 )
                                  )
                           )
                         ),
@@ -407,8 +416,15 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1, align = "left",
                                               h4("Questions"),
-                                              p(tags$b(quest["q5", 1])),
-                                              p(tags$b(quest["q6", 1]))
+                                              p(tags$b(quest["q9", 1])),
+                                              p(tags$b(quest["q10", 1])),
+                                              tags$ul(
+                                                tags$li(id = "txt_j", quest["q10a", ]),
+                                                tags$li(id = "txt_j", quest["q10b", ]),
+                                                tags$li(id = "txt_j", quest["q10c", ]),
+                                                tags$li(id = "txt_j", quest["q10d", ]),
+                                                tags$li(id = "txt_j", quest["q10e", ])
+                                              ),
                                        )
                                      )
                                  )
@@ -468,9 +484,9 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q7", 1])),
-                                              p(tags$b(quest["q8", 1])),
-                                              p(tags$b(quest["q9", 1]))
+                                              p(tags$b(quest["q11", 1])),
+                                              p(tags$b(quest["q12", 1])),
+                                              p(tags$b(quest["q13", 1]))
                                        )
                                      )
                                  )
@@ -493,8 +509,20 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q10", 1])),
-                                              p(tags$b(quest["q11", 1]))
+                                              p(tags$b(quest["q14", 1])),
+                                              tags$ul(
+                                                tags$li(quest["q14a", ]),
+                                                tags$li(quest["q14b", ]),
+                                                tags$li(quest["q14c", ]),
+                                                tags$li(quest["q14d", ])
+                                              ),
+                                              p(tags$b(quest["q15", 1])),
+                                              tags$ul(
+                                                tags$li(quest["q15a", ]),
+                                                tags$li(quest["q15b", ]),
+                                                tags$li(quest["q15c", ]),
+                                                tags$li(quest["q15d", ])
+                                              )
                                        )
                                      )
                                  )
@@ -543,9 +571,11 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q12", 1])),
-                                              p(tags$b(quest["q13", 1])),
-                                              p(tags$b(quest["q14", 1]))
+                                              p(tags$b(quest["q16", 1])),
+                                              p(tags$b(quest["q17", 1])),
+                                              p(tags$b(quest["q18", 1])),
+                                              p(tags$b(quest["q19", 1])),
+                                              p(tags$b(quest["q20", 1]))
                                        )
                                      )
                                  )
@@ -568,8 +598,13 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q15", 1])),
-                                              p(tags$b(quest["q16", 1]))
+                                              p(tags$b(quest["q21", 1])),
+                                              tags$ul(
+                                                tags$li(quest["q21a", ]),
+                                                tags$li(quest["q21b", ]),
+                                                tags$li(quest["q21c", ])
+                                              ),
+                                              p(tags$b(quest["q22", 1]))
                                        )
                                      )
                                  )
@@ -617,8 +652,8 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q17", 1])),
-                                              p(tags$b(quest["q18", 1]))
+                                              p(tags$b(quest["q23", 1])),
+                                              p(tags$b(quest["q24", 1]))
                                        )
                                      )
                                  )
@@ -720,9 +755,9 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q19", 1])),
-                                              p(tags$b(quest["q20", 1])),
-                                              p(tags$b(quest["q21", 1]))
+                                              p(tags$b(quest["q25", 1])),
+                                              p(tags$b(quest["q26", 1])),
+                                              p(tags$b(quest["q27", 1]))
                                        )
                                      )
                                  )
@@ -743,8 +778,8 @@ ui <- function(req) {
                                        column(10, offset = 1,
                                               h3("Make a decision for water extraction on July 31."),
                                               h4(tags$em("Hint: you can scroll over the plot to see the exact values of the water quality variables at different depths on July 31.")),
-                                              p(tags$b(quest["q22", 1])),
-                                              p(tags$b(quest["q23", 1]))
+                                              p(tags$b(quest["q28", 1])),
+                                              p(tags$b(quest["q29", 1]))
                                        )
                                      )
                                  )
@@ -773,10 +808,10 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q24", 1])),
+                                              p(tags$b(quest["q30", 1])),
                                               p(tags$em("Hint! Notice that the data are plotted in degrees Fahrenheit!")),
-                                              p(tags$b(quest["q25", 1])),
-                                              p(tags$b(quest["q26", 1]))
+                                              p(tags$b(quest["q31", 1])),
+                                              p(tags$b(quest["q32", 1]))
                                        )
                                      )
                                  )
@@ -796,9 +831,11 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h3("Make a decision for water extraction before and after fall turnover."),
-                                              p(tags$b(quest["q27", 1])),
-                                              p(tags$b(quest["q28", 1])),
-                                              p(tags$b(quest["q29", 1]))
+                                              p(tags$b(quest["q33", 1])),
+                                              p(tags$b(quest["q34", 1])),
+                                              p(tags$b(quest["q35", 1])),
+                                              p(tags$b(quest["q36", 1])),
+                                              p(tags$b(quest["q37", 1]))
                                        )
                                      )
                                  )
@@ -827,9 +864,9 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Questions"),
-                                              p(tags$b(quest["q30", 1])),
-                                              p(tags$b(quest["q31", 1])),
-                                              p(tags$b(quest["q32", 1]))
+                                              p(tags$b(quest["q38", 1])),
+                                              p(tags$b(quest["q39", 1])),
+                                              p(tags$b(quest["q40", 1]))
                                        )
                                      )
                                  )
@@ -849,8 +886,8 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h3("Make a decision for water extraction on Jan. 31."),
-                                              p(tags$b(quest["q33", 1])),
-                                              p(tags$b(quest["q34", 1]))
+                                              p(tags$b(quest["q41", 1])),
+                                              p(tags$b(quest["q42", 1]))
                                        )
                                      )
                                  )
@@ -937,9 +974,10 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h3("Interpret the forecast plot."),
-                                              p(tags$b(quest["q35", 1])),
-                                              p(tags$b(quest["q36", 1])),
-                                              p(tags$b(quest["q37", 1]))
+                                              p(tags$b(quest["q43", 1])),
+                                              p(tags$b(quest["q44", 1])),
+                                              p(tags$b(quest["q45", 1])),
+                                              p(tags$b(quest["q46", 1]))
                                        )
                                      )
                                  )
@@ -1050,8 +1088,8 @@ ui <- function(req) {
                             fluidRow(
                               column(10, offset = 1,
                                      h3("Make a decision for water treatment on October 6 using real-time data."),
-                                     p(tags$b(quest["q38", 1])),
-                                     p(tags$b(quest["q39", 1]))
+                                     p(tags$b(quest["q47", 1])),
+                                     p(tags$b(quest["q48", 1]))
                               )
                             )
                         )
@@ -1087,9 +1125,9 @@ ui <- function(req) {
                             fluidRow(
                               column(10, offset = 1,
                                      h3("Make a decision for water treatment on October 6 using a turnover forecast."),
-                                     p(tags$b(quest["q40", 1])),
-                                     p(tags$b(quest["q41", 1])),
-                                     p(tags$b(quest["q42", 1]))
+                                     p(tags$b(quest["q49", 1])),
+                                     p(tags$b(quest["q50", 1])),
+                                     p(tags$b(quest["q51", 1]))
                               )
                             )
                         )
@@ -1135,8 +1173,8 @@ ui <- function(req) {
                            fluidRow(
                              column(10, offset = 1,
                                     h3("Make a decision for water treatment on October 13 using real-time data."),
-                                    p(tags$b(quest["q43", 1])),
-                                    p(tags$b(quest["q44", 1]))
+                                    p(tags$b(quest["q52", 1])),
+                                    p(tags$b(quest["q53", 1]))
                              )
                            )
                        )
@@ -1173,8 +1211,8 @@ ui <- function(req) {
                            fluidRow(
                              column(10, offset = 1,
                                     h3("Make a decision for water treatment on October 13 using a turnover forecast."),
-                                    p(tags$b(quest["q45", 1])),
-                                    p(tags$b(quest["q46", 1]))
+                                    p(tags$b(quest["q54", 1])),
+                                    p(tags$b(quest["q55", 1]))
                              )
                            )
                        )
@@ -1215,10 +1253,9 @@ ui <- function(req) {
                                        column(10, offset = 1,
                                               introBox(
                                                 h3("Questions"),
-                                                p(tags$b(quest["q47", 1])),
-                                                p(tags$b(quest["q48", 1])),
-                                                p(tags$b(quest["q49", 1])),
-                                                p(tags$b(quest["q50", 1]))
+                                                p(tags$b(quest["q56", 1])),
+                                                p(tags$b(quest["q57", 1])),
+                                                p(tags$b(quest["q58", 1]))
                                                 )
                                        )
                                      )
