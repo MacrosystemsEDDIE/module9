@@ -38,14 +38,12 @@ ui <- function(req) {
              p(tags$b("Teaching materials associated with this module can be found at ",
                       tags$a(href="http://module9.macrosystemseddie.org", 
                              "http://module9.macrosystemseddie.org.", target="_blank"))),
-             h2(tags$b("Module 9: Using High-Frequency Data to Manage Water Quality")),
-             bookmarkButton(id = "bookmarkBtn", label = "Bookmark my progress"),
-             p(tags$em("At any time, use this button to obtain a link that saves your progress."))
+             h2(tags$b("Module 9: Using High-Frequency Data to Manage Water Quality"))
       ),
       column(1, align = "right",
              br(),
              introBox(
-               actionButton("help", label = "Help", icon = icon("question-circle")), data.step = 7, data.intro = help_text["help", 1]
+               actionButton("help", label = "Quick-start", icon = icon("question-circle"))
              )
       )
     ),
@@ -182,7 +180,7 @@ ui <- function(req) {
                           img(src = "mod9_conceptual_figure.png", height = "100%",
                               width = "100%")
                    )
-                 ), data.step = 8, data.intro = help_text["start", 1]
+                 )
                ),
                hr(),
                fluidRow(
@@ -218,16 +216,18 @@ ui <- function(req) {
                         box(id = "box1", width = 10, status = "success",
                             solidHeader = TRUE,
                             fluidRow(
-                              column(8, offset = 1,
+                              column(10, offset = 1,
                                      introBox(
                                        h3("Workflow for this module"),
                                        tags$ol(
                                          tags$li(id = "txt_j", module_text["workflow1", ]),
                                          tags$li(id = "txt_j", module_text["workflow2", ]),
                                          tags$li(id = "txt_j", module_text["workflow3", ]),
-                                         tags$li(id = "txt_j", module_text["workflow4", ])
+                                         tags$li(id = "txt_j", module_text["workflow4", ]),
+                                         tags$li(id = "txt_j", module_text["workflow5", ]),
+                                         tags$li(id = "txt_j", module_text["workflow6", ])
                                        ),
-                                       data.step = 5, data.intro = help_text["questions", 1]
+                                       data.step = 4, data.intro = help_text["workflow", 1]
                                      )
                               )
                             )
@@ -493,9 +493,8 @@ ui <- function(req) {
                           ),
                           column(8,
                                  wellPanel(
-                                   plotlyOutput("wtemp_plot")
-                                 ),
-                                 downloadButton("save_wtemp_plot", "Download plot", icon = icon("download"))
+                                   plotlyOutput("wtemp_plot"), data.step = 6, data.intro = help_text["plots", 1]
+                                 )
                                  )
                         ),
                         hr(),
@@ -583,8 +582,7 @@ ui <- function(req) {
                           column(8,
                                  wellPanel(
                                    plotlyOutput("do_plot")
-                                 ),
-                                 downloadButton("save_do_plot", "Download plot", icon = icon("download"))
+                                 )
                           )
                         ),
                         hr(),
@@ -661,8 +659,7 @@ ui <- function(req) {
                           column(8,
                                  wellPanel(
                                    plotlyOutput("turb_plot")
-                                 ),
-                                 downloadButton("save_turb_plot", "Download plot", icon = icon("download"))
+                                 )
                           )
                         ),
                         hr(),
@@ -765,9 +762,7 @@ ui <- function(req) {
                           column(8,
                                  wellPanel(
                                    plotlyOutput("summer_data_plot", width = "800px", height = "700px")
-                                 ),
-                                 downloadButton("save_summer_data_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
+                                 )
                                  )
                         ),
                         fluidRow(
@@ -819,9 +814,7 @@ ui <- function(req) {
                           column(8,
                                  wellPanel(
                                    plotlyOutput("fall_data_plot", width = "800px", height = "700px")
-                                 ),
-                                 downloadButton("save_fall_data_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
+                                 )
                           )
                         ),
                         fluidRow(
@@ -874,9 +867,7 @@ ui <- function(req) {
                           column(8,
                                  wellPanel(
                                    plotlyOutput("winter_data_plot", width = "800px", height = "700px")
-                                 ),
-                                 downloadButton("save_winter_data_plot", "Download plot", icon = icon("download")),
-                                 br(),br()
+                                 )
                           )
                         ),
                         fluidRow(
@@ -963,9 +954,7 @@ ui <- function(req) {
                                    p("Click the button below to view a 1 to 16-day-ahead turnover forecast."),
                                    actionButton("plot_fc", "View turnover forecast"),
                                    br(),br(),
-                                   plotlyOutput("fc_plot"),
-                                   br(),br(),
-                                   downloadButton("save_fc_plot", "Download plot", icon = icon("download"))
+                                   plotlyOutput("fc_plot")
                                  ),
                           ),
                           column(4,
@@ -992,7 +981,7 @@ ui <- function(req) {
                                        column(10, offset = 1,
                                               introBox(
                                                 h3("Next step:"),
-                                                h4("Make water treatment decisions using high-frequency water quality data and water quality forecasts."))
+                                                h4("Make water treatment decisions using water quality forecasts."))
                                        )
                                      )
                                  )
@@ -1007,7 +996,7 @@ ui <- function(req) {
                         fluidRow(
                           column(12,
                                  wellPanel(style = paste0("background: ", obj_bg),
-                                           h2("Activity C - Make water treatment decisions using high-frequency water quality data and forecasts"),
+                                           h2("Activity C - Make water treatment decisions using water quality forecasts"),
                                            p(module_text["act_C", ])
                                  )
                           ),
@@ -1017,7 +1006,7 @@ ui <- function(req) {
                                    fluidRow(
                                      column(10, offset = 1,
                                             introBox(
-                                              h3("Objective 5: Make water treatment decisions using high-frequency water quality data and forecasts"))
+                                              h3("Objective 5: Make water treatment decisions using water quality forecasts"))
                                      )
                                    )
                                )
@@ -1069,13 +1058,9 @@ ui <- function(req) {
                           br(),br(),
                           plotlyOutput("realtime_wtemp_plot_1", width = "1200px", height = "400px"),
                           br(),br(),
-                          downloadButton("save_realtime_wtemp_plot_1", "Download plot", icon = icon("download")),
-                          br(),br(),
                           span(textOutput("turb_message1"), style="color:#8A5F50; font-size:16px"),
                           br(),
                           plotlyOutput("realtime_data_1_plot", width = "1200px", height = "400px"),
-                          br(),br(),
-                          downloadButton("save_realtime_data_plot_1", "Download plot", icon = icon("download")),
                           br(),br()
                         )
                  )
@@ -1111,9 +1096,7 @@ ui <- function(req) {
                           p("Click the button below to view a 1 to 16-day-ahead turnover forecast at the reservoir you are operating."),
                           actionButton("plot_fc1", "View turnover forecast"),
                           br(),br(),
-                          plotlyOutput("fc1_plot"),
-                          br(),br(),
-                          downloadButton("save_fc1_plot", "Download plot", icon = icon("download"))
+                          plotlyOutput("fc1_plot")
                         ),
                  )
                ),
@@ -1154,13 +1137,9 @@ ui <- function(req) {
                          br(),br(),
                          plotlyOutput("realtime_wtemp_plot_2", width = "1200px", height = "400px"),
                          br(),br(),
-                         downloadButton("save_realtime_wtemp_plot_2", "Download plot", icon = icon("download")),
-                         br(),br(),
                        span(textOutput("turb_message2"), style="color:#8A5F50; font-size:16px"),
                        br(),
                        plotlyOutput("realtime_data_2_plot", width = "1200px", height = "400px"),
-                       br(),br(),
-                       downloadButton("save_realtime_data_plot_2", "Download plot", icon = icon("download")),
                        br(),br()
                        )
                 )
@@ -1197,9 +1176,7 @@ ui <- function(req) {
                          p("Click the button below to view a 1 to 16-day-ahead turnover forecast at the reservoir you are operating."),
                          actionButton("plot_fc2", "View turnover forecast"),
                          br(),br(),
-                         plotlyOutput("fc2_plot"),
-                         br(),br(),
-                         downloadButton("save_fc2_plot", "Download plot", icon = icon("download"))
+                         plotlyOutput("fc2_plot")
                        ),
                 )
               ),
@@ -1238,8 +1215,6 @@ ui <- function(req) {
                                    span(textOutput("turb_message2"), style="color:#8A5F50; font-size:16px"),
                                    br(),
                                    plotlyOutput("outcome_plot", width = "1200px", height = "400px"),
-                                   br(),br(),
-                                   downloadButton("save_outcome", "Download plot", icon = icon("download")),
                                    br(),br()
                                  )
                           )
@@ -1270,7 +1245,7 @@ ui <- function(req) {
                        h4("Please check through the answers in your Canvas quiz and be sure you have copy-pasted in all the required plots before you submit the quiz to your instructor."),
                        h4("You’ve now made operations decisions informed by high-frequency water quality data and forecasts - well done!")
                        )
-              )
+              ), data.step = 7, data.intro = help_text["finish", 1]
                )
     ),
     # Tab navigation buttons ----

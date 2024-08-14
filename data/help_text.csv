@@ -2,4 +2,7 @@ title,description
 welcome,Welcome to Macrosystems EDDIE Module 9: Using High-Frequency Data to Manage Water Quality!
 tab_nav1,Navigate through the module by selecting a tab.
 tab_nav2,Or you can use these buttons at the bottom of the page to also navigate through the tabs.
-finish,When you are finished you can generate a Word document with your answers and plots embedded which you can then download.
+workflow,Follow the steps in the workflow to complete the module.
+questions,"As you go, answer the questions in the module in your Canvas quiz."
+plots,"Many of the graphs in the module are interactive! You can scroll over them to see the values of the data points, zoom in and out, and click on items in the legend to focus on or remove them."
+finish,When you are finished please be sure to submit your Canvas quiz to be graded.

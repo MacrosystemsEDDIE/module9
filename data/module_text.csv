@@ -7,10 +7,12 @@ act_A,Access and explore high-frequency water quality data from a drinking water
 water_quality,"Water quality is the suitability of water for human use, such as drinking water or irrigation, as well as the degree to which a water body can support important ecosystem processes, such as sustaining a fish population."
 high_freq_data,"High-frequency water quality data are measurements of various attributes of a water body (such as temperature, dissolved oxygen, pH, etc.) that are taken many times a day (for example, every 10 minutes). High-frequency data allow water managers and scientists to observe and analyze patterns and trends in water quality that were not previously measurable using low-frequency (once a day or even less frequently) measurements."
 collection,"High-frequency water quality data are often collected using automated sensors. These sensors are deployed in a water body attached to buoys, catwalks, or other structures and collect data continuously. Many of these sensors are automated, which means they can wirelessly stream data to a server so that it is accessible to managers in near-real time."
-workflow1,Watch the introductory presentation provided at the link in your Canvas module.
-workflow2,"Complete Activities A, B, and C in this web app."
-workflow3,"When you are prompted to answer questions in the app, enter your answers in the Canvas quiz provided as part of the Canvas module."
-workflow4,"As you work, you can save your progress in the web app using the 'Bookmark my progress' button described below, and you can save your progress in the quiz using the 'Save' button on Canvas."
+workflow1,Watch the introductory presentation provided in Canvas.
+workflow2,"Go through the ""Quick-start"" guide to the module using the button at the top right corner of the module web page to learn about key features of the module that will help you complete module activities."
+workflow3,"Complete Activities A, B, and C in this web app."
+workflow4,"When you are prompted to answer questions, enter your answers in the Canvas quiz. Be sure to fill in the Canvas quiz that corresponds to the reservoir site you have chosen!"
+workflow5,"If you would like to take a break and come back later, or if you lose internet connection, all you have to do is re-load this web app, re-select your reservoir site in Activity A, Objective 1, and you will be able to resume your progress. On Canvas, you can save your quiz responses using the ""Save"" button."
+workflow6,"When you have finished the module activities, be sure to submit your Canvas quiz for grading."
 act_B,Use high-frequency water quality data to explore how water quality changes and make decisions about water withdrawal depth over the course of a year 
 act_C,Make water treatment decisions using high-frequency water quality data and water quality forecasts
 acknowledgement,"This module was initially developed by: Lofton, M.E., Cooke, R.L., and C.C. Carey. 19 July 2024. Macrosystems EDDIE: Using High-Frequency Data to Manage Water Quality. Macrosystems EDDIE Module 9, Version 1. https://serc.carleton.edu/eddie/teaching_materials/modules/module9.html. Module development was supported by NSF grants XXX."

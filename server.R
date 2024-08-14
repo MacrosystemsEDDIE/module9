@@ -176,11 +176,11 @@ shinyServer(function(input, output, session) {
       
       if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "bvre"){
         df <- df %>% filter(year(datetime) == 2022)
+        palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(14)
       } else {
         df <- df %>% filter(year(datetime) == 2023)
+        palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(10)
       }
-      
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
       
       
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
@@ -198,20 +198,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of water temperature
-  output$save_wtemp_plot <- downloadHandler(
-    filename = function() {
-      paste("Q8-10-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.wtemp$main, device = device)
-    }
-  )
   
   #** dissolved oxygen Presentation slides ----
   output$do_slides <- renderSlickR({
@@ -253,7 +239,7 @@ shinyServer(function(input, output, session) {
         geom_line()+
         xlab("")+
         ylab("Dissolved oxygen (ppm)")+
-        scale_color_manual(name = "Depth", values = c("#A9A448", "#023858"))+
+        scale_color_manual(name = "Depth", values = c("#BEEF46", "#023858"))+
         theme_bw()
       
       plot.do$main <- p
@@ -263,20 +249,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of DO
-  output$save_do_plot <- downloadHandler(
-    filename = function() {
-      paste("Q12-14-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.do$main, device = device)
-    }
-  )
   
   #** turbidity Presentation slides ----
   output$turb_slides <- renderSlickR({
@@ -315,7 +287,7 @@ shinyServer(function(input, output, session) {
         geom_point(aes(color = "surface water turbidity"))+
         xlab("")+
         ylab("Turbidity (FNU)")+
-        scale_color_manual(values = c("surface water turbidity" = "#A9A448"), name = "")+
+        scale_color_manual(values = c("surface water turbidity" = "#BEEF46"), name = "")+
         theme_bw()
       
       plot.turb$main <- p
@@ -325,20 +297,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of turbidity
-  output$save_turb_plot <- downloadHandler(
-    filename = function() {
-      paste("Q17-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.turb$main, device = device)
-    }
-  )
   
   #### Activity B ----
   
@@ -396,8 +354,12 @@ shinyServer(function(input, output, session) {
       var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
-      
+      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "bvre"){
+        palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(14)
+      } else {
+        palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(10)
+      }
+
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
         xlab("")+
@@ -417,20 +379,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of summer data
-  output$save_summer_data_plot <- downloadHandler(
-    filename = function() {
-      paste("Q19-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.summer.data$main, device = device)
-    }
-  )
   
   # Plot fall data
   plot.fall.data <- reactiveValues(main=NULL)
@@ -471,7 +419,11 @@ shinyServer(function(input, output, session) {
       var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
+      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "bvre"){
+        palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(14)
+      } else {
+        palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(10)
+      }
       
       p <- ggplot(data = plot_data, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
@@ -490,20 +442,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of fall data
-  output$save_fall_data_plot <- downloadHandler(
-    filename = function() {
-      paste("Q24-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.fall.data$main, device = device)
-    }
-  )
   
   # Plot winter data
   plot.winter.data <- reactiveValues(main=NULL)
@@ -530,7 +468,11 @@ shinyServer(function(input, output, session) {
       var.labs <- c("Water temperature (degrees Fahrenheit)","Dissolved oxygen (ppm)","Turbidity (NTU)")
       names(var.labs) <- unique(df$variable)
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
+      if(pull(sites_df[input$table01_rows_selected, "SiteID"]) == "bvre"){
+        palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(14)
+      } else {
+        palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(10)
+      }
       
       p <- ggplot(data = df, aes(x = datetime, y = observation, group = depth_ft, color = depth_ft))+
         geom_line()+
@@ -549,20 +491,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of winter data
-  output$save_winter_data_plot <- downloadHandler(
-    filename = function() {
-      paste("Q30-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.winter.data$main, device = device)
-    }
-  )
   
   # forecasting slides
   output$forecast_slides <- renderSlickR({
@@ -609,20 +537,6 @@ shinyServer(function(input, output, session) {
     
   })
   
-  # Download plot of second forecast
-  output$save_fc_plot <- downloadHandler(
-    filename = function() {
-      paste("Q17-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.fc$main, device = device)
-    }
-  )
-  
   
   #### Activity C ----
   
@@ -647,7 +561,7 @@ shinyServer(function(input, output, session) {
         filter(datetime %in% realtime.dates) %>%
         mutate(observation = round(observation*(9/5) + 32,1))
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
+      palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(10)
       
       # Text 
       ann_text <- data.frame(datetime = as.Date(c("2023-10-05")),
@@ -671,20 +585,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of water temperature
-  output$save_realtime_wtemp_plot_1 <- downloadHandler(
-    filename = function() {
-      paste("Q8-10-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.realtime.wtemp.1$main, device = device)
-    }
-  )
   
   # Message re: turbidity threshold
   output$turb_message1 <- renderText({"The horizontal line indicates the raw water turbidity threshold of 20 NTU."})
@@ -729,7 +629,7 @@ shinyServer(function(input, output, session) {
                    aes(yintercept = 20), col = "#8A5F50")+
         facet_wrap(vars(wq.variable), nrow = 1, scales = "free_y", 
                    labeller = labeller(wq.variable = var.labs), strip.position = "top")+
-        scale_color_manual(name = "Depth", values = c("#A9A448", "#023858"))+
+        scale_color_manual(name = "Depth", values = c("#BEEF46", "#023858"))+
         ggtitle("Real-time water quality data")+
         geom_vline(xintercept = as.numeric(as.Date("2023-10-06")), linetype = 2)+
         geom_text(data = ann_text, aes(x = datetime, y = observation, label = lab))+
@@ -742,20 +642,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of real-time data
-  output$save_realtime_data_plot_1 <- downloadHandler(
-    filename = function() {
-      paste("Q38-39-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 3,
-                       res = 300, units = "in")
-      }
-      ggsave(file, plot = plot.realtime.data.1$main, device = device)
-    }
-  )
   
   # Plot forecast for first time period
   plot.fc1 <- reactiveValues(main=NULL)
@@ -797,20 +683,6 @@ shinyServer(function(input, output, session) {
     
   })
   
-  # Download plot of first forecast
-  output$save_fc1_plot <- downloadHandler(
-    filename = function() {
-      paste("Q17-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.fc1$main, device = device)
-    }
-  )
-  
   # Plot real-time water temperature data for the second time period
   plot.realtime.wtemp.2 <- reactiveValues(main=NULL)
   
@@ -832,7 +704,7 @@ shinyServer(function(input, output, session) {
         filter(datetime %in% realtime.dates) %>%
         mutate(observation = round(observation*(9/5) + 32,1))
       
-      palette_yb <- colorRampPalette(colors = c("#A9A448", "#023858"))(14)
+      palette_yb <- colorRampPalette(colors = c("#ffff33","#2ecc71","#023858"))(10)
       
       # Text 
       ann_text <- data.frame(datetime = as.Date(c("2023-10-12")),
@@ -856,20 +728,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of water temperature
-  output$save_realtime_wtemp_plot_2 <- downloadHandler(
-    filename = function() {
-      paste("Q8-10-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.realtime.wtemp.2$main, device = device)
-    }
-  )
   
   # Message re: turbidity threshold
   output$turb_message2 <- renderText({"The horizontal line indicates the raw water turbidity threshold of 20 NTU."})
@@ -914,7 +772,7 @@ shinyServer(function(input, output, session) {
                    aes(yintercept = 20), col = "#8A5F50")+
         facet_wrap(vars(wq.variable), nrow = 1, scales = "free_y", 
                    labeller = labeller(wq.variable = var.labs), strip.position = "top")+
-        scale_color_manual(name = "Depth", values = c("#A9A448", "#023858"))+
+        scale_color_manual(name = "Depth", values = c("#BEEF46", "#023858"))+
         ggtitle("Real-time water quality data")+
         geom_vline(xintercept = as.numeric(as.Date("2023-10-13")), linetype = 2)+
         geom_text(data = ann_text, aes(x = datetime, y = observation, label = lab))+
@@ -928,20 +786,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of real-time data
-  output$save_realtime_data_plot_2 <- downloadHandler(
-    filename = function() {
-      paste("Q42-43-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 3,
-                       res = 300, units = "in")
-      }
-      ggsave(file, plot = plot.realtime.data.2$main, device = device)
-    }
-  )
   
   # Plot forecast for second time period
   plot.fc2 <- reactiveValues(main=NULL)
@@ -982,20 +826,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of second forecast
-  output$save_fc2_plot <- downloadHandler(
-    filename = function() {
-      paste("Q17-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 4,
-                       res = 200, units = "in")
-      }
-      ggsave(file, plot = plot.fc2$main, device = device)
-    }
-  )
   
   # Message re: turbidity threshold
   output$turb_message3 <- renderText({"The horizontal line indicates the raw water turbidity threshold of 20 NTU."})
@@ -1040,7 +870,7 @@ shinyServer(function(input, output, session) {
                    aes(yintercept = 20), col = "#8A5F50")+
         facet_wrap(vars(wq.variable), nrow = 1, scales = "free_y", 
                    labeller = labeller(wq.variable = var.labs), strip.position = "top")+
-        scale_color_manual(name = "Depth", values = c("#A9A448", "#023858"))+
+        scale_color_manual(name = "Depth", values = c("#BEEF46", "#023858"))+
         ggtitle("Real-time water quality data")+
         geom_vline(xintercept = as.numeric(as.Date("2023-10-22")), linetype = 2)+
         geom_text(data = ann_text, aes(x = datetime, y = observation, label = lab))+
@@ -1054,23 +884,6 @@ shinyServer(function(input, output, session) {
     })
     
   })
-  
-  # Download plot of outcome data
-  output$save_outcome <- downloadHandler(
-    filename = function() {
-      paste("Q42-43-plot-", Sys.Date(), ".png", sep="")
-    },
-    content = function(file) {
-      device <- function(..., width, height) {
-        grDevices::png(..., width = 8, height = 3,
-                       res = 300, units = "in")
-      }
-      ggsave(file, plot = plot.outcome$main, device = device)
-    }
-  )
-  
-  
-  
   
   #### Navigating Tabs ----
     
@@ -1142,8 +955,6 @@ shinyServer(function(input, output, session) {
       
     })
     
-
-  
   # Help buttons ----
   observeEvent(input$help, {
     introjs(session, events = list(onbeforechange = readCallback("switchTabs")))
@@ -1151,51 +962,6 @@ shinyServer(function(input, output, session) {
   observeEvent(input$help2, {
     shinyalert(title = "Resume Progress", text = "Use this field to upload your '.eddie' file to resume your progress.", type = "info")
   })
-  
-  # Bookmarking
-  # use this to check inputs if need to update bookmarking
-  # observe({
-  #   list_of_inputs <<- reactiveValuesToList(input)
-  # })
-  # inp <- unlist(names(list_of_inputs))
-  bookmarkingWhitelist <- c("plot_chla","plot_lag1","plot_lag2","calc_ac","plot_ac","plot_pacf","fit_model" ,"calc_bias",            
-                            "calc_rmse","calc_proc_distrib","plot_high_freq","calc_ic_uc","fc1" ,"fc1_viz" ,             
-                            "view_new_obs","update_ic","second_forecast_da","view_ic_no_da","second_forecast_no_da", "plot_low_ic" ,         
-                            "plot_fc_low_obs_uc","plot_high_ic","plot_fc_high_obs_uc" , 
-                            "fc_series_no_da","calc_bias2","calc_rmse2","fc_series_weekly","calc_bias3","calc_rmse3",           
-                            "fc_series_daily","calc_bias4" ,"calc_rmse4"  ,"fc_scenario_weekly" ,"fc_scenario_daily","fc_compare",           
-                            "calc_bias5","calc_rmse5", "calc_bias6" ,"calc_rmse6" ,"show_ic","show_obs",             
-                            "show_obs2","show_obs3"  )
-
-  observeEvent(input$bookmarkBtn, {
-    session$doBookmark()
-  })
-
-  ExcludedIDs <- reactiveVal(value = NULL)
-
-  observe({
-    toExclude <- setdiff(names(input), bookmarkingWhitelist)
-    setBookmarkExclude(toExclude)
-    ExcludedIDs(toExclude)
-  })
-
-  # Save extra values in state$values when we bookmark
-  onBookmark(function(state) {
-    state$values$sel_row <- input$table01_rows_selected
-  })
-
-  # Read values from state$values when we restore
-  onRestore(function(state) {
-    updateTabsetPanel(session, "maintab",
-                      selected = "mtab4")
-    updateTabsetPanel(session, "tabseries1",
-                      selected = "obj1")
-  })
-
-  onRestored(function(state) {
-    updateSelectizeInput(session, "row_num", selected = state$values$sel_row)
-  })
-  
   
 })
 
