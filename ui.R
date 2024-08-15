@@ -184,9 +184,88 @@ ui <- function(req) {
                ),
                hr(),
                fluidRow(
+                              column(11,  
+                                       h3("Workflow for this module"),
+                                         box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
+                                             fluidRow(
+                                             column(11, offset = 1, h4(tags$b(module_text["workflow1", ]))))),
+                                         br(),br(),br(),
+                                     fluidRow(
+                                       column(12, offset = 1,
+                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/rM3Hc0rVUdI?si=sfxbQqDEat1v7tZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
+                                              )
+                                     ),
+                                         br(),
+                                         box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
+                                             fluidRow(
+                                               column(11, offset = 1, h4(tags$b(module_text["workflow2", ]))))),
+                                         br(),br(),br(),br(),br(),
+                                     fluidRow(
+                                       column(12, offset = 1,
+                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/rM3Hc0rVUdI?si=sfxbQqDEat1v7tZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
+                                       )
+                                     ),
+                                     br(),
+                                         box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
+                                             fluidRow(
+                                               column(11, offset = 1, h4(tags$b(module_text["workflow3", ]))))),
+                                         br(),br(),br(),
+                                         fluidRow(
+                                         #** Choose site ----
+                                         column(4,
+                                                h4("Site Names"),
+                                                p("Select a site in the table to highlight on the map"),
+                                                conditionalPanel("input.row_num > 25",
+                                                                 selectizeInput("row_num", "Select row",
+                                                                                choices = 1:nrow(sites_df),
+                                                                                options = list(
+                                                                                  placeholder = 'Please select a row',
+                                                                                  onInitialize = I('function() { this.setValue(""); }'))
+                                                                 )
+                                                ),
+                                                DTOutput("table01", fill = TRUE)
+                                         ),
+                                         #** Site map ----
+                                         column(4,
+                                                h4("Map of Virginia Reservoir LTREB sites"),
+                                                wellPanel(
+                                                  leafletOutput("ltrebmap")
+                                                )
+                                         ),
+                                         #** Site photo ----
+                                         column(4,
+                                                h4("Site photo"),
+                                                wellPanel(
+                                                  imageOutput("site_photo"),
+                                                  p(id = "txt_j", module_text["site_photo", ])
+                                                )
+                                         )
+                                         ),
+                                         br(),
+                                         box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
+                                             fluidRow(
+                                               column(11, offset = 1, h4(tags$b(module_text["workflow4", ]))))),
+                                         br(),br(),br(),
+                                         box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
+                                             fluidRow(
+                                               column(11, offset = 1, h4(tags$b(module_text["workflow5", ]))))),
+                                         br(),br(),br(),
+                                         box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
+                                             fluidRow(
+                                               column(11, offset = 1, h4(tags$b(module_text["workflow6", ]))))),
+                                         br(),br(),br(),
+                                         box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
+                                             fluidRow(
+                                               column(11, offset = 1, h4(tags$b(module_text["workflow7", ]))))),
+                                         br(),br(),br(),
+                                       data.step = 4, data.intro = help_text["workflow", 1]
+                              )
+               ), 
+               hr(),
+               fluidRow(
                  column(4,
                         h3("Introductory presentation"),
-                        p("The presentation accompanying this module introduces key variables for assessing water quality, how high-frequency sensors can be used to measure water quality, and how high-frequency sensor data can aid in management decision-making."),
+                        p(tags$i("Click through the slides to review some of the main points from the introductory presentation to help you answer the questions below.")),
                         p(tags$b("What is water quality?")),
                         tags$ul(
                           tags$li(module_text["water_quality", ])
@@ -199,7 +278,6 @@ ui <- function(req) {
                         tags$ul(
                           tags$li(module_text["collection", ])
                         ),
-                        p(tags$i("Click through the slides to recap some of the main points from the lecture."))
                  ),
                  column(8, offset = 0, align = "center",
                         h3("Key Slides",
@@ -212,44 +290,12 @@ ui <- function(req) {
                ),
                hr(),
                fluidRow(
-                 column(10, 
-                        box(id = "box1", width = 10, status = "success",
-                            solidHeader = TRUE,
-                            fluidRow(
-                              column(10, offset = 1,
-                                     introBox(
-                                       h3("Workflow for this module"),
-                                       tags$ol(
-                                         tags$li(id = "txt_j", module_text["workflow1", ]),
-                                         tags$li(id = "txt_j", module_text["workflow2", ]),
-                                         tags$li(id = "txt_j", module_text["workflow3", ]),
-                                         tags$li(id = "txt_j", module_text["workflow4", ]),
-                                         tags$li(id = "txt_j", module_text["workflow5", ]),
-                                         tags$li(id = "txt_j", module_text["workflow6", ])
-                                       ),
-                                       data.step = 4, data.intro = help_text["workflow", 1]
-                                     )
-                              )
-                            )
-                        )
-                 )
-               ), hr(),
-               fluidRow(
-                 column(6,
-                        h3("Saving your progress"),
-                        p(style="text-align: justify;", "As you go, fill out answers to questions in the Canvas quiz. Some of the plots you generate in the web app will be needed for the Canvas quiz. When prompted, be sure to download these plots so you can copy-paste them into the Canvas quiz."),
-                        p(style="text-align: justify;", "If you run out of time to finish all the activities you can save your progress and return to it at a later date. Click the 'Bookmark my progress' button at the top of the page and you will obtain a link, which you should save by copy-pasting it into the first question in your Canvas quiz. Be sure to save your quiz responses! When you are ready to resume work, paste the link into your web browser, and it will load a Shiny app session that contains your progress."),
-                        br()
-                 )
-               ),
-               hr(),
-               fluidRow(
                  column(10, align = "left",
                         box(id = "box1", width = 10, status = "primary",
                             solidHeader = TRUE,
                             fluidRow(
                               column(8, offset = 1,
-                                     h3("Before you start..."),
+                                     h3("Let's begin..."),
                                      p(id = "txt_j", "Open your Canvas quiz. Then, answer the following questions in the Canvas quiz."),
                                      introBox(
                                        h3(tags$b("Think about it!")),
@@ -321,35 +367,8 @@ ui <- function(req) {
                         hr(),
                         fluidRow(
                           #** LTREB Intro ----
-                          column(4,
-                                 h2("Site Description"),
-                                 p("Select a site in the table to highlight on the map"),
-                                 conditionalPanel("input.row_num > 25",
-                                                  selectizeInput("row_num", "Select row",
-                                                                 choices = 1:nrow(sites_df),
-                                                                 options = list(
-                                                                   placeholder = 'Please select a row',
-                                                                   onInitialize = I('function() { this.setValue(""); }'))
-                                                  )
-                                 ),
-                                 DTOutput("table01")
-                          ),
-                          #** Site map ----
-                          column(4,
-                                 h2("Map of Virginia Reservoir LTREB sites"),
-                                 wellPanel(
-                                   leafletOutput("ltrebmap")
-                                 )
-                          )
-                          ,
-                          #** Site photo ----
-                          column(4,
-                                 h2("Site photo"),
-                                 wellPanel(
-                                   imageOutput("site_photo"),
-                                   p(id = "txt_j", module_text["site_photo", ])
-                                 )
-                          )
+                          
+                          
                         ), 
                         br(),
                         fluidRow(
@@ -409,12 +428,14 @@ ui <- function(req) {
                         fluidRow(
                           column(4,
                                  h3("Water temperature"),
-                                 p(tags$i("Click through the slides to understand how water temperature data can be related to water quality. The information presented on the slides is also summarized in text below the slides to help you answer the questions.")),
+                                 p(tags$i("Watch the video and click through the slides to understand how water temperature data relate to water quality. The information in the presentation is also summarized in text below to help you answer the questions.")),
                                  br(),
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1, align = "left",
+                                              h4("Video"),
+                                              HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/phJ6JogqUeE?si=CVuARbc2N3MVu19f" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                               h4("Questions"),
                                               p(tags$b(quest["q9", 1])),
                                               p(tags$b(quest["q10", 1])),
@@ -438,6 +459,7 @@ ui <- function(req) {
                                  )
                           )
                         ),
+                        hr(),
                         fluidRow(
                           column(6,
                                  p(tags$b("Why is water temperature important?")),
@@ -501,12 +523,14 @@ ui <- function(req) {
                         fluidRow(
                           column(4,
                                  h3("Dissolved oxygen"),
-                                 p(tags$i("Click through the slides to understand how dissolved oxygen data can be related to water quality. The information presented on the slides is also summarized in text below the slides to help you answer the questions.")),
+                                 p(tags$i("Watch the video and click through the slides to understand how dissolved oxygen data relate to water quality. The information in the presentation is also summarized in text below to help you answer the questions.")),
                                  br(),
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1,
+                                              h4("Video"),
+                                              HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/3Gft3PS2XYg?si=udyreazhKxA70_Gk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                               h4("Questions"),
                                               p(tags$b(quest["q14", 1])),
                                               tags$ul(
@@ -589,12 +613,14 @@ ui <- function(req) {
                         fluidRow(
                           column(4,
                                  h3("Turbidity"),
-                                 p(tags$i("Click through the slides to understand how turbidity data can be related to water quality.")),
+                                 p(tags$i("Watch the video and click through the slides to understand how turbidity data relate to water quality. The information in the presentation is also summarized in text below to help you answer the questions.")),
                                  br(),
                                  box(id = "box12", width = 12, status = "primary",
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1,
+                                              h4("Video"),
+                                              HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/r0OGKBf0n7o?si=amBJjBo2YMNpdJpI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                               h4("Questions"),
                                               p(tags$b(quest["q21", 1])),
                                               tags$ul(

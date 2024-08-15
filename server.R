@@ -32,7 +32,7 @@ shinyServer(function(input, output, session) {
   # LTREB Sites datatable ----
   output$table01 <- DT::renderDT(
     sites_df[, c(1:2)], selection = "single", options = list(stateSave = TRUE, dom = 't'), server = FALSE
-  )
+  ) 
   
   observe({
     if(input$row_num != "") {
