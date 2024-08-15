@@ -245,7 +245,15 @@ ui <- function(req) {
                                          box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
                                              fluidRow(
                                                column(11, offset = 1, h4(tags$b(module_text["workflow4", ]))))),
-                                         br(),br(),br(),
+                                         br(),br(),br(),br(),
+                                     tags$style(type="text/css", "#stud_dl {background-color:#98CAB2;color: white}"),
+                                     wellPanel(
+                                       fluidRow(
+                                         column(6, align = "center", offset = 3,
+                                                downloadButton(outputId = "stud_dl", label = "Download Student Handout")
+                                         )
+                                       )
+                                     ),
                                          box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
                                              fluidRow(
                                                column(11, offset = 1, h4(tags$b(module_text["workflow5", ]))))),
@@ -296,7 +304,7 @@ ui <- function(req) {
                             fluidRow(
                               column(8, offset = 1,
                                      h3("Let's begin..."),
-                                     p(id = "txt_j", "Open your Canvas quiz. Then, answer the following questions in the Canvas quiz."),
+                                     p(id = "txt_j", "Open your Canvas quiz or Word document. Then, answer the following questions in the Canvas quiz or Word document."),
                                      introBox(
                                        h3(tags$b("Think about it!")),
                                        p(tags$b(quest["q1", 1])),
