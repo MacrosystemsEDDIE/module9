@@ -43,7 +43,7 @@ ui <- function(req) {
       column(1, align = "right",
              br(),
              introBox(
-               actionButton("help", label = "Quick-start", icon = icon("question-circle"))
+               actionButton("help", label = "Help", icon = icon("question-circle"))
              )
       )
     ),
@@ -202,7 +202,7 @@ ui <- function(req) {
                                          br(),br(),br(),br(),br(),
                                      fluidRow(
                                        column(12, offset = 1,
-                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/rM3Hc0rVUdI?si=sfxbQqDEat1v7tZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
+                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/uOaZhENushQ?si=9ontMzU5SGu7A59_" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                        )
                                      ),
                                      br(),
@@ -366,7 +366,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               introBox(
-                                                h3("Objective 1: Select and learn about a focal drinking water reservoir"))
+                                                h3("Objective 1: Learn about your focal drinking water reservoir"))
                                        )
                                      )
                                  )
@@ -375,16 +375,43 @@ ui <- function(req) {
                         hr(),
                         fluidRow(
                           #** LTREB Intro ----
-                          
+                          column(6,
+                                 box(id = "box12", width = 12, status = "warning",
+                                     solidHeader = TRUE,
+                                     fluidRow(
+                                       column(10, offset = 1,
+                                              h3("You have chosen to work with"),
+                                              wellPanel(
+                                                htmlOutput("site_name")
+                                              ),
+                                              p("You will learn about the characteristics and uses of this reservoir and explore high-frequency water quality data collected there.")
+                                       )
+                                     )
+                                 ),
+                                 fluidRow(
+                                   column(12,
+                                          p("")
+                                          )
+                                 ),
+                                 fluidRow(
+                                   column(12,
+                                          wellPanel(
+                                            h4(tags$b("About Site")),
+                                            textOutput("site_info")
+                                          )
+                                          )
+                                 )
+                                 ),
+                          column(6,
+                                 h4("Site photo"),
+                                 wellPanel(
+                                   imageOutput("site_photo1"),
+                                   p(id = "txt_j", module_text["site_photo", ])
+                                 )
+                                 )
                           
                         ), 
-                        br(),
-                        fluidRow(
-                          wellPanel(
-                            h4(tags$b("About Site")),
-                            textOutput("site_info")
-                          )
-                        ),
+                        hr(),
                         fluidRow(
                           column(12, align = "left",
                                  box(id = "box3", width = 10, status = "primary",
@@ -962,6 +989,9 @@ ui <- function(req) {
                         fluidRow(
                           column(4,
                                  h3("Water quality forecasting"),
+                                 p(tags$i("Watch the video and click through the slides to learn about water quality forecasting. The information in the presentation is also summarized in text below to help you answer the questions.")),
+                                 h4("Video"),
+                                 HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/MK5_BHiyHX0?si=1ZivFJet4QdedglB" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                  p(tags$b("What is a forecast?")),
                                  tags$ul(
                                    tags$li(module_text["forecast", ])

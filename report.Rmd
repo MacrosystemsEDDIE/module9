@@ -85,12 +85,13 @@ This can be accessed via any internet browser and allows you to navigate through
 
 \newpage
 
-# **Module Questions**
-________________________________________________________________________________
 
-# Introduction
 
-## Think about it!
+# Module Questions:
+
+## Introduction
+
+### Think about it!
 
 Answer the following questions:  
   
@@ -108,13 +109,14 @@ Answer the following questions:
     b. `r substr(quest["q2b", ], 4, nchar(quest["q2b", ]))`
     c. `r substr(quest["q2c", ], 4, nchar(quest["q2c", ]))`
 
+<br>
 
-# Activity A - Build A Model and Generate A Forecast
+## Activity A - Build A Model and Generate A Forecast
 
 `r module_text["act_A", ]`
 
 ***
-## Objective 1: Learn about your focal drinking water reservoir
+### Objective 1: Learn about your focal drinking water reservoir
 
 ***
 
@@ -155,13 +157,14 @@ Virginia's Water Quality Assessment Guidance Manual gives the following guidance
 <br>
 
 ***
-## Objective 2: Explore high-frequency water quality data from your chosen reservoir
+### Objective 2: Explore high-frequency water quality data from your chosen reservoir
 
 ***
 
 <br>
-### Water temperature
-<br>
+
+#### Water temperature
+
 
 9. `r substr(quest["q9", ], 4, nchar(quest["q9", ]))`  
 
@@ -187,8 +190,9 @@ Virginia's Water Quality Assessment Guidance Manual gives the following guidance
      **Answer:**
 
 <br>
-### Dissolved oxygen
-<br>
+
+#### Dissolved oxygen
+
 
 14. `r substr(quest["q14", ], 5, nchar(quest["q14", ]))`
 
@@ -225,8 +229,9 @@ Virginia's Water Quality Assessment Guidance Manual gives the following guidance
      **Answer:**
 
 <br>
-### Turbidity
-<br>
+
+#### Turbidity
+
 
 21. `r substr(quest["q21", ], 5, nchar(quest["q21", ]))`
 
@@ -247,460 +252,184 @@ Virginia's Water Quality Assessment Guidance Manual gives the following guidance
 
      **Answer:**
 
-<br>
-
-***
-## Objective 3: Use high-frequency water quality data to make water withdrawal depth decisions at different times of year
-
-***
-
-6. `r substr(quest["q6", ], 4, nchar(quest["q6", ]))`  
-
-    **Answer:** 
-
-7. `r substr(quest["q7", ], 4, nchar(quest["q7", ]))`
-
-      a.  `r substr(quest["q7a", ], 3, nchar(quest["q7a", ]))` 
-
-           *Please copy-paste your Q7a-plot.png image here.*
-
-           *Figure 2. Time series of lagged chlorophyll-a data for your selected NEON lake.*
-
-      b.  `r substr(quest["q7b", ], 3, nchar(quest["q7b", ]))` 
-
-           **Answer:**   
-           
-
-8. `r substr(quest["q8", ], 4, nchar(quest["q8", ]))`
-
-      a.  `r substr(quest["q8a", ], 3, nchar(quest["q8a", ]))` 
-
-           *Please copy-paste your Q8a-plot.png image here.*
-
-           *Figure 3. Scatterplot of chlorophyll-a data vs. lagged chlorophyll-a data for your selected NEON lake.*
-
-      b.  `r substr(quest["q8b", ], 3, nchar(quest["q8b", ]))` 
-
-           **Answer:**   
-           
-
-9. `r substr(quest["q9", ], 4, nchar(quest["q9", ]))`  
-
-    **Answer:** 
-
-10. `r substr(quest["q10", ], 5, nchar(quest["q10", ]))`
-
-      a.  `r substr(quest["q10a", ], 3, nchar(quest["q10a", ]))` 
-
-           *Please copy-paste your Q10a-plot.png image here.*
-
-           *Figure 4. Autocorrelation of lagged chlorophyll-a at your lake site.*
-
-      b.  `r substr(quest["q10b", ], 3, nchar(quest["q10b", ]))` 
-
-           **Answer:**   
-           
-
-11. `r substr(quest["q11", ], 5, nchar(quest["q11", ]))`    
-
-     **Answer:**
-
-12. `r substr(quest["q12", ], 5, nchar(quest["q12", ]))`
-
-      a.  `r substr(quest["q12a", ], 3, nchar(quest["q12a", ]))` 
-
-           *Please copy-paste your Q12a-plot.png image here.*
-
-           *Figure 5. Partial autocorrelation of chlorophyll-a at your lake site.*
-
-      b.  `r substr(quest["q12b", ], 3, nchar(quest["q12b", ]))` 
-
-           **Answer:**   
-           
-           
-13. `r substr(quest["q13", ], 5, nchar(quest["q13", ]))`    
-
-     **Answer:**
-     
-14. `r substr(quest["q14", ], 5, nchar(quest["q14", ]))`    
-
-     **Answer:**
-
-15. `r substr(quest["q15", ], 5, nchar(quest["q15", ]))`
-
-      a.  `r substr(quest["q15a", ], 3, nchar(quest["q15a", ]))` 
-
-           *Please copy-paste your Q15a-plot.png image here.*
-
-           *Figure 6. Autoregressive model predictions and chlorophyll-a observations at your lake site.*
-
-      b.  `r substr(quest["q15b", ], 3, nchar(quest["q15b", ]))` 
-
-           **Answer:**  
-           
-           
-16. `r substr(quest["q16", ], 5, nchar(quest["q16", ]))`    
-
-     **Answer:**
-     
-17. `r substr(quest["q17", ], 5, nchar(quest["q17", ]))`    
-
-     **Answer:**    
-     
-<br>
-
-## Objective 4: Generate forecast
-
-***
-`r module_text["obj_04", ]`
-
-***
-
-18. `r substr(quest["q18", ], 5, nchar(quest["q18", ]))`    
-
-     **Answer:**
-     
-19. `r substr(quest["q19", ], 5, nchar(quest["q19", ]))`    
-
-     **Answer:**    
-     
-20. `r substr(quest["q20", ], 5, nchar(quest["q20", ]))`    
-
-     **Answer:**
-          
-21. `r substr(quest["q21", ], 5, nchar(quest["q21", ]))`
-
-      a.  `r substr(quest["q21a", ], 3, nchar(quest["q21a", ]))` 
-
-           *Please copy-paste your Q21a-plot.png image here.*
-
-           *Figure 7. High-frequency chlorophyll-a data at your lake site.*
-
-      b.  `r substr(quest["q21b", ], 3, nchar(quest["q21b", ]))` 
-
-           **Answer:**  
-           
-           
-22. `r substr(quest["q22", ], 5, nchar(quest["q22", ]))`    
-
-     **Answer:**
-          
-23. `r substr(quest["q23", ], 5, nchar(quest["q23", ]))`
-
-      a.  `r substr(quest["q23a", ], 3, nchar(quest["q23a", ]))` 
-
-           *Please copy-paste your Q23a-plot.png image here.*
-
-           *Figure 8. A one-day-ahead forecast of chlorophyll-a at your lake site.*
-
-      b.  `r substr(quest["q23b", ], 3, nchar(quest["q23b", ]))` 
-
-           **Answer:**  
-           
-      c.  `r substr(quest["q23c", ], 3, nchar(quest["q23c", ]))` 
-
-           **Answer:**  
-           
-      d.  `r substr(quest["q23d", ], 3, nchar(quest["q23d", ]))` 
-
-           **Answer:**  
-           
-        
 \newpage
 
-# Activity B - Explore Data Assimilation
+## Activity B - Use high-frequency water quality data to make water treatment plant operation decisions
 
 `r module_text["act_B", ]`
 
-## Objective 5: Assimilate data
+***
+### Objective 3: Use high-frequency water quality data to make water withdrawal depth decisions at different times of year
 
 ***
-`r module_text["obj_05", ]`
-
-***
-
-24. `r substr(quest["q24", ], 5, nchar(quest["q24", ]))`    
-
-     **Answer:**
-     
-25. `r substr(quest["q25", ], 5, nchar(quest["q25", ]))`
-
-      a.  `r substr(quest["q25a", ], 3, nchar(quest["q25a", ]))` 
-
-           *Please copy-paste your Q25a-plot.png image here.*
-
-           *Figure 9. One-day-ahead forecast with updated initial condition using newly observed chlorophyll-a data.*
-
-      b.  `r substr(quest["q25b", ], 3, nchar(quest["q25b", ]))` 
-
-           **Answer:**  
-           
-    
-26. `r substr(quest["q26", ], 5, nchar(quest["q26", ]))`
-
-      a.  `r substr(quest["q26a", ], 3, nchar(quest["q26a", ]))` 
-
-           *Please copy-paste your Q26a-plot.png image here.*
-
-           *Figure 10. One-day-ahead forecast with updated initial condition when chlorophyll-a data are missing.*
-
-      b.  `r substr(quest["q26b", ], 3, nchar(quest["q26b", ]))` 
-
-           **Answer:**  
-           
-           
-27. `r substr(quest["q27", ], 5, nchar(quest["q27", ]))`
-
-      a.  `r substr(quest["q27a", ], 3, nchar(quest["q27a", ]))` 
-
-           *Please copy-paste your Q27a-plot.png image here.*
-
-           *Figure 11. Two-forecast plot with data assimilation.*
-
-      b.  `r substr(quest["q27b", ], 3, nchar(quest["q27b", ]))` 
-
-           *Please copy-paste your Q27b-plot.png image here.*
-
-           *Figure 12. Two-forecast plot without data assimilation.*
-
-      c.  `r substr(quest["q27c", ], 3, nchar(quest["q27c", ]))` 
-
-           **Answer:**  
-           
 
 <br>
 
-## Objective 6: Explore observation uncertainty
+#### Summer
 
-***
-`r module_text["obj_06", ]`
 
-***
+25. `r substr(quest["q25", ], 5, nchar(quest["q25", ]))`    
+
+     **Answer:**
+
+26. `r substr(quest["q26", ], 5, nchar(quest["q26", ]))`    
+
+     **Answer:**
+     
+27. `r substr(quest["q27", ], 5, nchar(quest["q27", ]))`    
+
+     **Answer:**
 
 28. `r substr(quest["q28", ], 5, nchar(quest["q28", ]))`    
 
      **Answer:**
      
-29. `r substr(quest["q29", ], 5, nchar(quest["q29", ]))`
+29. `r substr(quest["q29", ], 5, nchar(quest["q29", ]))`    
 
-      a.  `r substr(quest["q29a", ], 3, nchar(quest["q29a", ]))` 
+     **Answer:**
 
-           *Please copy-paste your Q29a-plot.png image here.*
+<br>
 
-           *Figure 13. Plot of forecasts assimilating data with low observation uncertainty.*
+#### Fall
 
-      b.  `r substr(quest["q29b", ], 3, nchar(quest["q29b", ]))` 
-
-           **Answer:** 
-
-      c.  `r substr(quest["q29c", ], 3, nchar(quest["q29c", ]))` 
-
-           **Answer:**  
-           
 
 30. `r substr(quest["q30", ], 5, nchar(quest["q30", ]))`    
 
      **Answer:**
-     
-31. `r substr(quest["q31", ], 5, nchar(quest["q31", ]))`
 
-      a.  `r substr(quest["q31a", ], 3, nchar(quest["q31a", ]))` 
-
-           *Please copy-paste your Q31a-plot.png image here.*
-
-           *Figure 14. Plot of forecasts assimilating data with high observation uncertainty.*
-
-      b.  `r substr(quest["q31b", ], 3, nchar(quest["q31b", ]))` 
-
-           **Answer:** 
-
-      c.  `r substr(quest["q31c", ], 3, nchar(quest["q31c", ]))` 
-
-           **Answer:**  
-           
-
-<br>
-
-## Objective 7: Explore data assimilation frequency
-
-***
-`r module_text["obj_07", ]`
-
-***
-
-32. `r substr(quest["q32", ], 5, nchar(quest["q32", ]))`    
+31. `r substr(quest["q31", ], 5, nchar(quest["q31", ]))`    
 
      **Answer:**
      
-33. `r substr(quest["q33", ], 5, nchar(quest["q33", ]))`
+32. `r substr(quest["q32", ], 5, nchar(quest["q32", ]))`    
 
-      a.  `r substr(quest["q33a", ], 3, nchar(quest["q33a", ]))` 
+     **Answer:**
 
-           *Please copy-paste your Q33a-plot.png image here.*
+33. `r substr(quest["q33", ], 5, nchar(quest["q33", ]))`    
 
-           *Figure 15. A series of one-day-ahead forecasts with no data assimilation.*
+     **Answer:**
+     
+34. `r substr(quest["q34", ], 5, nchar(quest["q34", ]))`    
 
-      b.  `r substr(quest["q33b", ], 3, nchar(quest["q33b", ]))` 
+     **Answer:**
+     
+35. `r substr(quest["q35", ], 5, nchar(quest["q35", ]))`    
 
-           **Answer:** 
+     **Answer:**
 
-      c.  `r substr(quest["q33c", ], 3, nchar(quest["q33c", ]))` 
+36. `r substr(quest["q36", ], 5, nchar(quest["q36", ]))`    
 
-           **Answer:**  
-           
+     **Answer:**
+     
+37. `r substr(quest["q37", ], 5, nchar(quest["q37", ]))`    
 
-34. `r substr(quest["q34", ], 5, nchar(quest["q34", ]))`
+     **Answer:**
 
-      a.  `r substr(quest["q34a", ], 3, nchar(quest["q34a", ]))` 
+<br>
 
-           **Answer:**
+#### Winter
 
-      b.  `r substr(quest["q34b", ], 3, nchar(quest["q34b", ]))` 
+     
+38. `r substr(quest["q38", ], 5, nchar(quest["q38", ]))`    
 
-           **Answer:** 
+     **Answer:**
 
-
-35. `r substr(quest["q35", ], 5, nchar(quest["q35", ]))`
-
-      a.  `r substr(quest["q35a", ], 3, nchar(quest["q35a", ]))` 
-
-           *Please copy-paste your Q35a-plot.png image here.*
-
-           *Figure 16. A series of one-day-ahead forecasts with weekly data assimilation.*
-
-      b.  `r substr(quest["q35b", ], 3, nchar(quest["q35b", ]))` 
-
-           **Answer:** 
-
-      c.  `r substr(quest["q35c", ], 3, nchar(quest["q35c", ]))` 
-
-           **Answer:**  
-           
-
-36. `r substr(quest["q36", ], 5, nchar(quest["q36", ]))`
-
-      a.  `r substr(quest["q36a", ], 3, nchar(quest["q36a", ]))` 
-
-           **Answer:**
-
-      b.  `r substr(quest["q36b", ], 3, nchar(quest["q36b", ]))` 
-
-           **Answer:** 
-
-
-37. `r substr(quest["q37", ], 5, nchar(quest["q37", ]))`
-
-      a.  `r substr(quest["q37a", ], 3, nchar(quest["q37a", ]))` 
-
-           *Please copy-paste your Q37a-plot.png image here.*
-
-           *Figure 17. A series of one-day-ahead forecasts with daily data assimilation.*
-
-      b.  `r substr(quest["q37b", ], 3, nchar(quest["q37b", ]))` 
-
-           **Answer:** 
-
-      c.  `r substr(quest["q37c", ], 3, nchar(quest["q37c", ]))` 
-
-           **Answer:**  
-           
-
-38. `r substr(quest["q38", ], 5, nchar(quest["q38", ]))`
-
-      a.  `r substr(quest["q38a", ], 3, nchar(quest["q38a", ]))` 
-
-           **Answer:**
-
-      b.  `r substr(quest["q38b", ], 3, nchar(quest["q38b", ]))` 
-
-           **Answer:** 
-           
-           
 39. `r substr(quest["q39", ], 5, nchar(quest["q39", ]))`    
 
      **Answer:**
      
-\newpage 
-
-# Activity C - Management Scenario
-
-`r module_text["act_C", ]`
-
-## Objective 8: Management scenario
-
-***
-`r module_text["obj_08", ]`
-
-***
-
 40. `r substr(quest["q40", ], 5, nchar(quest["q40", ]))`    
 
      **Answer:**
-    
-41. `r substr(quest["q41", ], 5, nchar(quest["q41", ]))`
 
-      a.  `r substr(quest["q41a", ], 3, nchar(quest["q41a", ]))` 
+41. `r substr(quest["q41", ], 5, nchar(quest["q41", ]))`    
 
-           *Please copy-paste your Q41a-plot.png image here.*
+     **Answer:**
+     
+42. `r substr(quest["q42", ], 5, nchar(quest["q42", ]))`    
 
-           *Figure 18. A series of one-day-ahead forecasts generated using the current forecasting system and data collection method.*
+     **Answer:**
 
-      b.  `r substr(quest["q41b", ], 3, nchar(quest["q41b", ]))` 
+***
+### Objective 4: Define water quality forecasting and interpret a fall turnover forecast
 
-           **Answer:** 
+***
 
+43. `r substr(quest["q43", ], 5, nchar(quest["q43", ]))`    
 
-42. `r substr(quest["q42", ], 5, nchar(quest["q42", ]))`
-
-      a.  `r substr(quest["q42a", ], 3, nchar(quest["q42a", ]))` 
-
-           *Please copy-paste your Q42a-plot.png image here.*
-
-           *Figure 19. A series of one-day-ahead forecasts generated using the borrowed high-frequency sensor.*
-
-      b.  `r substr(quest["q42b", ], 3, nchar(quest["q42b", ]))` 
-
-           **Answer:** 
-
-
-43. `r substr(quest["q43", ], 5, nchar(quest["q43", ]))`
-
-      a.  `r substr(quest["q43a", ], 3, nchar(quest["q43a", ]))` 
-
-           *Please copy-paste your Q43a-plot.png image here.*
-
-           *Figure 20. A series of one-day-ahead forecasts generated using the current forecasting system and data collection method and showing the observation for Saturday, Oct. 11.*
-
-      b.  `r substr(quest["q43b", ], 3, nchar(quest["q43b", ]))` 
-
-           *Please copy-paste your Q43b-plot.png image here.*
-
-           *Figure 21. A series of one-day-ahead forecasts generated using the borrowed high-frequency sensor and showing the observation for Saturday, Oct. 11.*
-
-      c.  `r substr(quest["q43c", ], 3, nchar(quest["q43c", ]))` 
-
-           **Answer:** 
-
-      d.  `r substr(quest["q43d", ], 3, nchar(quest["q43d", ]))` 
-
-           **Answer:** 
-
-
+     **Answer:**
+     
 44. `r substr(quest["q44", ], 5, nchar(quest["q44", ]))`    
 
      **Answer:**
-  
-45. `r substr(quest["q45", ], 5, nchar(quest["q45", ]))`
 
-      a.  `r substr(quest["q45a", ], 3, nchar(quest["q45a", ]))` 
+45. `r substr(quest["q45", ], 5, nchar(quest["q45", ]))`    
 
-           **Answer:**
+     **Answer:**
+     
+46. `r substr(quest["q46", ], 5, nchar(quest["q46", ]))`    
 
-      b.  `r substr(quest["q45b", ], 3, nchar(quest["q45b", ]))` 
+     **Answer:**
 
-           **Answer:** 
+\newpage 
+
+## Activity C - Make water treatment decisions using water quality forecasts
+
+`r module_text["act_C", ]`
+
+***
+### Objective 5: Make water treatment decisions using water quality forecasts
+
+***
+
+47. `r substr(quest["q47", ], 5, nchar(quest["q47", ]))`    
+
+     **Answer:**
+     
+48. `r substr(quest["q48", ], 5, nchar(quest["q48", ]))`    
+
+     **Answer:**
+
+49. `r substr(quest["q49", ], 5, nchar(quest["q49", ]))`    
+
+     **Answer:**
+     
+50. `r substr(quest["q50", ], 5, nchar(quest["q50", ]))`    
+
+     **Answer:**
+
+51. `r substr(quest["q51", ], 5, nchar(quest["q51", ]))`    
+
+     **Answer:**
+     
+52. `r substr(quest["q52", ], 5, nchar(quest["q52", ]))`    
+
+     **Answer:**
+
+53. `r substr(quest["q53", ], 5, nchar(quest["q53", ]))`    
+
+     **Answer:**
+     
+54. `r substr(quest["q54", ], 5, nchar(quest["q54", ]))`    
+
+     **Answer:**
+
+55. `r substr(quest["q55", ], 5, nchar(quest["q55", ]))`    
+
+     **Answer:**
+     
+56. `r substr(quest["q56", ], 5, nchar(quest["q56", ]))`    
+
+     **Answer:**
+
+57. `r substr(quest["q57", ], 5, nchar(quest["q57", ]))`    
+
+     **Answer:**
+     
+58. `r substr(quest["q58", ], 5, nchar(quest["q58", ]))`    
+
+     **Answer:**
            
-    
 <br>
 
 *`r module_text["acknowledgement", ]`*

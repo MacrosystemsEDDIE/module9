@@ -25,10 +25,6 @@ shinyServer(function(input, output, session) {
     }
   )
   
-  #### Activity A
-  
-  #### Objective 1 ----
-  
   # LTREB Sites datatable ----
   output$table01 <- DT::renderDT(
     sites_df[, c(1:2)], selection = "single", options = list(stateSave = TRUE, dom = 't'), server = FALSE
@@ -55,7 +51,7 @@ shinyServer(function(input, output, session) {
                               do = NULL,
                               turb = NULL)
   site_photo_file <- reactiveValues(img = NULL)
-
+  
   observeEvent(input$table01_rows_selected, {
     
     siteID$lab <- input$table01_rows_selected
@@ -94,7 +90,7 @@ shinyServer(function(input, output, session) {
     
     #retrieve site photooutput$display.image <- renderImage({
     site_photo_file$img <- paste("www/",row_selected$SiteID,".jpg",sep="")
-
+    
     #show site info
     output$site_info <- renderText({
       module_text[row_selected$SiteID, ]
@@ -140,8 +136,50 @@ shinyServer(function(input, output, session) {
     )
     list(src = site_photo_file$img,
          alt = "Image failed to render.",
-         height = 320,
-         width = 400)
+         height = 256,
+         width = 320)
+  }, deleteFile = FALSE)
+  
+  #### Activity A
+  
+  #### Objective 1 ----
+  
+  # Output potential extraction depths
+  observe({
+    
+    output$site_name <- renderUI({
+      
+      validate(
+        need(!is.null(lake_data$df),
+             message = "Please select a site in the Introduction.")
+      )
+      
+      site = pull(sites_df[input$table01_rows_selected, "SiteID"])
+      
+      if(site == "fcre"){
+        site_name <- paste("<b>","Falling Creek Reservoir","</b>", sep = "")
+      }
+      if(site == "bvre"){
+        site_name <- paste("<b>","Beaverdam Reservoir","</b>", sep = "")
+      }
+      
+      
+      HTML(paste(site_name))
+    })
+    
+  })
+  
+  # Show reservoir image again ----
+  output$site_photo1 <- renderImage({
+    
+    validate(
+      need(input$table01_rows_selected != "",
+           message = "Please select a site in the Introduction.")
+    )
+    list(src = site_photo_file$img,
+         alt = "Image failed to render.",
+         height = 384,
+         width = 480)
   }, deleteFile = FALSE)
   
   #### Objective 2 ----
@@ -160,11 +198,11 @@ shinyServer(function(input, output, session) {
       
       validate(
         need(input$table01_rows_selected != "",
-             message = "Please select a site in Objective 1.")
+             message = "Please select a site in the Introduction.")
       )
       validate(
         need(!is.null(lake_data$df),
-             message = "Please select a site in Objective 1.")
+             message = "Please select a site in the Introduction.")
       )
       validate(
         need(input$plot_wtemp > 0,
@@ -213,11 +251,11 @@ shinyServer(function(input, output, session) {
       
       validate(
         need(input$table01_rows_selected != "",
-             message = "Please select a site in Objective 1.")
+             message = "Please select a site in the Introduction.")
       )
       validate(
         need(!is.null(lake_data$df),
-             message = "Please select a site in Objective 1.")
+             message = "Please select a site in the Introduction.")
       )
       validate(
         need(input$plot_do > 0,
@@ -264,11 +302,11 @@ shinyServer(function(input, output, session) {
       
       validate(
         need(input$table01_rows_selected != "",
-             message = "Please select a site in Objective 1.")
+             message = "Please select a site in the Introduction.")
       )
       validate(
         need(!is.null(lake_data$df),
-             message = "Please select a site in Objective 1.")
+             message = "Please select a site in the Introduction.")
       )
       validate(
         need(input$plot_turb > 0,
@@ -307,7 +345,7 @@ shinyServer(function(input, output, session) {
       
       validate(
         need(!is.null(lake_data$df),
-             message = "Please select a site in Activity A.")
+             message = "Please select a site in the Introduction.")
       )
       
       site = pull(sites_df[input$table01_rows_selected, "SiteID"])
@@ -334,7 +372,7 @@ shinyServer(function(input, output, session) {
       
       validate(
         need(!is.null(lake_data$df),
-             message = "Please select a site in Activity A")
+             message = "Please select a site in the Introduction.")
       )
       validate(
         need(input$plot_summer_data > 0,
@@ -389,7 +427,7 @@ shinyServer(function(input, output, session) {
       
       validate(
         need(!is.null(lake_data$df),
-             message = "Please select a site in Activity A")
+             message = "Please select a site in the Introduction.")
       )
       validate(
         need(input$plot_fall_data > 0,
@@ -452,7 +490,7 @@ shinyServer(function(input, output, session) {
       
       validate(
         need(!is.null(lake_data$df),
-             message = "Please select a site in Activity A")
+             message = "Please select a site in the Introduction.")
       )
       validate(
         need(input$plot_winter_data > 0,
