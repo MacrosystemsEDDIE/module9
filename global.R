@@ -77,6 +77,15 @@ sites_df <- tibble(SiteID = c("fcre","bvre"),
 
 # Read in data
 reservoir_data <- read_csv("./data/reservoir_data.csv")
+forecast_data <- read_csv("./data/forecast_scenario_data.csv")
+
+# Wrangle realtime FCR data
+realtime_fcr_data <- reservoir_data %>%
+  filter(site_id == "fcre",
+         variable %in% c("Temp_C_mean","DO_mgL_mean","Turbidity_FNU_mean"),
+         !(variable == "DO_mgL_mean" & depth_m >= 2 & depth_m <= 8)) %>% # remove metalimnetic DO
+  mutate(observation = round(observation, 1),
+         depth_ft = round(depth_m*3.28,1))
 
 # Icons
 ltrebIcons <- iconList(
