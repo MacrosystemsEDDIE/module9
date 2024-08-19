@@ -51,8 +51,8 @@ q21c,c. dissolved organic matter
 q22,"Q22. What is the regulatory limit on bottom filter turbidity in NTU? Round your answer to the nearest tenth (e.g., 0.1)."
 q23,Q23. The turbidity data on the plot are in FNU. What is the highest observed turbidity in the surface waters of the reservoir in NTU? Round your answer to the nearest tenth.
 q24,"Q24. On what date does the highest observed turbidity occur? Write out the full month name and day (e.g., September 20)."
-q25,Q25. Is the reservoir currently thermally stratified or mixed? 
-q26,"Q26. Do you observe hypoxia at any depth(s) in the reservoir? If so, which depth(s)? You may select more than one answer in the Canvas quiz."
+q25,"Q25. In the plot of summer data, is the reservoir thermally stratified or mixed? "
+q26,"Q26. Do you observe dissolved oxygen concentrations less than 2 mg/L at any depth(s) in the reservoir? If so, which depth(s)? You may select more than one answer in the Canvas quiz."
 q27,Q27. At what depth is the turbidity sensor deployed? Select the correct depth in the Canvas quiz.
 q28,Q28. Which depth do you choose for water extraction on July 31? Select the depth in the Canvas quiz.
 q29,Q29. Explain your reasoning behind your decision in Question 28.
@@ -64,7 +64,7 @@ q34,Q34. Explain your reasoning behind your decision in Question 33.
 q35,Q35. Which depth would you choose for water extraction TWO DAYS AFTER the day of fall turnover? 
 q36,Q36. Explain your reasoning behind your decision in Question 35.
 q37,"Q37. Compare your answers to Question 33 and Question 35. Were your choices different before and after turnover? If so, explain why."
-q38,Q38. Is the reservoir currently thermally stratified or mixed?
+q38,"Q38. In the plot of winter data, is the reservoir thermally stratified or mixed?"
 q39,"Q39. Compare dissolved oxygen concentrations at the deepest depth in your reservoir (29.5 ft for Falling Creek and 42.7 ft for Beaverdam) between the summer and winter data. Do they differ? If so, how? Select the best answer in the Canvas quiz."
 q40,"Q40. Compare turbidity concentrations in your reservoir between the summer and winter data. Do they differ? If so, how? Select the best answer in the Canvas quiz."
 q41,Q41. Which depth do you choose for water extraction on Jan. 31?
