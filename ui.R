@@ -36,8 +36,8 @@ ui <- function(req) {
       column(11,
              br(),
              p(tags$b("Teaching materials associated with this module can be found at ",
-                      tags$a(href="http://module9.macrosystemseddie.org", 
-                             "http://module9.macrosystemseddie.org.", target="_blank"))),
+                      tags$a(href="https://serc.carleton.edu/eddie/teaching_materials/modules/module9.html", 
+                             "https://serc.carleton.edu/eddie/teaching_materials/modules/module9.html.", target="_blank"))),
              h2(tags$b("Module 9: Using High-Frequency Data to Manage Water Quality"))
       ),
       column(1, align = "right",
@@ -160,7 +160,10 @@ ui <- function(req) {
                  fluidRow(
                    column(6,
                           #* Module text ====
-                          h2("Using High-Frequency Data to Manage Water Quality"),
+                          introBox(data.step = 10,
+                          data.intro = help_text["thank_you", 1],
+                          h2("Using High-Frequency Data to Manage Water Quality")
+                          ),
                           h3("Focal question"),
                           h4(tags$b(tags$i("How can we use high-frequency data to improve water quality?"))),
                           h3("Summary"),
@@ -185,14 +188,18 @@ ui <- function(req) {
                hr(),
                fluidRow(
                               column(11,  
-                                       h3("Workflow for this module"),
+                                     introBox(data.step = 4, data.intro = help_text["workflow", 1],
+                                       h3("Workflow for this module")
+                                     ),
                                          box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
                                              fluidRow(
                                              column(11, offset = 1, h4(tags$b(module_text["workflow1", ]))))),
                                          br(),br(),br(),
                                      fluidRow(
                                        column(12, offset = 1,
-                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/rM3Hc0rVUdI?si=sfxbQqDEat1v7tZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
+                                              introBox(data.step = 5, data.intro = help_text["videos", 1],
+                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/rM3Hc0rVUdI?si=sfxbQqDEat1v7tZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+                                              )
                                               )
                                      ),
                                          br(),
@@ -265,8 +272,7 @@ ui <- function(req) {
                                          box(id = "box1", width = 12, status = "success", solidHeader = TRUE,
                                              fluidRow(
                                                column(11, offset = 1, h4(tags$b(module_text["workflow7", ]))))),
-                                         br(),br(),br(),
-                                       data.step = 4, data.intro = help_text["workflow", 1]
+                                         br(),br(),br()
                               )
                ), 
                hr(),
@@ -292,7 +298,9 @@ ui <- function(req) {
                            align = "center"),
                         h5("Click the arrows to navigate through the slides", align = "center"),
                         wellPanel(
+                          introBox(data.step = 6, data.intro = help_text["slides", 1],
                           slickROutput("slides", width = "700px", height = "525px")
+                          )
                         )
                  )
                ),
@@ -321,7 +329,7 @@ ui <- function(req) {
                                          tags$li(id = "txt_j", quest["q2b", ]),
                                          tags$li(id = "txt_j", quest["q2c", ])
                                        ),
-                                       data.step = 5, data.intro = help_text["questions", 1]
+                                       data.step = 8, data.intro = help_text["questions", 1]
                                      )
                               )
                             )
@@ -550,7 +558,9 @@ ui <- function(req) {
                           ),
                           column(8,
                                  wellPanel(
-                                   plotlyOutput("wtemp_plot"), data.step = 6, data.intro = help_text["plots", 1]
+                                   introBox(data.step = 7, data.intro = help_text["plots", 1],
+                                   plotlyOutput("wtemp_plot")
+                                 )
                                  )
                                  )
                         ),
@@ -1304,12 +1314,14 @@ ui <- function(req) {
               hr(),
               fluidRow(
                 column(12,
+                       introBox(data.step = 9, data.intro = help_text["finish", 1],
                        h2("Completed Module!"),
                        h3("You have completed the module! Congratulations!"),
                        h4("Please check through the answers in your Canvas quiz and be sure you have copy-pasted in all the required plots before you submit the quiz to your instructor."),
                        h4("You’ve now made operations decisions informed by high-frequency water quality data and forecasts - well done!")
                        )
-              ), data.step = 7, data.intro = help_text["finish", 1]
+                )
+              )
                )
     ),
     # Tab navigation buttons ----
