@@ -8,7 +8,7 @@
 <a href="url"><img src="mod9_conceptual_figure.png" align="right" height="220" width="293" ></a>
 
 ### Summary
-This branch contains the `paper.md` and `bib.md` files associated with a [Journal of Open Source Education (JOSE)](https://jose.theoj.org/) submission of Macrosystems EDDIE Module 9: Using High-Frequency Data to Manage Water Quality
+This branch contains the `paper.md` and `paper.bib` files associated with a [Journal of Open Source Education (JOSE)](https://jose.theoj.org/) submission of Macrosystems EDDIE Module 9: Using High-Frequency Data to Manage Water Quality
 
 ## Questions & Feedback
 If you have any questions, comments or feedback related to these materials you can send an email to [macrosystemseddie@gmail.com]().
