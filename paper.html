@@ -391,7 +391,7 @@ developed as part of a virtual, asynchronous curriculum for community
 college students training to become drinking water treatment plant
 operators, and could also be taught in high school or introductory
 undergraduate environmental science and natural resource management
-courses. The module is designed to be fully accessible for in-person,
+courses. The module is designed to be flexible for use in-person,
 hybrid, and virtual, asynchronous course formats. Students complete
 module activities using an R Shiny web application which can be accessed
 from an internet browser on a computer. Module materials include source
@@ -405,38 +405,38 @@ available in the module GitHub repository.</p>
 <p>In recent decades, there have been substantial improvements in our
 ability to monitor water quality in real time using sensors that measure
 variables at a high frequency [e.g., every few minutes; <span class="citation">Bieroza et al. (2023)</span>]. These high-frequency
-data, which can often be accessed as they are collected through
-automated streaming of sensor data to the cloud, have tremendous
-potential to inform drinking water management <span class="citation">(Marcé et al. 2016; Seifert-Dähnn et al. 2021; Bertone,
-Rousso, and Kufeji 2023)</span>. In addition, collection of
-high-frequency water quality data has enabled recent development of
-water quality forecasts, or predictions of the future water quality
-conditions with uncertainty <span class="citation">(Lofton et al.
-2023)</span>. Often, water quality forecasts are developed with the goal
-of informing and improving natural resource management <span class="citation">(e.g., Carey et al. 2022)</span>. However, while use of
-real-time high-frequency water quality data to inform water resource
-management is increasing <span class="citation">(e.g., Ruberg et al.
-2008; Tran Khac et al. 2018; Zhan, Kong, and Rinke 2022)</span>, few
-managers currently incorporate water quality forecasts into their
-decision-making <span class="citation">(Lofton et al. 2023; but see
-Baracchini, Wüest, and Bouffard 2020)</span>. In addition, while
-complete automation of drinking water treatment is possible for some
-large treatment plants <span class="citation">(Worm et al. 2010)</span>,
-the majority of drinking water treatment plants may be small, with
-manual operation procedures, even in well-resourced nations <span class="citation">(e.g., Stein et al. 2017)</span>, necessitating that
-drinking water treatment operators use their own judgment and experience
-to make decisions about water treatment based on current and expected
-future water quality. Currently, despite their utility for informing
-decision-making, few water treatment operations curricula incorporate
-visualization and interpretation of high-frequency water quality data
-and forecasts [REFS]. To address this need, we developed a short (one-
-to three-hour) module to introduce students to the use of high-frequency
-water quality data and forecasts for decision-making while operating a
-drinking water treatment plant. The module develops key skills in
-high-frequency data and forecast visualization and interpretation that
-can be applied across a variety of natural resource management topics,
-and the module materials and activities are designed to be easily
-adaptable for multiple course formats by the instructor.</p>
+data have tremendous potential to inform drinking water management <span class="citation">(Marcé et al. 2016; Seifert-Dähnn et al. 2021; Bertone,
+Rousso, and Kufeji 2023)</span>, and use of real-time high-frequency
+water quality data to inform water resource management is increasing
+<span class="citation">(e.g., Ruberg et al. 2008; Tran Khac et al. 2018;
+Zhan, Kong, and Rinke 2022)</span>. In some large drinking water
+treatment plants, water treatment workflows using high-frequency data
+are completely automated <span class="citation">(Worm et al.
+2010)</span>. However, the majority of drinking water treatment plants
+may be small, with manual operation procedures, even in well-resourced
+nations <span class="citation">(e.g., Stein et al. 2017)</span>,
+necessitating that drinking water treatment operators use their own
+judgment and experience to make decisions about water treatment based on
+current and expected future water quality.</p>
+<p>In addition to directly informing water management decision-making,
+collection of high-frequency water quality data has enabled recent
+development of water quality forecasts, or predictions of the future
+water quality conditions with uncertainty <span class="citation">(Lofton
+et al. 2023)</span>. Often, water quality forecasts are developed with
+the goal of informing and improving water treatment and management <span class="citation">(e.g., Carey et al. 2022)</span>. However, few managers
+currently incorporate water quality forecasts into their decision-making
+workflows <span class="citation">(Lofton et al. 2023; but see
+Baracchini, Wüest, and Bouffard 2020)</span>.</p>
+<p>To introduce water treatment students to use of high-frequency data
+and forecasts to improve water quality, we developed a short (one- to
+three-hour) module for the Mountain Empire Community College (MECC)
+Water program. The MECC Water program is the only of its kind in the
+southern Appalachian region of the United States, a region which
+receives a high proportion of its drinking water from reservoirs in
+small, mountainous catchments with correspondingly small treatment
+plants. The module develops key skills in high-frequency data and
+forecast visualization and interpretation that are applied to drinking
+water treatment scenarios.</p>
 </div>
 <div id="instructional-design" class="section level1">
 <h1>Instructional design</h1>
@@ -445,39 +445,31 @@ adaptable for multiple course formats by the instructor.</p>
 introduces students to quantitative skills, such as data visualization,
 interpretation, modeling, and forecasting, through use of real-world
 environmental datasets <span class="citation">(Carey et al. 2020;
-Hounshell, Farrell, and Carey 2021)</span>. Macrosystems EDDIE modules
-are developed using the 5E (Engagement, Exploration, Explanation,
-Expansion, Evaluation) instructional model <span class="citation">(Bybee
-et al. 2006)</span>. Each module comprises three activities (A, B, and
-C), which are scaffolded to sequentially build on each other. Activity A
-Engages students and asks them to Explore the module topic; Activity B
-Explains more about the topic to Expand on Activity A; and Activity C
-Evaluates students’ understanding of the topic <span class="citation">(O’Connell et al. 2024)</span>. The three-part module
-structure also allows instructors to choose whether to complete just
-Activity A, Activities A and B, or all three Activities, maximizing the
-adaptibility of modules to various course contexts.</p>
+Hounshell, Farrell, and Carey 2021; Lofton et al. 2024)</span>.
+Macrosystems EDDIE modules are developed using the 5E (Engagement,
+Exploration, Explanation, Expansion, Evaluation) instructional model
+<span class="citation">(Bybee et al. 2006)</span>. Each module comprises
+three activities (A, B, and C), which are scaffolded to sequentially
+build on each other. Activity A Engages students and asks them to
+Explore the module topic; Activity B Explains more about the topic to
+Expand on Activity A; and Activity C Evaluates students’ understanding
+of the topic <span class="citation">(O’Connell et al. 2024)</span>. The
+three-part module structure also allows instructors to choose whether to
+complete just Activity A, Activities A and B, or all three Activities,
+maximizing the adaptibility of modules to various course contexts.</p>
 <p>All module activities and questions are designed to enhance student
 engagement through real-world problem-solving <span class="citation">(Villarroel et al. 2018)</span> and place-based
-learning <span class="citation">(Semken and Freeman 2008)</span>. High
-student engagement has been shown to improve student learning outcomes
-<span class="citation">(Carini, Kuh, and Klein 2006)</span>,
-particularly for underrepresented groups <span class="citation">(Theobald et al. 2020)</span>. To engage students in
-real-world problem-solving, we developed decision-making scenarios for
-students to complete within the module that are informed by the past
-experiences and water treatment challenges of operators working at the
-same drinking water reservoirs that are included in the module (see
-descriptions of Activity B and C in Module Activities for further
+learning <span class="citation">(Semken and Freeman 2008)</span>. To
+engage students in real-world problem-solving, we developed
+decision-making scenarios for students to complete that are informed by
+the past experiences and water treatment challenges of operators working
+at the same drinking water reservoirs that are included in the module
+(see descriptions of Activity B and C in Module Activities for further
 details). To engage students in place-based learning, we specifically
 chose drinking water reservoir sites located in the same region as the
 community college where we taught the module (southwest Virginia, United
 States), so that students would be more likely able to relate to the
-geographic location of the reservoirs. In addition, the drinking water
-reservoirs presented in the module are more likely to present similar
-water treatment challenges as other reservoirs located throughout the
-region (which is characterized by mountainous, high-elevation catchments
-with relatively small reservoirs and treatment plants), where the
-drinking water operations students who complete the module may work in
-the future.</p>
+geographic location of the reservoirs.</p>
 </div>
 <div id="learning-objectives" class="section level1">
 <h1>Learning Objectives</h1>
@@ -498,87 +490,25 @@ drinking water treatment.</li>
 <p>This module comprises an introduction and three activities (A, B, C)
 which guide students towards answering the focal question: <strong>How
 can we use high-frequency data to improve water quality?</strong> Below
-is a brief overview of the module activities.</p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>In the Introduction, students watch a brief (~ 7 min.) video
-introducing key concepts related to water quality and high-frequency
-environmental sensors, as well as the drinking water reservoir sites
-where data used in the module are collected. Students also view a brief
-(~5 min.) video orientation to the module webpage and its interactive
-features. Finally, students select a focal drinking water reservoir site
-to work with for the rest of the module. Students may choose to explore
-data from one of two drinking water supply reservoirs in southwest
-Virginia, USA: Falling Creek Reservoir (abbreviated as FCR) or Beaverdam
-Reservoir (BVR). Both waterbodies are located in Vinton, VA and are
-owned and operated by the Western Virginia Water Authority. FCR and BVR
-are monitored regularly as part of a Long-Term Research in Environmental
-Biology (LTREB) program which is funded by the National Science
-Foundation (NSF). As a result, both reservoirs have at least six years
-of high-frequency water temperature, dissolved oxygen, and turbidity
-data which students can visualize and interpret to complete module
-activities.</p>
-</div>
-<div id="activity-a" class="section level2">
-<h2>Activity A</h2>
-<p>In Activity A, students access and explore high-frequency water
-quality data from a drinking water reservoir in southwest Virginia.
-Activity A includes two objectives. In Objective 1, students learn about
-their focal reservoir site, and answer questions about its size,
-location, use, and average water quality conditions. In Objective 2,
-students view recent (within the past two years) environmental data from
-their site, and are asked to interpret these data in the context of
-drinking water quality. For example, students view a short video
-explaining how high turbidity (indicating low water clarity) can
-complicate drinking water treatment due to high concentrations of
-particulate matter on treatment plant filters. Then, they plot turbidity
-data from their focal reservoir and are asked to identify times during
-the year when turbidity might be high enough to cause water quality
-concerns.</p>
-</div>
-<div id="activity-b" class="section level2">
-<h2>Activity B</h2>
-<p>In Activity B, students use high-frequency water quality data to
-explore how water quality changes over the course of a year and make
-decisions about water withdrawal depth (i.e., the depth from which water
-will be extracted for treatment at a drinking water treatment plant).
-They are also introduced to the concept of water quality forecasting,
-which can provide predictions of future water quality to managers to
-enable pre-emptive management action to avoid water quality impairment.
-Activity B includes two objectives. In Objective 3, students view
-environmental data from three different seasons (summer, fall, winter)
-at their chosen reservoir data. They are asked to assess how water
-quality differs among seasons, and use this information to decide from
-which depth in the reservoir to extract water for treatment at a
-drinking water treatment plant. Ultimately, students should choose the
-depth which maximizes the quality of the water flowing from the
-reservoir into the drinking water treatment plant, as this water will be
-the easiest and most cost-efficient to treat to meet drinking water
-quality standards. In Objective 4, students are asked to read and
-interpret a fall turnover forecast. Fall turnover is a seasonal event
-which occurs in many inland waterbodies located in temperate regions.
-During fall turnover, water temperatures change very quickly, and this
-can lead to rapid changes in the chemical and biological attributes of
-water quality, potentially complicating drinking water treatment. A
-forecast of fall turnover could allow drinking water treatment plant
-managers to anticipate water quality impairment and prepare for
-additional treatment measures, thus ensuring they are able to meet
-drinking water quality standards during the period of fall turnover.</p>
-</div>
-<div id="activity-c" class="section level2">
-<h2>Activity C</h2>
-<p>In Activity C, students make management recommendations for water
-treatment using water quality forecasts. Activity C includes one
-objective. In Objective 5, students are given a drinking water treatment
-plant operation scenario and asked to decide whether to enact additional
-treatment measures to ensure that they meet regulatory standards for
-turbidity (water clarity). Student are asked to make decisions using
-both “real-time” water quality data as well as water quality forecasts
-over time. At the end of the objective, students are given the
-opportunity to evaluate the quality of their decisions after the fact,
-as well as evaluate the utility of both the “real-time” data and the
-water quality forecasts to their decision-making process.</p>
-</div>
+is a brief overview of the module activities:</p>
+<ul>
+<li><strong>Introduction</strong>: Students are introduced to key
+concepts covered in the module and select a focal drinking water
+reservoir site to work with during the module.</li>
+<li><strong>Activity A</strong>: Students access and explore
+high-frequency water quality data from a drinking water reservoir in
+southwest Virginia.</li>
+<li><strong>Activity B</strong>: Students use high-frequency water
+quality data to explore how water quality changes over the course of a
+year and make decisions about water withdrawal depth (i.e., the depth
+from which water will be extracted for treatment at a drinking water
+treatment plant).<br />
+</li>
+<li><strong>Activity C</strong>: Students make management
+recommendations for water treatment to meet regulatory standards for
+turbidity (water clarity) using high-frequency data and water quality
+forecasts.</li>
+</ul>
 </div>
 <div id="context-for-use" class="section level1">
 <h1>Context for Use</h1>
@@ -594,14 +524,14 @@ synchronous courses, this entire module can be completed in one 2 to
 lecture periods. Students complete module activities using an R Shiny
 web application, and can answer questions either by typing them into a
 student handout which can be downloaded from the app, or by using a
-Canvas quiz which can be imported from the Canvas commons. Module
-materials include: source code and datasets for the R Shiny web
-application; instructional videos and slide decks; a student handout
-with question prompts; and an instructor manual. The instructor manual
-includes both detailed instructions for module delivery in diverse
-course contexts as well as an answer key for student questions.
-Open-source versions of all module materials are available in the module
-GitHub repository (<a href="https://github.com/MacrosystemsEDDIE/module9" class="uri">https://github.com/MacrosystemsEDDIE/module9</a>) and all
+Canvas quiz which can be imported from the Canvas commons (Canvas
+commons link). Module materials include: source code and datasets for
+the R Shiny web application; instructional videos and slide decks; a
+student handout with question prompts; and an instructor manual. The
+instructor manual includes both detailed instructions for module
+delivery in diverse course contexts as well as an answer key for student
+questions. Open-source versions of all module materials are available in
+the module GitHub repository (<a href="https://github.com/MacrosystemsEDDIE/module9" class="uri">https://github.com/MacrosystemsEDDIE/module9</a>) and all
 module code is published on Zenodo (Zenodo DOI). Editable and
 open-source versions of all instructional materials (videos, slide
 decks, student handout and instructor manual) are also hosted online
@@ -611,22 +541,21 @@ and are published in the Environmental Data Initiative repository (EDI
 DOI).</p>
 <p>This module is currently included in the curricula for ENV 211:
 Sanitary Biology and Chemistry in the Environmental Science
-Water/Wastewater Specialization and Course YYY in the Program ZZZ at
-Mountain Empire Community College, Big Stone Gap, VA, USA.</p>
+Water/Wastewater Specialization and <strong>Course YYY in the Program
+ZZZ</strong> at Mountain Empire Community College, Big Stone Gap, VA,
+USA.</p>
 </div>
 <div id="module-development-background" class="section level1">
 <h1>Module Development Background</h1>
 <p>This module was developed through a partnership between Rosa-Lee
-Cooke, lead instructor for environmental sciences at Mountain Empire
-Community College, and Virginia Tech researchers Mary E. Lofton and
-Cayelan C. Carey, who have previously developed educational materials
-for undergraduates related to freshwater science and ecological
-forecasting [REFS]. Our aim in developing this module was to provide
-drinking water operations students with experience in visualizing and
-interpreting real-world high-frequency water quality data, as well as
-introduce students to the potential of water quality forecasting to
-inform water resource management. Module development was primarily
-supported by the National Science Foundation (EF-2318861).</p>
+Cooke, lead instructor for environmental sciences and water/wastewater
+treatment at Mountain Empire Community College, and Virginia Tech
+researchers Mary E. Lofton and Cayelan C. Carey, who have previously
+developed educational materials for undergraduates related to freshwater
+science and ecological forecasting <span class="citation">(Carey et al.
+2020; Hounshell, Farrell, and Carey 2021; Lofton et al. 2024)</span>.
+Module development was primarily supported by the National Science
+Foundation (EF-2318861).</p>
 </div>
 <div id="acknowledgements" class="section level1">
 <h1>Acknowledgements</h1>
@@ -683,13 +612,6 @@ al. 2022. <span>“Advancing Lake and Reservoir Water Quality Management
 with Near-Term, Iterative Ecological Forecasting.”</span> <em>Inland
 Waters</em> 12 (1): 107–20. <a href="https://doi.org/10.1080/20442041.2020.1816421">https://doi.org/10.1080/20442041.2020.1816421</a>.
 </div>
-<div id="ref-carini_student_2006" class="csl-entry">
-Carini, Robert M., George D. Kuh, and Stephen P. Klein. 2006.
-<span>“Student <span>Engagement</span> and <span>Student</span>
-<span>Learning</span>: <span>Testing</span> the
-<span>Linkages</span>.”</span> <em>Research in Higher Education</em> 47
-(1): 1–32. <a href="https://doi.org/10.1007/s11162-005-8150-9">https://doi.org/10.1007/s11162-005-8150-9</a>.
-</div>
 <div id="ref-hounshell_macrosystems_2021" class="csl-entry">
 Hounshell, Alexandria G., Kaitlin J. Farrell, and Cayelan C. Carey.
 2021. <span>“Macrosystems <span>EDDIE</span> <span>Teaching</span>
@@ -704,6 +626,12 @@ Lofton, Mary E., Dexter W. Howard, R. Quinn Thomas, and Cayelan C.
 Carey. 2023. <span>“Progress and Opportunities in Advancing Near‐term
 Forecasting of Freshwater Quality.”</span> <em>Global Change
 Biology</em> 29 (7): 1691–1714. <a href="https://doi.org/10.1111/gcb.16590">https://doi.org/10.1111/gcb.16590</a>.
+</div>
+<div id="ref-lofton_modular_2024" class="csl-entry">
+Lofton, Mary E., Tadhg N. Moore, Whitney M. Woelmer, R. Quinn Thomas,
+and Cayelan C. Carey. 2024. <span>“A Modular Curriculum to Teach
+Undergraduates Ecological Forecasting Improves Student and Instructor
+Confidence in Their Data Science Skills.”</span> <a href="https://doi.org/10.22541/essoar.171269260.08508117/v1">https://doi.org/10.22541/essoar.171269260.08508117/v1</a>.
 </div>
 <div id="ref-marce_automatic_2016" class="csl-entry">
 Marcé, Rafael, Glen George, Paola Buscarinu, Melania Deidda, Julita
@@ -747,14 +675,6 @@ Husnain Haider, Kejiang Zhang, and Rehan Sadiq. 2017. <span>“Performance
 Management of Small Water Treatment Plant Operations: A Decision Support
 System.”</span> <em>Water and Environment Journal</em> 31 (3): 330–44.
 <a href="https://doi.org/10.1111/wej.12248">https://doi.org/10.1111/wej.12248</a>.
-</div>
-<div id="ref-theobald_active_2020" class="csl-entry">
-Theobald, Elli J., Mariah J. Hill, Elisa Tran, Sweta Agrawal, E. Nicole
-Arroyo, Shawn Behling, Nyasha Chambwe, et al. 2020. <span>“Active
-Learning Narrows Achievement Gaps for Underrepresented Students in
-Undergraduate Science, Technology, Engineering, and Math.”</span>
-<em>Proceedings of the National Academy of Sciences</em> 117 (12):
-6476–83. <a href="https://doi.org/10.1073/pnas.1916903117">https://doi.org/10.1073/pnas.1916903117</a>.
 </div>
 <div id="ref-tran_khac_automatic_2018" class="csl-entry">
 Tran Khac, Viet, Yi Hong, Denis Plec, Bruno Lemaire, Philippe Dubois,
