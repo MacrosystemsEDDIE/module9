@@ -167,7 +167,7 @@ ui <- function(req) {
                           h3("Focal question"),
                           h4(tags$b(tags$i("How can we use high-frequency data to improve water quality?"))),
                           h3("Summary"),
-                          p("In recent decades, there have been substantial improvements in our ability to monitor water quality in real time using sensors that measure variables at a high frequency (every few minutes)."),
+                          p("In recent decades, there have been substantial improvements in our ability to monitor water quality in real time using sensors that measure variables at a high frequency (every few minutes). These new data allow us to track changes in the water at a much finer scale than previous monitoring data, which were generally collected at weekly to monthly scales."),
                           p("In this module, you will explore data collected using high-frequency sensors and learn how to interpret these data to inform water quality management."),
                           h3("Learning Outcomes"),
                           tags$line(),
@@ -441,7 +441,7 @@ ui <- function(req) {
                                        ),
                                        column(5, 
                                               h3(""),
-                                              p("Virginia's Water Quality Assessment Guidance Manual gives the following guidance on water quality evaluation using a trophic state index (TSI), which may be calculated from Secchi depth (SD), chlorophyll-a (CA), or total phosphorus (TP):"),
+                                              p("Virginia's Water Quality Assessment Guidance Manual gives the following guidance on water quality evaluation using a trophic state index (TSI), which may be calculated from Secchi depth (SD), chlorophyll-a (CA) in the top 1 meter of the water column, or total phosphorus (TP) in the top 1 meter of the water column:"),
                                               p(tags$em("A trophic state index value of 60 or greater for any one of the 3 indices will indicate that nutrient enrichment from anthropogenic sources are adversely interfering, directly or indirectly, with the designated uses. A TSI value of 60 corresponds to a CA concentration of 20 ug/l, a SD of 1 meter, and a TP concentration of 48 ug/l.")),
                                               p(tags$b(quest["q8", 1]))
                                        )
@@ -515,7 +515,7 @@ ui <- function(req) {
                                  ),
                                  img(src = "water_density.png", height = "60%", id = "bla_border",
                                      width = "60%", tags$style("border: solid 2px black;")),
-                                 p("Water density vs. water temperature"),
+                                 p("Water density vs. water temperature (degrees Celsius)"),
                                  p(tags$em("Source: Mike Arthur and Demian Saffer, accessed at: https://www.e-education.psu.edu/earth111/node/842"))
                                  ),
                           column(6,
@@ -617,7 +617,7 @@ ui <- function(req) {
                                  ),
                                  img(src = "oxygen_solubility.png", height = "60%", id = "bla_border",
                                      width = "60%", tags$style("border: solid 2px black;")),
-                                 p("Oxygen solubility vs. water temperature"),
+                                 p("Oxygen solubility vs. water temperature (degrees Celsius)"),
                                  p(tags$em("Source: Kenneth C. Waterman, accessed at: https://www.researchgate.net/figure/Effect-of-temperature-on-oxygen-solubility-in-water-generated-by-extrapolation-of-data_fig5_7957124"))
                                  ),
                           column(6,
@@ -781,7 +781,7 @@ ui <- function(req) {
                                        column(10, offset = 1,
                                               h3("Operation scenario"),
                                               h4("Decide: from which depth should water be extracted for treatment?"),
-                                              p("You are operating a reservoir with intake valves at multiple depths. During the course of a year, you must decide which intake valve to use for water extraction for treatment."),
+                                              p("You are operating a reservoir with intake valves at multiple depths. During the course of a year, you must decide which intake valve to use to extract water for drinking water treatment."),
                                               p("Remember, water quality can differ greatly at different depths in the reservoir! Your objective is to withdraw water at the depth that has the highest water quality, to minimize treatment difficulty and cost."),
                                               p("Click the plotting buttons below to view reservoir data from different times of year. Then, use what you have learned in previous objectives to choose an intake valve depth."),
                                               h4("The depths of water intake valves in your reservoir are given below."),
@@ -947,7 +947,7 @@ ui <- function(req) {
                                      solidHeader = TRUE,
                                      fluidRow(
                                        column(10, offset = 1,
-                                              h3("Make a decision for water extraction on Jan. 31."),
+                                              h3("Make a decision for water extraction on January 31."),
                                               p(tags$b(quest["q41", 1])),
                                               p(tags$b(quest["q42", 1]))
                                        )
@@ -993,6 +993,7 @@ ui <- function(req) {
                           column(6,
                                  img(src = "turnover_water_samples.png", height = "90%", id = "bla_border",
                                      width = "90%", tags$style("border: solid 2px black;")),
+                                 p(tags$em("Water samples from Falling Creek Reservoir just before (left) and after (right) fall turnover."))
                                  )
                         ),
                         hr(),
@@ -1095,9 +1096,9 @@ ui <- function(req) {
                               column(10, offset = 1,
                                      h3("Operation scenario"),
                                      h4("Decide: should I begin additional treatment measures to prevent water quality concerns during fall turnover, and if so, when?"),
-                                     p("You are operating a small reservoir water treatment plant with a very short detention time - only 30 minutes from the raw water intake to the bottom filter. In addition, the reservoir feeding your plant is small, with a short residence time. This means that water can travel from the inflow to the dam, where it is withdrawn for treatment, in a matter of hours to a few days, especially during high rainfall events. There is only one extraction depth in the surface waters of the reservoir. As a result, your plant is very sensitive to high turbidity in the raw water, and you must be able to act quickly to avoid exceeding the regulatory limit of 0.3 NTU turbidity on the bottom filter."),
-                                     p(tags$b("Specifically, previous operators have had difficulty meeting regulatory limits for bottom filter turbidity when raw water turbidity exceeds 20 NTU.")),
-                                     p("Your supervisor has alerted you that this reservoir has experienced increased turbidity around the time of fall turnover in the past. Usually, the highest turbidity is experienced from about a week before until about a week after turnover. In addition, it has been a rainy fall so far this year. Cumulative rainfall last month was three inches above what your region typically experiences."),
+                                     p("You are operating a small reservoir water treatment plant with a very rapid detention time - only 30 minutes from the raw water intake to the bottom filter - so you have only a very short period of time to ensure the water that goes into the distribution system is adequately treated. There is only one extraction depth in the surface waters of the reservoir. As a result, your plant is very sensitive to high turbidity in the raw water, and you must be able to act quickly to avoid exceeding the regulatory limit of 0.3 NTU turbidity on the bottom filter."),
+                                     p(tags$b("Specifically, previous operators at this reservoir have had difficulty meeting regulatory limits for bottom filter turbidity when raw water turbidity exceeds 20 NTU.")),
+                                     p("Your supervisor has alerted you that this reservoir has experienced increased turbidity around the time of fall turnover in the past. Usually, the highest turbidity is experienced from about a week before until about a week after turnover. In addition, it has been a rainy fall so far this year. Cumulative rainfall last month was three inches above what your region typically experiences, resulting in much higher turbidity than usual in the reservoir."),
                                      h4("Your objective is to determine if and when to enact additional treatment measures to ensure you meet the regulatory limit for turbidity immediately before and after fall turnover."),
                                      p(tags$b("You will make a series of four treatment decisions using reservoir data and turnover forecasts.")),
                                      p("Click the plotting buttons below to view reservoir data and turnover forecasts. Then, use what you have learned in previous objectives to choose whether to enact additional treatment measures to counteract potentially high turbidity during fall turnover.")
