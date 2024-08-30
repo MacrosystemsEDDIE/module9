@@ -5,7 +5,7 @@ q1b,b. ability of a water body to support aquatic life
 q1c,c. the amount of water available for human use
 q1d,d. the geographic region in which the water body is located
 q1e,e. all of the above
-q2,Q2. Which of the following is a benefit of collecting high-frequency water quality data? Select only one answer.
+q2,Q2. Which of the following options is a benefit of collecting high-frequency water quality data? Select only one answer.
 q2a,a. high-frequency data prevent water quality from becoming degraded
 q2b,b. high-frequency data require many automated sensors to be deployed in a reservoir
 q2c,c. high-frequency data allow managers and scientists to observe patterns that are not visible from low-frequency data
@@ -48,7 +48,7 @@ q21,Q21. Which of the following factors can contribute to high turbidity in a ra
 q21a,a. particles such as silt and clay
 q21b,b. microorganisms
 q21c,c. dissolved organic matter
-q22,"Q22. What is the regulatory limit on bottom filter turbidity in NTU? Round your answer to the nearest tenth (e.g., 0.1)."
+q22,"Q22. What is the Environmental Protection Agency (EPA) regulatory limit on bottom filter turbidity in NTU? Round your answer to the nearest tenth (e.g., 0.1)."
 q23,Q23. The turbidity data on the plot are in FNU. What is the highest observed turbidity in the surface waters of the reservoir in NTU? Round your answer to the nearest tenth.
 q24,"Q24. On what date does the highest observed turbidity occur? Write out the full month name and day (e.g., September 20)."
 q25,"Q25. In the plot of summer water temperature data, is the reservoir thermally stratified or mixed? "
