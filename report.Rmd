@@ -48,13 +48,13 @@ _How can we use high-frequency data to improve water quality?_
 
 In recent decades, there have been substantial improvements in our ability to monitor water quality in real time using sensors that measure variables at a high frequency (every few minutes).
 
-In this module, you will explore data collected using high-frequency sensors and learn how to interpret these data to inform water quality management.
+In this module, you will explore data collected using high-frequency sensors and learn how to interpret these data to inform water quality management. This module was developed for water managers and students in the USA but could be transferred to other sites with some modifications.
 
 # Learning Objectives:
 
 By the end of this module, you will be able to:
 
-- Define key measures of surface freshwater quality (water temperature, dissolved oxygen, and turbidity).
+- Define key measures of freshwater quality (water temperature, dissolved oxygen, and turbidity).
 - Explain how water temperature changes over the course of a year in a temperate reservoir and how these changes affect water quality.
 - Interpret high-frequency water quality data to make decisions about water extraction depth for a drinking water reservoir.
 - Evaluate water quality data and forecasts to make decisions about drinking water treatment.
@@ -62,7 +62,7 @@ By the end of this module, you will be able to:
 ## Module overview:
 
 - Introductory presentation on concepts related to assessing water quality and collecting high-frequency water quality data
-- Activity A: Access and explore high-frequency water quality data from a drinking water reservoir in southwest Virginia
+- Activity A: Access and explore high-frequency water quality data from a drinking water reservoir in southwest Virginia, USA
 - Activity B: Use high-frequency water quality data to make water treatment plant operation decisions
 - Activity C: Make water treatment decisions using water quality forecasts
 
@@ -145,9 +145,9 @@ Be sure you have answered questions 1 and 2 in the previous Introduction section
 
     **Answer:** 
    
-Virginia's Water Quality Assessment Guidance Manual gives the following guidance on water quality evaluation using a trophic state index (TSI), which may be calculated from Secchi depth (SD), chlorophyll-a (CA), or total phosphorus (TP):
+Virginia's Water Quality Assessment Guidance Manual gives the following guidance on water quality evaluation using a trophic state index (TSI), which may be calculated from Secchi depth (SD), chlorophyll-a (CA) in the top 1 meter of the water column, or total phosphorus (TP) in the top 1 meter of the water column:
 
-*A trophic state index value of 60 or greater for any one of the 3 indices will indicate that nutrient enrichment from anthropogenic sources are adversely interfering, directly or indirectly, with the designated uses. A TSI value of 60 corresponds to a CA concentration of 20 ug/l, a SD of 1 meter, and a TP concentration of 48 ug/l.*
+*"A trophic state index value of 60 or greater for any one of the 3 indices will indicate that nutrient enrichment from anthropogenic sources are adversely interfering, directly or indirectly, with the designated uses. A TSI value of 60 corresponds to a CA concentration of 20 ug/l, a SD of 1 meter, and a TP concentration of 48 ug/l."*
 
 8. `r substr(quest["q8", ], 4, nchar(quest["q8", ]))`  
 
@@ -176,6 +176,7 @@ Virginia's Water Quality Assessment Guidance Manual gives the following guidance
       b.  `r substr(quest["q10b", ], 3, nchar(quest["q10b", ]))`
       c.  `r substr(quest["q10c", ], 3, nchar(quest["q10c", ]))`
       d.  `r substr(quest["q10d", ], 3, nchar(quest["q10d", ]))`
+      e.  `r substr(quest["q10e", ], 3, nchar(quest["q10e", ]))`
 
 11. `r substr(quest["q11", ], 5, nchar(quest["q11", ]))`    
 

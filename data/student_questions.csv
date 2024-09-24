@@ -1,14 +1,14 @@
 ﻿q_no,Question
-q1,Q1. Which of the following are components of water quality? You may select more than one answer.
+q1,Q1. Which of the following options are components of water quality? You may select more than one answer.
 q1a,a. suitability of water for human use
 q1b,b. ability of a water body to support aquatic life
 q1c,c. the amount of water available for human use
 q1d,d. the geographic region in which the water body is located
 q1e,e. all of the above
-q2,Q2. Which of the following is a benefit of collecting high-frequency water quality data?
-q2a,a. high-frequency data prevents water quality from becoming degraded
-q2b,b. high-frequency data requires many automated sensors to be deployed in a reservoir
-q2c,c. high-frequency data allows managers and scientists to observe patterns that are not visible from low-frequency data
+q2,Q2. Which of the following options is a benefit of collecting high-frequency water quality data? Select only one answer.
+q2a,a. high-frequency data prevent water quality from becoming degraded
+q2b,b. high-frequency data require many automated sensors to be deployed in a reservoir
+q2c,c. high-frequency data allow managers and scientists to observe patterns that are not visible from low-frequency data
 q3,Q3. What is the name of your selected reservoir?
 q4,"Q4. What is the four-letter site identifier of your selected reservoir? Use lower case (e.g., ‘fcre’)."
 q5,Q5. What are the uses of your selected reservoir?
@@ -20,7 +20,7 @@ q6,"Q6. What is the reservoir area in square feet of your selected reservoir? Pr
 q7,Q7. What is the maximum depth of your reservoir in feet? Round your answer to the nearest whole number.
 q8,Q8. Does your chosen reservoir site exceed a TSI of 60 (indicating negative human impacts on water quality) according to average total phosphorus levels? 
 q9,Q9. Water is most dense at 4 degrees Celsius. What temperature is this in degrees Fahrenheit? Round your answer to the nearest whole number.
-q10,Q10. Which of the following are possible effects turnover can have on water quality?
+q10,Q10. Which of the following are possible effects of fall turnover on water quality?
 q10a,a. metals from the bottom waters mixing to the surface
 q10b,b. nutrients from the bottom waters mixing to the surface
 q10c,c. harmful algal blooms
@@ -28,7 +28,7 @@ q10d,d. taste and odor concerns
 q10e,e. all of the above
 q11,Q11. The water temperatures on the plot are in degrees Celsius. What is the warmest observed water temperature at your reservoir in degrees Fahrenheit? Round your answer to the nearest whole number.
 q12,Q12. What is the coldest observed water temperature at your reservoir in degrees Fahrenheit?
-q13,"Q13. Fall turnover can be defined as the day when the temperature difference between the shallowest and deepest depths in the reservoir is less than 1 degree Celsius. What day did fall turnover occur in the reservoir? Write out the full month name and day (e.g., September 20)."
+q13,"Q13. Fall turnover can be defined as the first day in the fall when the temperature difference between the shallowest and deepest depths in the reservoir is less than 1 degree Celsius. What day did fall turnover occur in your reservoir? Write out the full month name and day (e.g., September 20)."
 q14,"Q14. During summer thermal stratification, dissolved oxygen in the bottom waters of a reservoir may become depleted. Which statement correctly explains why this occurs?"
 q14a,a. cold water cannot contain as much dissolved oxygen as warm water
 q14b,b. oxygen becomes trapped in the lake sediments and cannot be replenished from the atmosphere
@@ -36,27 +36,27 @@ q14c,c. oxygen is lost when water is extracted for drinking water treatment
 q14d,d. oxygen is consumed by organisms and chemical reactions and cannot be replenished from the atmosphere
 q15,Q15. Which statement best describes how low dissolved oxygen levels can affect the raw water quality for a drinking water treatment plant?
 q15a,"a. low dissolved oxygen can lead to release of metals and nutrients from the sediments, potentially causing algal blooms and taste and odor concerns"
-q15b,b. ability of a water body to support aquatic life
+q15b,"b. low dissolved oxgen can allow other gasses, such as nitrogen and carbon dioxide, to enter the water"
 q15c,"c. high-frequency sensors can become fouled more easily in water with low dissolved oxygen, causing inaccurate readings"
 q15d,d. low dissolved oxygen can increase treatment costs for a drinking water treatment plant
-q16,Q16. The dissolved oxygen data on the plot are in ppm. What is lowest observed dissolved oxygen concentration in the surface waters of the reservoir in mg/L? Round your answer to the nearest whole number.
+q16,Q16. The dissolved oxygen data on the plot are in ppm. What is the lowest observed dissolved oxygen concentration in the surface waters of the reservoir in mg/L? Round your answer to the nearest whole number.
 q17,Q17. What is the lowest observed dissolved oxygen concentration in the bottom waters of the reservoir in mg/L?
-q18,Q18. Two mg/L is a commonly used threshold to indicate that dissolved oxygen concentrations are low enough to cause water quality concerns. Does your reservoir exhibit dissolved oxygen concentrations less than 2 mg/L?
+q18,Q18. Two (2) mg/L is a commonly used threshold to indicate that dissolved oxygen concentrations are low enough to cause water quality concerns. Does your reservoir exhibit dissolved oxygen concentrations less than 2 mg/L?
 q19,"Q19. If your reservoir exhibits dissolved oxygen concentrations less than 2 mg/L, at which depth does this occur?"
 q20,"Q20. If your reservoir exhibits dissolved oxygen concentrations less than 2 mg/L, during which months does this occur? In the Canvas quiz, select all months that exhibit dissolved oxygen concentrations less than 2 mg/L."
 q21,Q21. Which of the following factors can contribute to high turbidity in a raw water source? You may select more than one answer.
 q21a,a. particles such as silt and clay
 q21b,b. microorganisms
 q21c,c. dissolved organic matter
-q22,"Q22. What is the regulatory limit on bottom filter turbidity in NTU? Round your answer to the nearest tenth (e.g., 0.1)."
+q22,"Q22. What is the Environmental Protection Agency (EPA) regulatory limit on bottom filter turbidity in NTU? Round your answer to the nearest tenth (e.g., 0.1)."
 q23,Q23. The turbidity data on the plot are in FNU. What is the highest observed turbidity in the surface waters of the reservoir in NTU? Round your answer to the nearest tenth.
 q24,"Q24. On what date does the highest observed turbidity occur? Write out the full month name and day (e.g., September 20)."
-q25,"Q25. In the plot of summer data, is the reservoir thermally stratified or mixed? "
+q25,"Q25. In the plot of summer water temperature data, is the reservoir thermally stratified or mixed? "
 q26,"Q26. Do you observe dissolved oxygen concentrations less than 2 mg/L at any depth(s) in the reservoir? If so, which depth(s)? You may select more than one answer in the Canvas quiz."
 q27,Q27. At what depth is the turbidity sensor deployed? Select the correct depth in the Canvas quiz.
 q28,Q28. Which depth do you choose for water extraction on July 31? Select the depth in the Canvas quiz.
 q29,Q29. Explain your reasoning behind your decision in Question 28.
-q30,"Q30. Fall turnover occurs when water temperatures are within 1 degree C of each other across all the depths of the reservoir. On what date did fall turnover occur this past fall? Write out the full month name and day (e.g., September 20)."
+q30,"Q30. Fall turnover can be defined as the first day in the fall when the temperature difference between the shallowest and deepest depths in the reservoir is less than 1 degree Celsius. On what date did fall turnover occur this past fall? Write out the full month name and day (e.g., September 20)."
 q31,Q31. Which statement best describes what happens to dissolved oxygen concentrations around the time of fall turnover? Compare dissolved oxygen values one week before vs. one week after turnover. Select the best answer in the Canvas quiz.
 q32,Q32. Which statement best describes what happens to turbidity around the time of fall turnover? Compare turbidity values one week before vs. one week after turnover. Select the best answer in the Canvas quiz.
 q33,Q33. Which depth would you choose for water extraction TWO DAYS BEFORE the day of fall turnover? Explain your reasoning.
@@ -67,21 +67,21 @@ q37,"Q37. Compare your answers to Question 33 and Question 35. Were your choices
 q38,"Q38. In the plot of winter data, is the reservoir thermally stratified or mixed?"
 q39,"Q39. Compare dissolved oxygen concentrations at the deepest depth in your reservoir (29.5 ft for Falling Creek and 42.7 ft for Beaverdam) between the summer and winter data. Do they differ? If so, how? Select the best answer in the Canvas quiz."
 q40,"Q40. Compare turbidity concentrations in your reservoir between the summer and winter data. Do they differ? If so, how? Select the best answer in the Canvas quiz."
-q41,Q41. Which depth do you choose for water extraction on Jan. 31?
+q41,Q41. Which depth do you choose for water extraction on January 31?
 q42,Q42. Explain your reasoning behind your decision in Question 41.
-q43,"Q43. What is the forecasted percent chance of turnover on Oct. 15? Provide your answer as a whole number (e.g., 15). "
-q44,Q44. Is it likely that turnover will occur on or before Oct. 15? 
-q45,"Q45. What is the forecasted percent chance of turnover on Oct. 27? Provide your answer as a whole number (e.g., 15). "
-q46,Q46. Is it likely that turnover will occur on or before Oct. 27? 
+q43,"Q43. What is the forecasted percent chance of fall turnover on October 15? Provide your answer as a whole number (e.g., 15). "
+q44,Q44. Is it likely that fall turnover will occur on or before October 15? 
+q45,"Q45. What is the forecasted percent chance of fall turnover on October 27? Provide your answer as a whole number (e.g., 15). "
+q46,Q46. Is it likely that fall turnover will occur on or before October 27? 
 q47,Q47. Do you think you will need to enact additional treatment measures in the coming week (next 7 days)? 
 q48,Q48. Explain your reasoning behind your decision in Question 47.
-q49,Q49. Do you think you will need to enact additional treatment measures in the coming week (next 7 days)? 
+q49,Q49. Do you think you will need to enact additional treatment measures in the coming week (over the next 7 days)? 
 q50,Q50. Explain your reasoning behind your decision in Question 49.
 q51,"Q51. Compare the decisions you made in Question 47 and Question 49. Are they the same or different, and why?"
-q52,Q52. Do you think you will need to enact additional treatment measures in the coming week (next 7 days)? 
+q52,Q52. Do you think you will need to enact additional treatment measures in the coming week (over the next 7 days)? 
 q53,Q53. Explain your reasoning behind your decision in Question 52.
-q54,Q54. Do you think you will need to enact additional treatment measures in the coming week (next 7 days)? 
+q54,Q54. Do you think you will need to enact additional treatment measures in the coming week (over the next 7 days)? 
 q55,Q55. Explain your reasoning behind your decision in Question 54.
 q56,"Q56. Compare the decisions you made in Question 52 and Question 54. Are they the same or different, and why?"
 q57,"Q57. Using the data plotted in the figures above, do you think you made the right treatment decisions in Questions 52 and 54? Explain your reasoning."
-q58,Q58. Evaluate the usefulness of the turnover forecasts. Did having a forecast available affect your decision-making compared to using real-time data?
+q58,Q58. Evaluate the usefulness of the fall turnover forecasts. Did having a forecast available affect your decision-making compared to using real-time data?
