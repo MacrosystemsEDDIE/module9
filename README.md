@@ -8,7 +8,7 @@
 <a href="url"><img src="www/mod9_conceptual_figure.png" align="right" height="220" width="293" ></a>
 
 ### Summary
-Here is the code for running the Macrosystems EDDIE Module 9: _Using High-Frequency Data to Manage Water Quality_. Below are instructions on how to access the Shiny app *via* a web browser and also a detailed guide below for launching the R Shiny App locally on your own computer. For more details about teaching this module please visit our [website](https://serc.carleton.edu/eddie/teaching_materials/modules/module9.html).
+Here are the code and instructor materials for running the Macrosystems EDDIE Module 9: _Using High-Frequency Data to Manage Water Quality_. Below are instructions on how to access the Shiny app *via* a web browser and also a detailed guide below for launching the R Shiny App locally on your own computer. Open-source versions of all instructor materials are available in the instructor_materials.zip file. For more details about teaching this module, including editable versions of instructor materials which can be downloaded and modified for teaching purposes, please visit our [website](https://serc.carleton.edu/eddie/teaching_materials/modules/module9.html).
 
 ## Accessing the Shiny App _via_ a web browser
 The Shiny app for this module can be accessed through any internet browser on [shinyapps.io](https://macrosystemseddie.shinyapps.io/module9/).
