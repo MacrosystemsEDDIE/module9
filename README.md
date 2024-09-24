@@ -4,7 +4,8 @@
 
 ## Module 9: Using High-Frequency Data to Manage Water Quality
 [![](https://img.shields.io/badge/Shiny-shinyapps.io-blue?style=flat&labelColor=white&logo=RStudio&logoColor=blue)](https://macrosystemseddie.shinyapps.io/module9/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10903839.svg)](https://doi.org/10.5281/zenodo.10903839)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13835236.svg
+)](https://doi.org/10.5281/zenodo.13835236)
 <a href="url"><img src="www/mod9_conceptual_figure.png" align="right" height="220" width="293" ></a>
 
 ### Summary
