@@ -566,6 +566,17 @@ ui <- function(req) {
                         ),
                         hr(),
                         fluidRow(
+                          column(8,
+                                 h3("A note on reading and interpreting graphs"),
+                                 p("Please watch the video on the right for a refresher course on reading and interpreting graphs. This may help you to answer the questions about water temperature data as well as other questions throughout the module.")
+                          ),
+                          column(4,
+                                 h4("Video: Reading and interpreting graphs"),
+                                 HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/AhnwYmHvHSc?si=r0LzHH-t8fAE3Lt9" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+                          )
+                        ),
+                        hr(),
+                        fluidRow(
                           column(4,
                                  h3("Dissolved oxygen"),
                                  p(tags$i("Watch the video and click through the slides to understand how dissolved oxygen data relate to water quality. The information in the presentation is also summarized in text below to help you answer the questions.")),
@@ -798,6 +809,22 @@ ui <- function(req) {
                                      width = "90%", tags$style("border: solid 2px black;")),
                                  p(tags$em("Carvin's Cove Reservoir, Roanoke, VA")),
                                  p(tags$em("Photo credit: Ryan Keverline"))
+                                 )
+                        ),
+                        hr(),
+                        fluidRow(
+                          column(6,
+                                 h3("A note on multiple intake depths"),
+                                 p("While many small reservoirs only have one intake depth, larger reservoirs typically have multiple intake depths so that water can still be withdrawn from the reservoir as water level decreases (such as during a drought)."),
+                                 p("One example of a well-known large reservoir in the United States with multiple intake depths is Lake Mead, which is located in Nevada and Arizona on the Colorado River behind the Hoover Dam. The intake tower for Lake Mead is shown in the photo on the right."),
+                                 p("There are three possible intake depths at Lake Mead, and historically low water levels have required dam operators to completely shut down the shallowest intake, leaving them to rely on the deeper two intakes for water supply."),
+                                 p("However, operators may also choose to change intake depth if water quality at a particular intake depth is likely to be poor. Changing the intake depth can allow operators to avoid this low-quality water and pull water from a depth with higher water quality.")
+                                 ),
+                          column(6,
+                                 img(src = "Lake_Mead_intake_tower.jpg", height = "90%", id = "bla_border",
+                                     width = "90%", tags$style("border: solid 2px black;")),
+                                 p(tags$em("Lake Mead, USA")),
+                                 p(tags$em("Lake Mead and intake towers (343/365) by gorbould is licensed under CC BY-NC-ND 2.0."))
                                  )
                         ),
                         hr(),
