@@ -54,34 +54,34 @@ q24,"Q24. On what date does the highest observed turbidity occur? Write out the 
 q25,"Q25. In the plot of summer water temperature data, is the reservoir thermally stratified or mixed? "
 q26,"Q26. Do you observe dissolved oxygen concentrations less than 2 mg/L at any depth(s) in the reservoir? If so, which depth(s)? You may select more than one answer in the Canvas quiz."
 q27,Q27. At what depth is the turbidity sensor deployed? Select the correct depth in the Canvas quiz.
-q28,Q28. Which depth do you choose for water extraction on July 31? Select the depth in the Canvas quiz.
-q29,Q29. Explain your reasoning behind your decision in Question 28.
+q28,Q28. Which depth do you choose for water extraction on July 31? Select the depth in the Canvas quiz. There is no right or wrong answer to this question; just record your choice.
+q29,Q29. Explain your reasoning behind your decision in Question 28. There is no right or wrong answer to this question; please simply explain your thought process.
 q30,"Q30. Fall turnover can be defined as the first day in the fall when the temperature difference between the shallowest and deepest depths in the reservoir is less than 1 degree Celsius. On what date did fall turnover occur this past fall? Write out the full month name and day (e.g., September 20)."
 q31,Q31. Which statement best describes what happens to dissolved oxygen concentrations around the time of fall turnover? Compare dissolved oxygen values one week before vs. one week after turnover. Select the best answer in the Canvas quiz.
 q32,Q32. Which statement best describes what happens to turbidity around the time of fall turnover? Compare turbidity values one week before vs. one week after turnover. Select the best answer in the Canvas quiz.
-q33,Q33. Which depth would you choose for water extraction TWO DAYS BEFORE the day of fall turnover? Explain your reasoning.
-q34,Q34. Explain your reasoning behind your decision in Question 33. 
-q35,Q35. Which depth would you choose for water extraction TWO DAYS AFTER the day of fall turnover? 
-q36,Q36. Explain your reasoning behind your decision in Question 35.
-q37,"Q37. Compare your answers to Question 33 and Question 35. Were your choices different before and after turnover? If so, explain why."
+q33,Q33. Which depth would you choose for water extraction TWO DAYS BEFORE the day of fall turnover? There is no right or wrong answer to this question; just record your choice.
+q34,Q34. Explain your reasoning behind your decision in Question 33. There is no right or wrong answer to this question; please simply explain your thought process.
+q35,Q35. Which depth would you choose for water extraction TWO DAYS AFTER the day of fall turnover? There is no right or wrong answer to this question; just record your choice.
+q36,Q36. Explain your reasoning behind your decision in Question 35. There is no right or wrong answer to this question; please simply explain your thought process.
+q37,"Q37. Compare your answers to Question 33 and Question 35. Were your choices different before and after turnover? If so, explain why. There is no right or wrong answer to this question; please simply explain your thought process."
 q38,"Q38. In the plot of winter data, is the reservoir thermally stratified or mixed?"
 q39,"Q39. Compare dissolved oxygen concentrations at the deepest depth in your reservoir (29.5 ft for Falling Creek and 42.7 ft for Beaverdam) between the summer and winter data. Do they differ? If so, how? Select the best answer in the Canvas quiz."
 q40,"Q40. Compare turbidity concentrations in your reservoir between the summer and winter data. Do they differ? If so, how? Select the best answer in the Canvas quiz."
-q41,Q41. Which depth do you choose for water extraction on January 31?
-q42,Q42. Explain your reasoning behind your decision in Question 41.
+q41,Q41. Which depth do you choose for water extraction on January 31? There is no right or wrong answer to this question; just record your choice.
+q42,Q42. Explain your reasoning behind your decision in Question 41. There is no right or wrong answer to this question; please simply explain your thought process.
 q43,"Q43. What is the forecasted percent chance of fall turnover on October 15? Provide your answer as a whole number (e.g., 15). "
 q44,Q44. Is it likely that fall turnover will occur on or before October 15? 
 q45,"Q45. What is the forecasted percent chance of fall turnover on October 27? Provide your answer as a whole number (e.g., 15). "
 q46,Q46. Is it likely that fall turnover will occur on or before October 27? 
-q47,Q47. Do you think you will need to enact additional treatment measures in the coming week (next 7 days)? 
-q48,Q48. Explain your reasoning behind your decision in Question 47.
-q49,Q49. Do you think you will need to enact additional treatment measures in the coming week (over the next 7 days)? 
-q50,Q50. Explain your reasoning behind your decision in Question 49.
-q51,"Q51. Compare the decisions you made in Question 47 and Question 49. Are they the same or different, and why?"
-q52,Q52. Do you think you will need to enact additional treatment measures in the coming week (over the next 7 days)? 
-q53,Q53. Explain your reasoning behind your decision in Question 52.
-q54,Q54. Do you think you will need to enact additional treatment measures in the coming week (over the next 7 days)? 
-q55,Q55. Explain your reasoning behind your decision in Question 54.
-q56,"Q56. Compare the decisions you made in Question 52 and Question 54. Are they the same or different, and why?"
-q57,"Q57. Using the data plotted in the figures above, do you think you made the right treatment decisions in Questions 52 and 54? Explain your reasoning."
-q58,Q58. Evaluate the usefulness of the fall turnover forecasts. Did having a forecast available affect your decision-making compared to using real-time data?
+q47,Q47. Do you think you will need to enact additional treatment measures in the coming week (next 7 days)? There is no right or wrong answer to this question; just record what you think.
+q48,Q48. Explain your reasoning behind your decision in Question 47. There is no right or wrong answer to this question; please simply explain your thought process.
+q49,Q49. Do you think you will need to enact additional treatment measures in the coming week (over the next 7 days)? There is no right or wrong answer to this question; just record what you think.
+q50,Q50. Explain your reasoning behind your decision in Question 49. There is no right or wrong answer to this question; please simply explain your thought process.
+q51,"Q51. Compare the decisions you made in Question 47 and Question 49. Are they the same or different, and why? There is no right or wrong answer to this question; please simply explain your thought process."
+q52,Q52. Do you think you will need to enact additional treatment measures in the coming week (over the next 7 days)? There is no right or wrong answer to this question; just record what you think.
+q53,Q53. Explain your reasoning behind your decision in Question 52. There is no right or wrong answer to this question; please simply explain your thought process.
+q54,Q54. Do you think you will need to enact additional treatment measures in the coming week (over the next 7 days)? There is no right or wrong answer to this question; just record what you think.
+q55,Q55. Explain your reasoning behind your decision in Question 54. There is no right or wrong answer to this question; please simply explain your thought process.
+q56,"Q56. Compare the decisions you made in Question 52 and Question 54. Are they the same or different, and why? There is no right or wrong answer to this question; please simply explain your thought process."
+q57,"Q57. Using the data plotted in the figures above, do you think you made the right treatment decisions in Questions 52 and 54? Explain your reasoning. There is no right or wrong answer to this question; please simply explain your thought process."
+q58,Q58. Evaluate the usefulness of the fall turnover forecasts. Did having a forecast available affect your decision-making compared to using real-time data? There is no right or wrong answer to this question; please simply explain your thought process.
