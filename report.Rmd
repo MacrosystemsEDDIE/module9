@@ -55,7 +55,7 @@ In this module, you will explore data collected using high-frequency sensors and
 By the end of this module, you will be able to:
 
 - Define key measures of freshwater quality (water temperature, dissolved oxygen, and turbidity).
-- Explain how water temperature changes over the course of a year in a temperate reservoir and how these changes affect water quality.
+- Explain how water temperature changes over a year in a temperate reservoir and how these changes affect water quality.
 - Interpret high-frequency water quality data to make decisions about water extraction depth for a drinking water reservoir.
 - Evaluate water quality data and forecasts to make decisions about drinking water treatment.
 
