@@ -198,7 +198,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(12, offset = 1,
                                               introBox(data.step = 5, data.intro = help_text["videos", 1],
-                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/rM3Hc0rVUdI?si=sfxbQqDEat1v7tZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/oDIxU0x5T08?si=a6-nDX6XOaGL3Bi1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
                                               )
                                               )
                                      ),
@@ -209,7 +209,7 @@ ui <- function(req) {
                                          br(),br(),br(),br(),br(),
                                      fluidRow(
                                        column(12, offset = 1,
-                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/uOaZhENushQ?si=9ontMzU5SGu7A59_" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
+                                              HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/Onj4mCmJZg8?si=t8I5e9KSfOp0ilvJ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                        )
                                      ),
                                      br(),
@@ -478,7 +478,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1, align = "left",
                                               h4("Video"),
-                                              HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/phJ6JogqUeE?si=CVuARbc2N3MVu19f" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
+                                              HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/2OtT3n7FP1Q?si=KOVKaljtNzlsd2Lx" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                               h4("Questions"),
                                               p(tags$b(quest["q9", 1])),
                                               p(tags$b(quest["q10", 1])),
@@ -572,7 +572,7 @@ ui <- function(req) {
                           ),
                           column(4,
                                  h4("Video: Reading and interpreting graphs"),
-                                 HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/AhnwYmHvHSc?si=r0LzHH-t8fAE3Lt9" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+                                 HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/3Bl5J5lIk6o?si=zg8_2Ct2g9Xkjb1D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
                           )
                         ),
                         hr(),
@@ -586,7 +586,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Video"),
-                                              HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/3Gft3PS2XYg?si=udyreazhKxA70_Gk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
+                                              HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/IX643t7U1ho?si=5IR9GaktGQwjdXh9" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                               h4("Questions"),
                                               p(tags$b(quest["q14", 1])),
                                               tags$ul(
@@ -676,7 +676,7 @@ ui <- function(req) {
                                      fluidRow(
                                        column(10, offset = 1,
                                               h4("Video"),
-                                              HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/r0OGKBf0n7o?si=amBJjBo2YMNpdJpI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
+                                              HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/OFB7GcMIjwI?si=SrQwSEpNtQDA69Mg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                               h4("Questions"),
                                               p(tags$b(quest["q21", 1])),
                                               tags$ul(
@@ -1029,7 +1029,7 @@ ui <- function(req) {
                                  h3("Water quality forecasting"),
                                  p(tags$i("Watch the video and click through the slides to learn about water quality forecasting. The information in the presentation is also summarized in text below to help you answer the questions.")),
                                  h4("Video"),
-                                 HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/MK5_BHiyHX0?si=1ZivFJet4QdedglB" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
+                                 HTML('<iframe width="280" height="157" src="https://www.youtube.com/embed/lQyp0skwuLA?si=tVhBNWGsnZlP5GPs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'),
                                  p(tags$b("What is a forecast?")),
                                  tags$ul(
                                    tags$li(module_text["forecast", ])
